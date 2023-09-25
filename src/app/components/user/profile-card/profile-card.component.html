@@ -1,0 +1,46 @@
+<div class="container mx-lg-3 mx-0 px-lg-2 px-0">
+
+
+
+    <div class="col-xl-11 col-12 px-0">
+      <div class="padding mx-lg-5">
+        <div class="col-xl-4 px-0 col-12">
+            <!-- Column -->
+            <div class="card">
+                <div class="card-body little-profile text-center">
+
+                    <div class="pro-img"><img [src]="user.profile || '../../../assets/images/dummy-image.jpeg'" alt="user"></div>
+                    <h3 class="m-b-0 text-dark">{{user.fullname}}</h3>
+                    <h6><i class="fa-solid fa-location-dot"></i> {{user.country}}</h6>
+                    <div *ngIf="!loggedIn">
+
+                      <a  class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded py-1" data-abc="true" style="font-size: medium; width:100%" (click)="follow()" *ngIf="!following"><i class="fa-solid fa-circle-plus py-1" style="margin-right:10px;"></i> Follow</a>
+                      <a  class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded py-1" data-abc="true" style="font-size: medium; width:100%" (click)="unfollow()" *ngIf="following"><i class="fa-solid fa-circle-minus py-1" style="margin-right:10px;"></i> Unfollow</a>
+                     <a  class="m-t-10 waves-effect waves-dark border btn btn-md btn-rounded py-1 mt-2 msg" data-abc="true" style="font-size: medium; width:100%"><i class="fa-regular fa-message py-1" style="margin-right:10px; margin-left: 15px;"></i>Message</a>
+                    </div>
+                    <div *ngIf="loggedIn">
+                      <a  class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded py-1" data-abc="true" style="font-size: medium; width:100%" *ngIf="!following"  href="profile/edit"><i class="fa-solid fa-circle-plus py-1" style="margin-right:10px;"></i> Edit Profile</a>
+                    </div>
+                    <div class="row text-center m-t-20" style="margin-left: 20px; margin-right: 20px;">
+                        <div class="m-t-20 d-flex justify-content-between  ">
+                          Likes<h5 class="m-b-0 font-light">10434</h5>
+                        </div>
+                        <div class="d-flex justify-content-between ">
+                          Followers<h5 class="m-b-0 font-light">{{user.followers.length}}</h5>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          Following<h5 class="m-b-0 font-light">{{user.following.length}}</h5>
+                        </div>
+                    </div>
+                    <p class="text-start mt-4 mb-1 mx-3" style="font-size: x-small; font-family: Verdana, Geneva, Tahoma, sans-serif;">ABOUT</p>
+                    <div class="card mt-0 text-start px-3 py-2 text-secondary mx-3">
+                      <small> No description </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+</div>

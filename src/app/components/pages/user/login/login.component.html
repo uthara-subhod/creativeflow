@@ -1,0 +1,59 @@
+<div class="box container-fluid">
+
+  <div class="d-flex justify-content-center align-items-center pt-4  mt-5">
+    <div class="card col-xl-5 pb-4 fs-5 col-lg-6 col-11" style="background-color: #5E3E5C; color:rgb(228, 228, 228)">
+      <div class=" d-flex flex-column justify-content-center align-items-center ">
+        <span class="d-flex mt-2 align-items-center">
+          <img
+          src="../../../../../assets/images/CreativeFlow-logos_white.png"
+          alt=""
+          width="50px"
+        />
+        <p class="mx-2 mt-5 mb-5" style="font-size: 30px; font-style: italic; font-family: 'Sitara' ;">CreativeFlow</p>
+        </span>
+        <!-- <label for="username">First Name</label> -->
+        <form (ngSubmit)="login()" class="col-7">
+          <div class="col-12 mb-5 ">
+              <div class="">
+
+                  <div class="field mb-4">
+                      <label for="username" class="form-label">Email Address</label><br>
+                      <input pInputText  [(ngModel)]="user.email" name="email" class="form-control"  type="email" placeholder="john@example.com" required/>
+                  </div>
+                  <div class="field mb-4">
+                      <label for="password" class="form-label">Password</label>
+                      <div class="input-group">
+
+                        <input class="form-control" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password">
+                        <span class="input-group-btn border bg-white text-secondary">
+                          <button mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                        </span>
+                      </div>
+                      <p class="text-end mt-1" style="font-size: smaller;">Don't have an account? <a style="color:rgb(228, 228, 228); cursor:pointer;" href="/register">Register Now!</a></p>
+                      <!-- <p-password  [toggleMask]="true"></p-password>
+                      <p-password [(ngModel)]="user.password" [feedback]="false" name="password" required></p-password> -->
+                  </div>
+                  <!-- Button trigger modal -->
+
+<!-- Modal -->
+
+                  <button label="login" type="submit" class="btn btn-secondary text-white col-12">Login</button>
+              </div>
+            </div>
+          </form>
+            <div class="col-9 p-fluid mb-4 mt-2">
+              <a routerLink="/register"></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+</div>
+
+<!-- Button trigger modal -->
+
+<router-outlet></router-outlet>
+
+

@@ -1,0 +1,10 @@
+<div *ngIf="!isEmpty()">
+
+  <div *ngFor="let n of notifications">
+    <p>{{n.from}} {{n.msg}}</p>
+  </div>
+</div>
+<div *ngIf="isEmpty()">
+
+  You have no notifications
+</div>

@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<h4 class="text-center py-2 my-2" style="font-family: 'Poppins', sans-serif; font-weight: bold; letter-spacing: 5px;">Today's Popular Works</h4>
+<div class="h-50 mt-0" style="background-color: #E1D9E0;"></div>
+
+<div class="d-lg-flex justify-content-center p-3" style="height:350px;">
+  <div class="col-xl-4 col-lg-6 col-12 my-2 my-lg-4 m-xl-4 p-4 text-light" style="background-color: #463d50; position: relative; background-image: url('../../../../../assets/images/slazzer-edit-image.png'); background-size: 70%; background-repeat: no-repeat; background-position: right; ">
+    <div class="d-flex" >
+      <div>
+       <h2 style="  text-shadow: 3px 3px 0 #463d50">Interested in <br> Freelancing<br> Commissions?</h2>
+       <div class="d-flex py-0 my-0">
+         <a [routerLink]="" class="btn redirect px-lg-4 border border-light" style="font-size: 2vh;">Join the Flow Services ></a>
+       </div>
+      </div>
+
+
+   </div>
+    <!-- <img src="../../../../../assets/images/girl.png" style="position: absolute; right:0; top:0;"> -->
+  </div>
+  <div class="col-xl-4 col-lg-6 col-12 my-4 m-xl-4 p-4 " style="background-color: #463d50; position: relative; background-image: url('../../../../../assets/images/cuirous.png'); background-size: 70%; background-repeat: no-repeat; background-position-x: right; ">
+    <div class="d-flex justify-content-between text-light">
+      <div>
+       <h2 style="  text-shadow: 3px 3px 0 #463d50">Looking to <br>hire a <br> freelancer?</h2>
+       <a [routerLink]="" class="btn redirect px-lg-4 border border-light" style="font-size: 2vh;">Browse Flow Services ></a>
+     </div>
+    </div>
+    <!-- <img src="../../../../../assets/images/girl.png" class="img-fluid" style=""> -->
+  </div>
+</div>
+<div *ngFor="let notification of notifications">
+  {{ notification }}
+</div>
+

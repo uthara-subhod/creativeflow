@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+/*mainpurple:5E3E5C*/
+
+html, body { height: 100%; background-color: #F7FAF0; padding:0;}
+body { margin: 0; font-family: Sitara, "Helvetica Neue", sans-serif; }

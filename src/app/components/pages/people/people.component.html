@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+<div class="row mx-0">
+  <div class="col-xl-4 col-lg-6 px-0 py-0 mx-0 my-0" *ngFor="let user of users">
+    <app-user-card [user]="user"></app-user-card>
+  </div>
+  <!-- <app-user-card *ngFor="let user of users" [user]="user"></app-user-card> -->
+</div>
+

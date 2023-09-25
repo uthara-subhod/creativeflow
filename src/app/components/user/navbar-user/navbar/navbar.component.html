@@ -1,0 +1,89 @@
+<div class="col-12">
+  <div class="top d-flex align-items-center justify-content-between" >
+    <span class="d-flex mx-2 align-items-center">
+      <img
+      src="../../../../../assets/images/CreativeFlow-logos_white.png"
+      alt=""
+      width="50px"
+    />
+    <p class="text-5 fs-5 mt-3">CreativeFlow</p>
+    </span>
+
+    <div class="d-flex justify-content-end col-5">
+      <button class="btn menu py-1 d-lg-none d-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-container d-lg-block d-none">
+  <input type="text" placeholder="Search for people, artworks, and more..." class="search">
+  <i class="fa fa-search search-icon"></i>
+    </div>
+    <button class="d-lg-block d-none rectangle-5 mx-3 btn py-0" type="button"><i class="fa-solid fa-pen-to-square"></i> Create Now
+    </button>
+    </div>
+
+  </div>
+  <div class="bottom d-flex justify-content-between align-items-center py-lg-0 py-4" >
+    <div class="d-lg-flex d-none justify-content-start align-items-center mx-3">
+      <a routerLink="/" class="link navlink">Home</a>
+      <a class="mx-2 navlink">|</a>
+      <a routerLink="/" class="link navlink">Works</a>
+      <a class="mx-2 navlink">|</a>
+      <a routerLink="/browse/people" class="link navlink">People</a>
+      <a class="mx-2 navlink">|</a>
+      <a routerLink="/" class="link navlink">Services</a>
+    </div>
+    <div class="search-container d-lg-none d-block border">
+      <input type="text" placeholder="Search for people, artworks, and more..." class="search">
+      <i class="fa fa-search search-icon"></i>
+    </div>
+    <div class="d-lg-none justify-content-start align-items-center mx-3 d-flex">
+      <a routerLink="/" class="link navlink btn border rounded-pill" style="margin-right: 10px;"> <i class="fa-regular fa-message"></i></a>
+      <a routerLink="/" class="link navlink btn border rounded-pill"> <i class="fa-solid fa-bell"></i></a>
+    </div>
+    <div class="d-lg-flex justify-content-start align-items-center mx-3 d-none">
+      <a routerLink="/" class="link navlink" *ngIf="logIn"><i class="fa-regular fa-message"></i></a>
+      <a class="mx-2" *ngIf="logIn" >|</a>
+      <div class="notif-wrapper"  *ngIf="logIn">
+        <a routerLink="/" class="link navlink" (click)="toggleDropdown()"> <i class="fa-solid fa-bell"></i></a>
+        <div class="dropdown-container " [ngClass]="{'active': showDropdown}" >
+          <app-notifications [userId]="userId" ></app-notifications>
+        </div>
+      </div>
+      <a class="mx-2"*ngIf="logIn" >|</a>
+      <a routerLink="/profile" class="link navlink" *ngIf="logIn"><i class="fa-solid fa-user"></i> Account</a>
+      <a class="mx-2" *ngIf="logIn">|</a>
+      <a routerLink="/" class="link" *ngIf="logIn" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+      <a routerLink="/register" class="link navlink" *ngIf="!logIn"> Register</a>
+      <a class="mx-2" *ngIf="!logIn" >|</a>
+      <a routerLink="/login" class="link navlink" *ngIf="!logIn">Login</a>
+    </div>
+  </div>
+  </div>
+
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="background-color: #b39eb1;">
+    <div class="offcanvas-header d-flex justify-content-center">
+    <span class="d-flex mx-2 align-items-center">
+      <img
+      src="../../../../../assets/images/CreativeFlow-logos_white.png"
+      alt=""
+      width="50px"
+    />
+    <p class="text-5 fs-5 mt-3 text-light">CreativeFlow</p>
+    </span>
+    <button type="button" class="btn-close text-reset text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="d-flex flex-column align-items-center text-light">
+      <a routerLink="/" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Home</a>
+
+      <a routerLink="/" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Works</a>
+
+      <a routerLink="/browse/people" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">People</a>
+
+      <a routerLink="/" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Services</a>
+
+      <a routerLink="/profile" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Account</a>
+      <button type="button" class="btn btn-secondary w-100 mt-3">Logout</button>
+    </div>
+  </div>
+</div>
+
