@@ -9,6 +9,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class PeopleComponent implements OnInit{
   users:any[]=[]
+  searchQuery=''
   constructor(private profile:ProfileService, private router:Router){}
   ngOnInit(): void {
     this.profile.getUsers().subscribe({
@@ -20,4 +21,11 @@ export class PeopleComponent implements OnInit{
       }
     })
   }
+
+  get searchUsers() {
+    return this.users.filter(user =>
+      user.fullname.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+  
 }

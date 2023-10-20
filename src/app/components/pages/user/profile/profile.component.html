@@ -2,4 +2,180 @@
 <p>{{user}}</p>
 <button>Follow me</button> -->
 <app-navbar></app-navbar>
-<app-profile-card [user]="user" [following]="following"></app-profile-card>
+<div class="banner" [ngStyle]="{ 'background-image': 'url(' + user.banner + ')' }"></div>
+<!-- <img width="100%"  [src]="user.banner" style="position: absolute; z-index:-1"> -->
+<div class="container-fluid  mx-0 px-lg-2 px-0" style="overflow-x: hidden !important;">
+
+
+
+  <div class="col-xl-12 col-12 px-xl-5 py-xl-5 px-2 row my-0 mx-0" style="overflow-x: hidden !important;">
+
+    <div class="col-xl-3 px-0 col-12 padding">
+
+      <app-profile-card [user]="user" [following]="following"></app-profile-card>
+    </div>
+    <div class="col-xl-8 col-12 padding mx-xl-4 mx-0 ">
+      <button class="btn btn-dark rounded-pill mx-4 mb-4 mt-3" (click)="art()">Artworks</button>
+      <button class="btn btn-dark rounded-pill mb-4 mt-3" (click)="book()">Books</button>
+      <div class="row mx-0 p-0" *ngIf="isArt">
+        <div class="container bg-white p-5 border" *ngIf="artworks.length==0">
+          <h4  class="text-center">This user has no artworks</h4>
+        </div>
+        <mat-card class="p-2 col-lg-4 mx-lg-2 col-12 artwork" *ngFor="let a of obs | async">
+          <button class="heart-button btn btn-light">
+            <i class="fa fa-heart px-1" style="font-size:15px"></i>{{a.votes.length}}
+          </button>
+          <div class="artwork-info">
+            <button class="info-button btn btn-dark rounded-pill" (click)="getArtwork(a)" data-bs-toggle="modal"
+              data-bs-target="#art">
+              <i class="fa fa-info"></i>
+              <span class="title">{{a.title}}</span>
+            </button>
+          </div>
+          <img [src]="a.artwork">
+          <mat-card-footer class="pt-2 px-2 d-flex justify-content-between ">
+            <div class="author-profile">
+
+              <img [src]="a.artist.profile==''? '../../../../assets/images/dummy-image.jpeg':a.artist.profile "
+                alt="Author's Profile">
+
+              <p class="my-0">{{ a.artist.fullname }}</p>
+            </div>
+            <div class="d-flex align-items-center text-secondary "> {{a.publishedAt|date:'shortDate'}} </div>
+
+          </mat-card-footer>
+        </mat-card>
+      </div>
+
+      <mat-paginator [pageSizeOptions]="[9]" *ngIf="artworks.length>0&&isArt"></mat-paginator>
+      <div class="row m-0 p-0 " *ngIf="!isArt">
+        <div class="container bg-white p-5 border" *ngIf="books.length==0">
+          <h4  class="text-center">This user has no books</h4>
+        </div>
+        <mat-card *ngFor="let book of obs2|async" class="book-card container col-xl-6 col-12">
+          <mat-card-content >
+
+            <div class="cover-image">
+              <img [src]="book.cover" alt="Book Cover">
+            </div>
+            <div class="book-details col-lg-5">
+              <mat-card-title>{{ book.title }}</mat-card-title>
+              <!-- Published Chapters -->
+              <mat-card-subtitle>
+                <div class="author-profile">
+                  <!-- Author's profile pic (replace 'book.authorProfilePic' with actual URL) -->
+                  <img
+                    [src]="book.author.profile==''? '../../../../assets/images/dummy-image.jpeg':book.author.profile "
+                    alt="Author's Profile">
+                  <!-- Author's name -->
+                  <p class="my-0">{{ book.author.fullname }}</p>
+                </div>
+              </mat-card-subtitle>
+              <p class="description"> {{ book.description | truncate:20 }}</p>
+            </div>
+            <div class="right-side ">
+              <!-- Last updated date (replace 'book.lastUpdated' with actual date) -->
+              <mat-card-subtitle>
+                <p class="last-updated">Last Updated: {{ book.updatedAt | date }}</p>
+              </mat-card-subtitle>
+
+              <!-- Start Reading button -->
+              <a mat-flat-button color="primary" class="btn rounded-pill px-4"
+                [routerLink]="'/browse/books/'+book.book_id">Start Reading</a>
+              <!-- Two small buttons in a row -->
+              <div class="button-row">
+                <button mat-icon-button>
+                  <mat-icon>info</mat-icon>
+                </button>
+                <button mat-icon-button>
+                  <mat-icon>library_add</mat-icon>
+                </button>
+              </div>
+            </div>
+
+
+          </mat-card-content>
+
+
+        </mat-card>
+        <div class="col-xl-6"></div>
+      </div>
+      <mat-paginator [pageSizeOptions]="[9]" *ngIf="books.length>0&&!isArt"></mat-paginator>
+
+      <div class="modal fade" id="art" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0" *ngIf="artwork">
+              <div class="container-fluid d-flex justify-content-center flex-column align-items-center p-4"
+                style="background-color: rgb(238, 238, 238);">
+                <img [src]="artwork.artwork" alt="" class="col-lg-5 col-12">
+                <div class="d-flex justify-content-between align-items-center mt-3" style="gap:10px;">
+                  <button class="btn btn-secondary rounded-pill"><i class="fa fa-plus"></i></button>
+                  <button class="btn btn-secondary rounded-pill" (click)="vote(artwork)">
+
+                    <i class="fa-regular fa-heart" *ngIf="!artwork.votes.includes(user._id)||!artwork.votes"></i>
+                    <i class="fa fa-heart" *ngIf="artwork.votes.includes(this.user._id)"></i>
+                  </button>
+                  <a class="btn btn-secondary rounded-pill" *ngIf="user.user_id!==artwork.artist.user_id"
+                    data-bs-dismiss="modal" [routerLink]="'/report/artwork/'+artwork.artwork_id">Report Work</a>
+                </div>
+              </div>
+              <div class="row mx-0 p-4">
+                <div class="col-lg-9">
+                  <mat-card>
+                    <mat-card-content>
+                      <h2>{{artwork.title}}</h2>
+                      <h5 class="text-secondary">{{artwork.publishedAt | date : 'medium'}}</h5>
+                      <hr>
+                      <h6>{{artwork.description}}</h6>
+                    </mat-card-content>
+                  </mat-card>
+                  <app-comments [id]="artwork.artwork_id" [place]="'artwork'"></app-comments>
+
+                </div>
+                <div class="col-lg-2">
+                  <mat-card>
+                    <mat-card-content>
+
+                      <div class="author-profile-big ">
+
+                        <img
+                          [src]="artwork.artist.profile==''? '../../../../assets/images/dummy-image.jpeg':artwork.artist.profile "
+                          alt="Author's Profile">
+
+                        <div class="d-flex justify-content-between   flex-column">
+
+                          <p class="my-0 fs-5">{{ artwork.artist.fullname }}</p>
+                          <p class="my-0">
+                            <span *ngIf="artwork.artist.artist">Artist</span>
+                            <span *ngIf="artwork.artist.artist&&artwork.artist.author" class="px-lg-2">|</span>
+                            <span *ngIf="artwork.artist.author">Author</span>
+                            <span *ngIf="artwork.artist.artist||artwork.artist.author" class="px-lg-2">|</span>
+                            <span *ngIf="artwork.artist.pro">Pro</span>
+                            <span *ngIf="!artwork.artist.pro">Hobbyist</span>
+                          </p>
+
+                          <a [routerLink]="['/user', artwork.artist.user_id]"
+                            class="btn redirect col-lg-12 rounded-pill btn-sm my-0 py-0 mt-2" data-bs-dismiss="modal"
+                            aria-label="Close">View Profile</a>
+                        </div>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

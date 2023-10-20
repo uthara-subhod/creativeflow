@@ -1,68 +1,91 @@
-
 <div class="box container-fluid">
 
-  <div class="d-flex justify-content-center align-items-center pt-4 ">
-    <div class="card col-xl-5 fs-5 col-lg-6 col-11" style="background-color: #5E3E5C; color:rgb(228, 228, 228)">
-      <div class=" d-flex flex-column justify-content-center align-items-center ">
-        <span class="d-flex mt-2 align-items-center">
-          <img
-          src="../../../../../assets/images/CreativeFlow-logos_white.png"
-          alt=""
-          width="50px"
-        />
-        <p class="mx-2 mt-5 mb-5" style="font-size: 30px; font-style: italic; font-family: 'Sitara' ;">CreativeFlow</p>
-        </span>
-        <!-- <label for="username">First Name</label> -->
-        <form  class="col-7" *ngIf="!isOtp" (ngSubmit)="register()">
-          <div class="col-12 mb-5 ">
-              <div class="">
-                <div class="field mb-4">
-                  <label for="firstname" class="form-label">Full Name</label>
-              <input pInputText class="col-11" [(ngModel)]="user.fullname" class="form-control"  name="fullname" type="text"/>
-              </div>
+  <div class="container">
+    <section class="section register min-vh-100  py-4" >
+    <div class="d-flex justify-content-center align-items-center pt-4">
+      <div class="card col-xl-6 fs-5 col-lg-6 col-11" *ngIf="!isOtp" style="background-color: #541e51; color:rgb(228, 228, 228)">
+        <div class=" d-flex flex-column justify-content-center align-items-center ">
+          <span class="d-flex mt-2 align-items-center">
+            <img
+            src="../../../../../assets/images/CreativeFlow-logos_white.png"
+            alt=""
+            width="50px"
+          />
+          <p class="mx-2 mt-5 mb-5" style="font-size: 30px; font-style: italic; font-family: 'Sitara' ;">CreativeFlow</p>
+          </span>
+          <!-- <label for="username">First Name</label> -->
+          <form  class="col-7" (ngSubmit)="register()">
+            <div class="col-12 mb-5 ">
+                <div class="">
                   <div class="field mb-4">
-                      <label for="username" class="form-label">Email Address</label><br>
-                      <input pInputText  [(ngModel)]="user.email" name="email" class="form-control"  type="email" placeholder="john@example.com" required/>
-                  </div>
-                  <div class="field mb-4">
-                      <label for="password" class="form-label">Password</label>
+                    <label for="firstname" class="form-label">Full Name</label>
+                <input pInputText class="col-11" [(ngModel)]="user.fullname" class="form-control"  name="fullname" type="text"/>
+                </div>
+                    <div class="field mb-4">
+                        <label for="username" class="form-label">Email Address</label><br>
+                        <input pInputText  [(ngModel)]="user.email" name="email" class="form-control"  type="email" placeholder="john@example.com" required/>
+                    </div>
+                    <div class="field mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+
+                          <input class="form-control" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password">
+                          <span class="input-group-btn border bg-white text-secondary">
+                            <button mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
+                              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                          </span>
+                        </div>
+                        <!-- <p-password  [toggleMask]="true"></p-password>
+                        <p-password [(ngModel)]="user.password" [feedback]="false" name="password" required></p-password> -->
+                    </div>
+                    <div class="field mb-4">
+                      <label for="repassword" class="form-label" >Confirm Password</label>
                       <div class="input-group">
 
-                        <input class="form-control" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password">
+                        <input class="form-control" [type]="hide ? 'password' : 'text'" name="confirm" [(ngModel)]="repass">
                         <span class="input-group-btn border bg-white text-secondary">
                           <button mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </button>
                         </span>
                       </div>
+                      <p class="text-end mt-1" style="font-size: smaller;">Already have an account? <a style="color:rgb(228, 228, 228); cursor:pointer;" href="/login">Login Now!</a></p>
                       <!-- <p-password  [toggleMask]="true"></p-password>
                       <p-password [(ngModel)]="user.password" [feedback]="false" name="password" required></p-password> -->
                   </div>
-                  <div class="field mb-4">
-                    <label for="repassword" class="form-label" >Confirm Password</label>
-                    <div class="input-group">
-
-                      <input class="form-control" [type]="hide ? 'password' : 'text'" name="confirm" [(ngModel)]="repass">
-                      <span class="input-group-btn border bg-white text-secondary">
-                        <button mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
-                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
-                      </span>
-                    </div>
-                    <p class="text-end mt-1" style="font-size: smaller;">Already have an account? <a style="color:rgb(228, 228, 228); cursor:pointer;" href="/login">Login Now!</a></p>
-                    <!-- <p-password  [toggleMask]="true"></p-password>
-                    <p-password [(ngModel)]="user.password" [feedback]="false" name="password" required></p-password> -->
+                    <button label="Register" class="btn btn-secondary text-white col-12" type="submit" (click)="register()" >Register</button>
                 </div>
-                  <button label="Register" class="btn btn-secondary text-white col-12" type="submit" >Register</button>
               </div>
-            </div>
-          </form>
+            </form>
 
-          <app-otp *ngIf="isOtp" [generatedOTP]="otp" [user]="user"></app-otp>
           </div>
 
         </div>
+        <div class="card col-xl-6 fs-5 col-lg-6 col-11 mt-5" *ngIf="isOtp" style="background-color: #541e51; color:rgb(228, 228, 228)">
+          <div class=" d-flex flex-column justify-content-center align-items-center ">
+            <!-- <span class="d-flex mt-2 align-items-center">
+              <img
+              src="../../../../../assets/images/CreativeFlow-logos_white.png"
+              alt=""
+              width="50px"
+            />
+            <p class="mx-2 mt-5 mb-5" style="font-size: 30px; font-style: italic; font-family: 'Sitara' ;">CreativeFlow</p>
+            </span> -->
+
+
+            <div class="my-4 py-4  mt-5 pt-5">
+              <h6 class="text-center mb-4 text-uppercase" style="letter-spacing: 5px;">Enter your otp</h6>
+              <app-otp  [generatedOTP]="otp" [user]="user"></app-otp>
+              <p class="text-center" style="font-size: 15px;" *ngIf="!resend">Resend otp in: {{ countdown }}s</p>
+              <p class="text-center" style="font-size: 15px;" *ngIf="resend"><a class="btn" (click)="resendOTP()">Resend otp</a></p>
+            </div>
+            </div>
+
+          </div>
       </div>
+    </section>
+  </div>
 </div>
 
 

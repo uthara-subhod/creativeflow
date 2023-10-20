@@ -1,0 +1,154 @@
+
+<header id="header" class="header fixed-top d-flex align-items-center" style="background-color: #5e3e5c;">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <i class="fa-solid fa-bars toggle-sidebar-btn  text-light" (click)="toggle()"></i>
+    <a href="/behindflow" class="logo d-flex align-items-center mx-4">
+
+      <span class="text-light">CreativeFlow</span><span class="mx-2 text-white" style="font-style: italic; font-weight: normal;">Admin</span>
+    </a>
+  </div><!-- End Logo -->
+
+  <!-- <div class="search-bar">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+    </form>
+  </div> -->
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
+
+
+      <li class="nav-item  pe-3">
+
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" (click)="logout()">
+
+          <span class="d-none d-md-block ps-2 text-light">Logout</span>
+        </a><!-- End Profile Iamge Icon -->
+
+      </li><!-- End Profile Nav -->
+
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<div [ngClass]="{'toggle-sidebar': isSidebarToggled}">
+
+  <aside id="sidebar" class="sidebar" >
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link" href="/behindflow" [ngClass]="{'collapsed': activeRoute !== '/behindflow'}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Genres</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a [routerLink]="'/behindflow/genres'" [ngClass]="{'collapsed': activeRoute !== '/behindflow'}">
+              <i class="bi bi-circle"></i><span>Categories</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/behindflow/genres/add'">
+              <i class="bi bi-circle"></i><span>Add Category</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#artists-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Artfields</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="artists-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a [routerLink]="'/behindflow/artfields'">
+              <i class="bi bi-circle"></i><span>Categories</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/behindflow/artfields/add'">
+              <i class="bi bi-circle"></i><span>Add Category</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#services-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Services</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="services-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a [routerLink]="'/behindflow/services'">
+              <i class="bi bi-circle"></i><span>Categories</span>
+            </a>
+          </li>
+          <li>
+            <a >
+              <i class="bi bi-circle"></i><span>Add Category</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" [routerLink]="'/behindflow/users'">
+          <i class="bi bi-grid"></i>
+          <span>Users</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Moderators</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="/behindflow/moderators">
+              <i class="bi bi-circle"></i><span>Moderator List</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="bi bi-circle"></i><span>Add Moderator</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="bi bi-circle"></i><span>Moderator Logs</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="bi bi-bar-chart"></i><span>Management</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+      </li><!-- End Charts Nav -->
+
+
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+</div>
+
+
+
+
+

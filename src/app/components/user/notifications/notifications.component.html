@@ -1,7 +1,26 @@
+<button type="button" class="btn btn-primary py-0 my-2"  (click)="clearAll()">Clear all notifications</button>
 <div *ngIf="!isEmpty()">
 
   <div *ngFor="let n of notifications">
-    <p>{{n.from}} {{n.msg}}</p>
+    <div *ngIf="n.type=='follow'" class="border bg-white p-2">
+      <img [src]="n.from.profile==''?  '../../../../assets/images/dummy-image.jpeg': n.from.profile" width="50px" height="50px">
+      <a [routerLink]="['/user', n.from.user_id]" class="btn text-start">
+        <div class="my-0 py-0">
+
+          {{n.from.fullname.split(' ')[0]}} has followed you
+        </div>
+        <div class="text-secondary py-0 my-0 col-12" style="font-size: 13px;">{{n.time | date:'long'}}</div>
+      </a>
+    </div>
+    <div *ngIf="n.type=='book'" class="border bg-white p-2">
+      <img [src]="n.book.cover==''?  '../../../../assets/images/cover-dummy.jpg': n.book.cover"  height="50px">
+      <a [routerLink]="['/browse/books/', n.book.book_id]" class="btn text-start col-10">
+        <div class="my-0 py-0">
+          {{n.from.fullname.split(' ')[0]}} has published a new book {{n.book.title}}
+        </div>
+         <div style="font-size: 13px;" class="text-secondary col-12">{{n.time | date:'long'}}</div> </a>
+    </div>
+
   </div>
 </div>
 <div *ngIf="isEmpty()">

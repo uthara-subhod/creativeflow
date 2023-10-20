@@ -1,0 +1,118 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+
+.wrap {
+  background: #b2a0b5;
+  border-radius: 5px;
+}
+
+.people-list {
+  float: left;
+ 
+}
+
+.search{
+  width:95%;
+  background: #f5f1f6;
+}
+
+
+.people-list input {
+  border-radius: 3px;
+  border: none;
+  padding: 14px;
+  background: #f5f1f6;
+  font-size: 17px;
+  width:94%;
+}
+
+.people-list .fa-search {
+  position: relative;
+  left: -25px;
+}
+
+.people-list ul {
+  height: 80vh;
+  padding:0;
+  width:95%;
+  overflow-y: scroll;
+}
+
+.people-list ul li {
+  list-style: none;
+  padding-bottom: 20px;
+}
+
+.people-list img {
+  float: left;
+  width: 60px;
+  border-radius: 50px;
+}
+
+.people-list .about {
+  float: left;
+  margin-top: 8px;
+}
+
+.people-list .about {
+  padding-left: 8px;
+}
+
+.chat {
+  float: left;
+  background: #F2F5F8;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #434651;
+}
+
+
+.people-list ul::-webkit-scrollbar {
+  width: 0.2rem; /* Set the width to a very small value */
+}
+
+/* Customize the scrollbar track */
+.people-list ul::-webkit-scrollbar-track {
+  background-color: transparent; /* Set the background color to transparent */
+}
+
+/* Customize the scrollbar thumb (the draggable part) */
+.people-list ul::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Set the thumb color to transparent */
+}
+
+
+
+
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.float-right {
+  float: right;
+}
+
+.clearfix{
+  padding:20px;
+  
+  border:1px solid rgb(72, 52, 72)
+}
+
+.clearfix:hover{
+  background-color: #927491;
+}
+
+
+
+
+
+

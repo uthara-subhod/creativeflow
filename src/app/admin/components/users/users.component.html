@@ -1,0 +1,25 @@
+
+<app-navbar></app-navbar>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Users</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+        <li class="breadcrumb-item active">Users</li>>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <app-table [tableData]="data" [type]="'users'" [actions]="['Edit']" [columns]="columns" [displayedColumns]="display" [id]="'user_id'"></app-table>
+
+      </div>
+
+    </div>
+  </section>
+
+  </main>
+

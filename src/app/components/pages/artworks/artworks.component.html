@@ -1,0 +1,123 @@
+<app-navbar></app-navbar>
+<app-genres [type]="'artfields'" (cardClick)="getArtField($event)"></app-genres>
+<div class="d-flex flex-column justify-content-center my-4 align-items-center">
+  <h3 class="mb-3 text-center">Search to browse Our Artworks</h3>
+  <div class="wrapper col-lg-5  px-2">
+    <div class="search-input">
+      <a href="" target="_blank" hidden></a>
+      <input type="text" placeholder="Type to search.." [(ngModel)]="searchQuery">
+      <div class="icon"><i class="fas fa-search"></i></div>
+    </div>
+  </div>
+
+</div>
+<div class="row mx-0 mt-5">
+  <div class="component-wrapper col-lg-3 mb-3" >
+    <a class="btn ftr-btn " data-bs-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Filters
+    </a>
+    <div class="d-lg-block d-none">
+
+      <div class="filters-container collapse show" id="filters">
+        <div class="filter">
+          <div class="filter__title">Last updated</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" [value]="'day'" (change)="applyTime($event)">
+              Today
+            </label>
+            <label>
+              <input type="checkbox" [value]="'week'" (change)="applyTime($event)">
+              This week
+            </label>
+            <label>
+              <input type="checkbox" [value]="'month'" (change)="applyTime($event)">
+              This month
+            </label>
+            <label>
+              <input type="checkbox" [value]="'year'" (change)="applyTime($event)">
+              This year
+            </label>
+          </div>
+        </div>
+
+        <div class="filter">
+          <div class="filter__title">Content</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" [(ngModel)]="mature">
+              Hide mature artworks
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="free">
+              Hide free artworks
+            </label>
+            <label>
+              <input type="checkbox" value="paid" [(ngModel)]="paid">
+              Hide paid artworks
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-lg-none d-block">
+
+      <div class="filters-container collapse" id="filters">
+        <div class="filter">
+          <div class="filter__title">Last updated</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" value="day" (change)="applyTime($event)">
+              Today
+            </label>
+            <label>
+              <input type="checkbox" value="week" (change)="applyTime($event)">
+              This week
+            </label>
+            <label>
+              <input type="checkbox" value="month" (change)="applyTime($event)">
+              This month
+            </label>
+            <label>
+              <input type="checkbox" value="year" (change)="applyTime($event)">
+              This year
+            </label>
+          </div>
+        </div>
+
+        <div class="filter">
+          <div class="filter__title">Content</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" value="mature">
+              Hide mature artworks
+            </label>
+            <label>
+              <input type="checkbox" value="free">
+              Hide free artworks
+            </label>
+            <label>
+              <input type="checkbox" value="paid">
+              Hide Paid artworks
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="row mx-0">
+
+      <app-arts [artworks]="filteredArtworks.reverse()"></app-arts>
+    </div>
+  </div>
+
+</div>
+
+
+
+

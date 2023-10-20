@@ -1,0 +1,25 @@
+
+<app-navbar></app-navbar>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Genres</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a >Admin</a></li>
+        <li class="breadcrumb-item active">Genres</li>>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <app-table [tableData]="data" [type]="'genres'" [actions]="['Edit','delete']" [columns]="columns" [displayedColumns]="display" [id]="'cat_id'"></app-table>
+
+      </div>
+
+    </div>
+  </section>
+
+  </main>
+

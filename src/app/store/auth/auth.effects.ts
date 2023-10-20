@@ -63,6 +63,7 @@ export class AuthEffects {
         tap(({ loginSuccessResponse }) => {
           this.cookie.set('token',loginSuccessResponse.token)
           localStorage.setItem('token', loginSuccessResponse.token);
+          this.authService.setAuthenticated(true);
           const email=loginSuccessResponse.user.email as string
           const username = loginSuccessResponse.user.fullname? loginSuccessResponse.user.fullname :email.split('@')[0]
           this.router.navigateByUrl('/');
@@ -82,7 +83,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.loginFailure),
         tap(({ error }) => {
-          alert(error)
+          alert("you have logged out")
         })
       ),
     { dispatch: false }
@@ -95,9 +96,10 @@ export class AuthEffects {
     tap((user) => {
       this.cookie.delete('token')
       localStorage.removeItem('token');
+      this.authService.setAuthenticated(false);
       this.router.navigateByUrl('/');
       alert(
-        'You have logged out! '
+        "you have logged out"
       );
     })
   ),

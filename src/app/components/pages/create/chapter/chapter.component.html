@@ -1,0 +1,36 @@
+<app-c-navbar [book]="book" [chapter]="chapter"></app-c-navbar>
+<!-- <div #editor></div> -->
+<div class="container-fluid h-100 bg-white">
+  <div class="chapter-header">
+    <!-- Input field for editing the chapter title -->
+    <input type="text" class="chapter-title fs-3" [(ngModel)]="chapter.title" placeholder="Chapter Title" />
+  </div>
+  <hr>
+
+  <!-- <div id="toolbar-toolbar" class="toolbar ql-toolbar ql-snow sticky-top" #toolbar>
+  </div> -->
+  <div id="quill-editor" class="bg-white" #editor>
+
+  </div>
+  <div class="quill-text-output"></div>
+  <div class="quill-html-output" (input)="saveFormattedContent()"></div>
+  <!-- <div id="quill-editor-toolbar" class="sticky-bottom" >
+
+    <select class="ql-header"></select>
+    <button class="ql-header"></button>
+    <button class="ql-color"></button>
+    <button class="ql-background"></button>
+    <button class="ql-bold"></button>
+    <button class="ql-italic"></button>
+    <button class="ql-underline"></button>
+    <button class="ql-strike"></button>
+    <span class="ql-format">
+      <button class="ql-indent" value="-1" type="button"></button>
+      <button class="ql-indent" value="+1" type="button"></button>
+    </span>
+    <button class="ql-indent"></button>
+    <select class="ql-align"></select>
+    <button class="ql-clean"></button>
+
+  </div> -->
+</div>

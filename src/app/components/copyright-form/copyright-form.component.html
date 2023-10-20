@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<mat-card class="container my-4">
+
+  <h2 class="text-center text-uppercase mt-4">Report</h2>
+  <h5 class="text-center mb-4">Submit a report if you find anything inapproate in any form</h5>
+</mat-card>
+<mat-card class="container bg-white p-4 ">
+
+  <form>
+    <div class="form-group my-3">
+      <label for="violation">Type of violation</label>
+      <div>
+        <select class="form-select" id="violation" name="violation" required="required" [(ngModel)]="violation">
+          <option value="copyright violation">Copyright violation</option>
+          <option value="inappropriate language">Inappropriate language</option>
+          <option value="offensive content">Offensive content</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group my-3">
+      <label for="desc">Description of Violation</label>
+      <textarea id="desc" name="desc" cols="40" rows="4" required="required" class="form-control" [(ngModel)]="description"></textarea>
+    </div>
+    <div class="form-group my-3">
+      <label for="links">Links to proof</label>
+      <input id="link" name="link" cols="40" rows="3" class="form-control" (keydown)="onInputKeydown($event)" [(ngModel)]="link">
+    </div>
+    <div class="form-group my-3" *ngFor="let l of links">
+     <div class=" p-2 d-flex justify-content-between border">
+      <a [href]="l" class="col-8">{{l}}</a>
+      <button class="btn-close" (click)="removeLink(l)"></button>
+     </div>
+    </div>
+
+    <div class="form-group my-3">
+      <button name="submit" type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+  </form>
+</mat-card>

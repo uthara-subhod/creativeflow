@@ -1,20 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000'
-  // private getState: Observable<any>;
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
-
-  getUserToken(){
-    return localStorage.getItem('access');
+  setAuthenticated(value: boolean) {
+    this.isAuthenticatedSubject.next(value);
   }
 
   refresh(){
@@ -33,16 +33,14 @@ export class AuthService {
   login(formData:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, formData);
   }
-  logout(){
-    const token = this.getToken()
-    return this.http.post<any>(`${this.apiUrl}/logout`, {token});
-  }
 
   getOtp(email:any){
     return this.http.post<any>(`${this.apiUrl}/otp`, email);
   }
 
-
+  googleAuth(data:any){
+    return this.http.post<any>(`${this.apiUrl}/google`, data);
+  }
 
   editProfile(formData:any):Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/profile`,formData)

@@ -1,0 +1,185 @@
+.padding {
+  margin-top:150px;
+}
+.author-profile {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  gap:5px;
+}
+
+.author-profile img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+}
+
+.artwork{
+  position: relative;
+}
+
+.info{
+  position: absolute;
+  right:20px;
+  top:20px;
+  width:50px;
+  height:50px;
+}
+
+
+
+.artwork-info {
+  position: absolute;
+  top:20px;
+  right:20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: end;
+}
+
+.info-button {
+  border: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  position: relative;
+}
+
+
+.heart-button{
+   position: absolute;
+  left:20px;
+  top:20px;
+
+}
+.info-button i {
+  position: absolute;
+
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s; /* Add a transform transition */
+}
+
+.redirect{
+  background-color: #5e3e5c;
+  color:rgb(255, 251, 251);
+  border-radius: 20px;
+}
+
+
+.custom-tooltip {
+  background-color: rgb(53, 30, 74);
+  color:white;
+}
+
+.banner{
+  position: absolute;
+  z-index: -1;
+  width:100%;
+  height:30%
+}
+
+.info-button .title {
+  position: absolute;
+  top: 50%;
+  right:50px;
+  transform: translateY(-50%);
+  display: none;
+  white-space: nowrap;
+  transition: right 0.3s; /* Add a right transition */
+}
+
+.info-button:hover .title {
+  display: block;
+}
+
+.info-button:hover {
+  width: 60%; /* Adjust to the desired width for title */
+}
+.info-button:hover i{
+  right:20px;
+}
+
+.info-button:hover + .artwork-info {
+  opacity: 1;
+}
+
+.author-profile-big {
+  display: flex;
+  margin-top: 5px;
+  gap:10px;
+  font-size: 18px;
+}
+
+.author-profile-big img {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+
+}
+
+.book {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  width: 250px;
+}
+
+.book-card {
+  min-height: 250px;
+  display: flex;
+
+  text-align: left;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+  font-size: 27px;
+  font-weight: semi-bold;
+}
+
+mat-card-subtitle {
+  font-size: 16px;
+  color: #888;
+}
+
+.book-card mat-card-content {
+  margin-top: 0;
+  display: flex; /* Display the cover image and details in a flex container */
+  align-items: center;
+
+}
+
+mat-card-actions {
+  flex-direction: column;
+  justify-content: flex-end;
+  gap:10px;
+}
+
+.book-details {
+  flex-grow: 1; /* Allow the book details to expand and fill available space */
+}
+
+.cover-image {
+  width: 96px; /* Set the desired width for the cover image */
+  height: 150px; /* Set the desired height for the cover image */
+  margin-right: 10px; /* Adjust the spacing between cover and details */
+  overflow: hidden; /* Ensure the cover image doesn't exceed its container */
+}
+
+.cover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the cover image maintains its aspect ratio and covers the container */
+}
+
+.description {
+  font-size: 14px; /* Adjust font size for the description */
+  margin-top: 10px; /* Add spacing between description and other details */
+}
+
+

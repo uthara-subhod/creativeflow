@@ -18,21 +18,22 @@ export class EditProfileComponent {
   user = {
     fullname:'',
     profile:'',
-    country:''
+    country:'',
+    bio:'',
+    banner:''
   }
   countries: any[] = [];
   error=false
   msg = ''
 
+
   tabs = [
     { title: 'Edit Profile', active: true },
     { title: 'Change Password', active: false },
     { title: 'Manage Access', active: false },
-    // Add more tabs as needed
   ];
 
   uploadedFileUrl: string = '../../../assets/images/dummy-image.jpeg';
-
   following:boolean=false
 
   constructor(private profile:ProfileService, private route:ActivatedRoute, private router:Router){}
@@ -42,6 +43,8 @@ export class EditProfileComponent {
         this.user.fullname=res.user.fullname
         this.user.profile=res.user.profile
         this.user.country = res.user.country
+        this.user.bio = res.user.bio
+        this.user.banner=res.user.banner
 
       }
     })
@@ -53,7 +56,7 @@ export class EditProfileComponent {
 
   }
   options: UploadWidgetConfig = {
-    apiKey: "public_kW15bhn3GMUNmnekCdwzGVeqt6CX", // Get API key: https://www.bytescale.com/get-started
+    apiKey: "free", // Get API key: https://www.bytescale.com/get-started
     maxFileCount: 1,
     "editor": {
       "images": {
@@ -62,10 +65,45 @@ export class EditProfileComponent {
         "cropShape": "circ",
         "preview": true
       }
+    },
+    "mimeTypes": [
+      "image/jpeg",
+      "image/png",
+      "image/avif"
+    ]
+  };
+
+  option2: UploadWidgetConfig = {
+    apiKey: "free", // Get API key: https://www.bytescale.com/get-started
+    maxFileCount: 1,
+    "editor": {
+      "images": {
+        "crop": true,
+        "cropRatio": 1905/300,
+        "cropShape": "rect",
+        "preview": true
+      }
+    },
+    "mimeTypes": [
+      "image/jpeg",
+      "image/png",
+      "image/avif"
+    ]
+  };
+
+  //1905X300
+  onComplete = (files: UploadWidgetResult[]) => {
+    if(files[0]?.fileUrl){
+
+      this.uploadedFileUrl = files[0]?.fileUrl;
+      this.user.profile = this.uploadedFileUrl
     }
   };
-  onComplete = (files: UploadWidgetResult[]) => {
-    this.uploadedFileUrl = files[0]?.fileUrl;
+
+  bannerComplete= (files: UploadWidgetResult[]) => {
+    if(files[0]?.fileUrl){
+      this.user.banner = files[0]?.fileUrl;
+    }
   };
 
   selectTab(tab: any): void {
@@ -110,7 +148,9 @@ export class EditProfileComponent {
     const data ={
       fullname:this.user.fullname,
       profile:this.user.profile,
-      country:this.user.country
+      country:this.user.country,
+      bio:this.user.bio,
+      banner:this.user.banner
     }
     this.profile.editProfile(data).subscribe({
       next:(res)=>{

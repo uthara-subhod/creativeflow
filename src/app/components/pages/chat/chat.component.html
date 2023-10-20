@@ -1,0 +1,32 @@
+<div class=" p-0 m-0 col-12">
+
+  <app-navbar></app-navbar>
+  <!-- <h2 class="my-4 text-center">Socialize with our users!</h2> -->
+  <div class="d-flex justify-content-center" >
+  
+    <div class="col-12 wrap d-flex justify-content-center">
+      <div class="people-list col-3 m-4 mb-0 mr-0" id="people-list">
+        <div class="search input">
+          <input type="text" placeholder="search" [(ngModel)]="searchQuery" />
+          <i class="fa fa-search"></i>
+        </div>
+        <ul class="list mt-4">
+          <li class="clearfix d-flex align-items-center" *ngFor="let c of searchUsers" (click)="openChat(c.user_id)"
+            style="gap:10px">
+            <img [src]="c.profile!=''? c.profile : '../../../assets/images/dummy-image.jpeg'">
+            <div class="about">
+              <div class="name fs-4">{{c.fullname}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="chat container-fluid" *ngIf="isChat">
+        <app-messages></app-messages>
+      </div>
+      <div class="chat container-fluid d-flex justify-content-center align-items-center flex-column" *ngIf="!isChat">
+        <img src="../../../../assets/images/pngegg.png" width="60%" alt="">
+        <h3 >You are not in any chatroom currently</h3></div>
+    </div> <!-- end container -->
+  </div>
+</div>

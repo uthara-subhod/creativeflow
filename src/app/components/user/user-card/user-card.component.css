@@ -1,5 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
 .redirect{
   background-color: #5e3e5c;
   color:rgb(255, 251, 251);
   border-radius: 20px;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-position: center;
+  background-size: cover;
+}
+.banner {
+  background-color: #3498db; /* Set the background color of the banner */
+  background-size: cover;
+  padding: 10px; /* Adjust the padding as needed */
+  border-top-left-radius:25px;
+  border-top-right-radius: 25px;
+  width:100%;
+  height:150px;
+  text-align: center; /* Center the content within the banner */
+}
+
+.profile-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 25px;
+
+  border: 1px solid #ffffff40;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.212);
+}
+.image{
+  position: relative;
+  height: 150px;
+  width: 150px;
+}
+.image .profile-pic{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border:5px solid rgb(202, 202, 202)
+}
+.data{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+.data h2{
+  font-size: 33px;
+  font-weight: 600;
+}
+span{
+  font-size: 18px;
+}
+.row{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.row .info{
+  text-align: center;
+  padding: 0 20px;
+}
+.buttons{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.buttons .btn{
+  color: #fff;
+  text-decoration: none;
+  margin: 0 20px;
+  padding: 8px 25px;
+  border-radius: 25px;
+  font-size: 18px;
+  white-space: nowrap;
+  background: linear-gradient(to left, #610054 0%, #4f0c55 100%);
+}
+.buttons .btn:hover{
+  box-shadow: inset 0 5px 20px rgba(0,0,0,0.4);
 }

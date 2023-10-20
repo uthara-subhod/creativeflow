@@ -1,0 +1,55 @@
+<div class="col-12">
+  <div class="top d-flex align-items-center justify-content-between" >
+    <span class="d-flex mx-2 align-items-center">
+      <i class="text-5 fa fa-pencil px-3"></i>
+    <p class="text-5 fs-5 mt-3 fst-italic" style=" font-family: 'Sitara';">CreativeEditing</p>
+    </span>
+
+    <div class="d-lg-flex justify-content-end">
+
+
+    <a class="d-lg-block d-none rectangle-5 mx-3 btn py-0 " [routerLink]="'/create'" style="font-family: 'Sitara';"><i class="fa-solid fa-arrow-right-from-bracket" style="transform: scaleX(-1); margin-right: 10px;"></i>  Go back to CreativeFlow
+    </a>
+    <a class="d-lg-none d-block rectangle-5 btn py-0 mx-2" [routerLink]="'/create'"><i class="fa-solid fa-arrow-right-from-bracket" style="transform: scaleX(-1);"></i>
+    </a>
+    </div>
+
+  </div>
+  <div class="bottom d-lg-flex justify-content-between align-items-center py-lg-0" >
+    <mat-card class="book-card col-lg-3 col-12">
+      <mat-card-content>
+
+        <div class="cover-image">
+          <img [src]="book.cover" alt="Book Cover">
+        </div>
+        <a [href]="'/create/book/'+book.book_id">
+
+          <div class="book-details">
+            <mat-card-title> {{ book.title }}</mat-card-title>
+            <mat-card-subtitle>{{ book.chapters.length }} Chapters</mat-card-subtitle>
+          </div>
+        </a>
+
+      </mat-card-content>
+
+
+    </mat-card>
+    <div class="d-lg-flex d-none align-items-center" style="gap:5px;">
+
+      <button class="btn redirect fs-6" (click)="save()">Save Changes</button>
+      <button class="btn unpublish fs-6" (click)="togglepublish()" *ngIf="book.published && !chapter">Unpublish Story</button>
+      <button class="btn unpublish fs-6" (click)="togglepublish()" *ngIf="!book.published && !chapter">Publish Story</button>
+      <button class="btn unpublish fs-6" (click)="togglepublish()" *ngIf="chapter && chapter.published">Unpublish Chapter</button>
+      <button class="btn unpublish fs-6" (click)="togglepublish()" *ngIf="chapter && !chapter.published">Publish Chapter</button>
+      <button class="btn delete fs-6" (click)="delete()" ><i class="fa fa-trash"></i> </button>
+    </div>
+    <div class="d-lg-none d-flex align-items-center py-3 justify-content-center" style="gap:5px;">
+
+      <button class="btn redirect fs-6" (click)="save()">Save</button>
+      <button class="btn unpublish fs-6"(click)="togglepublish()" *ngIf="book.published">Unpublish</button>
+      <button class="btn unpublish fs-6"(click)="togglepublish()" *ngIf="!book.published">Publish</button>
+      <button class="btn delete fs-6" (click)="delete()"><i class="fa fa-trash"></i> </button>
+    </div>
+
+  </div>
+  </div>

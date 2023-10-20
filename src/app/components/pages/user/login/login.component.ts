@@ -5,41 +5,88 @@ import { Store } from '@ngrx/store';
 import * as appReducer from '../../../../store/app.reducer'
 import * as AuthActions from '../../../../store/auth/auth.actions';
 import { CookieService } from 'ngx-cookie-service';
-
-
+import Swal from 'sweetalert2';
+import {
+  SocialAuthService,
+  GoogleLoginProvider,
+  SocialUser,
+} from '@abacritt/angularx-social-login';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  constructor(private auth:AuthService, private router:Router, private store: Store<appReducer.AppState> , private cookie:CookieService){}
-
-  user={
-    email:'',
-    password:'',
+export class LoginComponent implements OnInit {
+  constructor(private auth: AuthService, private formBuilder: FormBuilder, private socialAuthService: SocialAuthService, private router: Router, private store: Store<appReducer.AppState>, private cookie: CookieService) { }
+  socialUser!: SocialUser;
+  loginForm!: FormGroup;
+  isLoggedin?: boolean;
+  private accessToken = '';
+  user = {
+    email: '',
+    password: '',
+    remember:false
   }
   hide = true;
-  login(){
-    this.user.password=this.user.password.trim()
-    this.user.email=this.user.email.trim()
+  ngOnInit(){
+    this.socialAuthService.authState.subscribe((user) => {
+      if(user!=null){
+        this.auth.googleAuth(user).subscribe({
+          next:(res)=>{
+          this.cookie.set('token',res.token)
+          localStorage.setItem('token', res.token);
+          this.auth.setAuthenticated(true);
+          const email=res.user.email as string
+          const username = res.user.fullname
+          this.router.navigateByUrl('/');
+
+          alert(
+            'Login Successful! ' +
+            'Welcome, ' +
+            username
+          );
+          }
+        })
+      }
+    });
+  }
+  login() {
+    this.user.password = this.user.password.trim()
+    if (this.user.email == '' || this.user.password == '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Fields cannot be empty',
+        background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+      })
+      return
+    }
+    this.user.email = this.user.email.trim()
     const payload = {
-      email:this.user.email,
-      password:this.user.password
+      email: this.user.email,
+      password: this.user.password,
+      remember:this.user.remember
     }
 
 
 
-      this.store.dispatch(AuthActions.loginRequest({credentials:payload}));
+    this.store.dispatch(AuthActions.loginRequest({ credentials: payload }));
 
 
   }
 
-  generateOTP(): string {
-    // Generate a 6-digit random OTP (you can customize this)
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    return otp;
+  getAccessToken(): void {
+    this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.accessToken = accessToken);
   }
+
+  refreshToken(): void {
+    this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+  }
+  loginWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+
 
 }
 

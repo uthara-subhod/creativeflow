@@ -1,0 +1,106 @@
+.edit-cover{
+  border-radius: 10px;
+  height:100%;
+  width: 100%;
+}
+
+.nav-item .active {
+  font-weight: normal !important;
+  border-bottom: 4px solid #dd9bd9 !important;
+}
+
+.nav-link{
+  letter-spacing: 1px;
+  color:black;
+}
+.work-section{
+  border-top: 5px solid rgb(189, 189, 189);
+}
+
+.redirect{
+  background-color: #5e3e5c;
+  color:rgb(255, 251, 251);
+  border-radius: 15px;
+}
+
+.tag-list li {
+  display: inline-block;
+}
+
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.book-card {
+
+  display: flex;
+
+  text-align: left;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+  font-size: 27px;
+  font-weight: semi-bold;
+}
+
+mat-card-subtitle {
+  font-size: 16px;
+  color: #888;
+}
+
+mat-card-content {
+  margin-top: 0;
+  display: flex; /* Display the cover image and details in a flex container */
+  align-items: center;
+
+}
+
+mat-card-actions {
+  flex-direction: column;
+  justify-content: flex-end;
+  gap:10px;
+}
+.d-flex button{
+  padding:0;
+  font-size: 12px;
+  background-color: #f3f3f3;
+  font-weight: normal;
+}
+
+
+.book-details {
+  flex-grow: 1; /* Allow the book details to expand and fill available space */
+}
+
+.book-card button {
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+.cover-image {
+  width: 96px; /* Set the desired width for the cover image */
+  height: 150px; /* Set the desired height for the cover image */
+  margin-right: 10px; /* Adjust the spacing between cover and details */
+  overflow: hidden; /* Ensure the cover image doesn't exceed its container */
+}
+
+.cover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the cover image maintains its aspect ratio and covers the container */
+}
+
+.description {
+  font-size: 14px; /* Adjust font size for the description */
+  margin-top: 10px; /* Add spacing between description and other details */
+}
+
+
+

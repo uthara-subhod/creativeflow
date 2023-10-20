@@ -1,0 +1,181 @@
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.banners {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-cover {
+  width: 300px;
+  border: 1px solid #ddd;
+  padding: 5px;
+  background-color: #fff;
+}
+
+.book-info {
+  flex: 1;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+p {
+  font-size: 16px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.redirect{
+  background-color: #5e3e5c;
+  color:rgb(255, 251, 251);
+  border-radius: 20px;
+}
+
+.table-of-contents {
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-of-contents h1 {
+  margin: 0;
+}
+
+.table-of-contents ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.table-of-contents li {
+  margin: 5px 0;
+}
+
+.table-of-contents a {
+  text-decoration: none;
+  color: #333;
+}
+
+.table-of-contents .btn:hover{
+  background-color: #b3b3b322;
+}
+
+.banner {
+  flex: 0 0 auto;
+  width: 292px; /* Increase the width by a factor of 2 */
+  height: 94px; /* Increase the height by a factor of 2 */
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  margin-right: 10px; /* Adjust the margin between banners */
+}
+
+
+
+/* Continue styling divider and page-indicator as needed */
+
+/* Info container */
+
+
+/* Book title */
+.book-title {
+  font-size: 45px;
+  font-weight: 400;
+  color: #121212;
+  font-family: 'Source Sans Pro';
+  word-wrap: break-word;
+}
+
+/* Book info items */
+.book-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Individual info items */
+.info-item {
+  text-align: center;
+
+}
+
+/* Label and value within info item */
+.label {
+  font-size: 21px;
+  font-weight: 400;
+  color: rgba(18, 18, 18, 0.64);
+  font-family: 'Source Sans Pro';
+  line-height: 30px;
+
+}
+
+.value {
+  font-size: 21px;
+  font-weight: 400;
+  color: #121212;
+  font-family: 'Source Sans Pro';
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+/* Start reading button */
+.read-button {
+  margin: 20px auto;
+  background: #5E3E5C;
+  border-top-left-radius: 400px;
+  border-bottom-left-radius: 400px;
+  text-align: center;
+  line-height: 48px;
+  font-size: 37px;
+  color: white;
+  font-family: 'Source Sans Pro';
+  cursor: pointer;
+}
+
+/* Additional information section */
+.extra-info {
+  width: 375px;
+  height: 70px;
+  margin: 20px auto;
+  background: white;
+  box-shadow: 0px 4px 5px rgba(34, 34, 34, 0.10);
+  border-radius: 8px;
+  border: 1px rgba(18, 18, 18, 0.04) solid;
+  text-align: center;
+  line-height: 70px;
+  font-size: 20px;
+  color: #121212;
+  font-family: 'Source Sans Pro';
+}
+
+

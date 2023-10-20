@@ -1,6 +1,6 @@
 
 import { Action, createReducer, on } from '@ngrx/store';
-import { adminLogout, loginFailure, loginSuccess, logout} from './auth.actions';
+import {  loginFailure, loginSuccess, logout} from './auth.actions';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { User } from 'src/app/models/user';
 
@@ -40,14 +40,7 @@ const _authReducer = createReducer(
       user: null,
     };
   }),
-  on((adminLogout),(state)=>{
-    return {
-      ...state,
-      token: null,
-      user: null,
-      admin:null
-    };
-  }),
+  
 
 
 );

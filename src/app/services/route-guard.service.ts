@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, ActivatedRoute } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, ActivatedRoute, CanDeactivate } from '@angular/router';
 
 
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { AuthService } from './auth/auth.service';
 import { ProfileService } from './profile.service';
@@ -22,6 +22,66 @@ export class RouteGuardService  {
       return false;
     }
     return true;
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class IsLoggedIn  {
+
+  constructor(private auth:AuthService, private router:Router) { }
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    if (this.auth.getToken()) {
+      this.router.navigate(['/'])
+      return false;
+  }else {
+    return true;
+  }
+}
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CreateGuard  {
+
+  constructor(private user:ProfileService, private router:Router) { }
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> {
+    return this.user.getUser().pipe(
+      map((res)=>{
+        if(!res.user.plan||res.user.plan==''){
+          this.router.navigate(['/create/plans']);
+          return false;
+        }else if(!res.user.artist&&!res.user.author){
+          this.router.navigate(['/create/roles']);
+          return false;
+        }else{
+          return true
+        }
+      }))
+}
+}
+export interface CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CanDeactivateGuard
+  implements CanDeactivate<CanComponentDeactivate>
+{
+  canDeactivate(
+    component: CanComponentDeactivate
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    return component.canDeactivate ? component.canDeactivate() : true;
   }
 }
 
@@ -58,6 +118,14 @@ export const AuthGuard = (next: ActivatedRouteSnapshot, state: RouterStateSnapsh
   return inject(RouteGuardService).canActivate(next, state);
 }
 
+export const loggedIn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => {
+  return inject(IsLoggedIn).canActivate(next, state);
+}
+
+
+export const isCreator = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<boolean>  => {
+  return inject(CreateGuard).canActivate(next, state);
+}
 // export const adminGuard = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => {
 //   return inject(AdminGuard).canActivate(next, state);
 // }

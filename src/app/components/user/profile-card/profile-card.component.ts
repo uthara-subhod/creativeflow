@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
@@ -10,8 +13,14 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfileCardComponent implements OnInit {
 @Input() user:any
 @Input() following:boolean|null=false
+users:any = []
+followings:any =[]
 loggedIn =false
-constructor(private profile:ProfileService, private route:ActivatedRoute){}
+@ViewChild(MatPaginator) paginator: MatPaginator | any;
+obs: Observable<any>|any;
+dataSource: MatTableDataSource<any> |any
+
+constructor(private profile:ProfileService, private route:ActivatedRoute,private changeDetectorRef: ChangeDetectorRef){}
 
 ngOnInit(): void {
 this.loggedIn=false
@@ -21,8 +30,7 @@ this.loggedIn=false
   });
   this.profile.getUser().subscribe({
     next:(res)=>{
-
-      if(id==res.user.user_id&&id){
+      if(this.user.user_id==res.user.user_id&&id){
         this.loggedIn=true
       }else if(!id){
         this.loggedIn=true
@@ -38,10 +46,22 @@ follow(){
       this.user=res.user
     },
     error: (error)=>{
-      console.log("damn",error.error)
+      alert(error.error)
     }
   })
 }
+isFollow(id:string){
+  this.profile.isFollow(id).subscribe({
+    next:(res)=>{
+      return res.status
+    },
+    error:(err)=>{
+      console.log("oops")
+      return false
+    }
+  })
+}
+
 unfollow(){
   this.profile.unFollow(this.user.user_id).subscribe({
     next: (res)=>{
@@ -49,8 +69,30 @@ unfollow(){
       this.user=res.user
     },
     error: (error)=>{
-      console.log(error.error)
+      alert(error.error)
     }
   })
+}
+
+followers(){
+  this.users=this.user.followers
+  this.dataSource = new MatTableDataSource<any>(this.users);
+  this.changeDetectorRef.detectChanges();
+  this.dataSource.paginator = this.paginator;
+  this.obs = this.dataSource.connect();
+}
+
+isfollowing(){
+  this.users= this.user.following
+  this.dataSource = new MatTableDataSource<any>(this.users);
+  this.changeDetectorRef.detectChanges();
+  this.dataSource.paginator = this.paginator;
+  this.obs = this.dataSource.connect();
+}
+
+ngOnDestroy() {
+  if (this.dataSource) {
+    this.dataSource.disconnect();
+  }
 }
 }

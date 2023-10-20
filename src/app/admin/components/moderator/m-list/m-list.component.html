@@ -1,0 +1,45 @@
+<div class="card m-5">
+  <div class="card-header fs-4 py-3 text-uppercase text-center">
+    User list
+  </div>
+  <div class="py-3" >
+  <div class="container" style="overflow-x: scroll; scrollbar-color: tranparent;">
+    <table class="table table-bordered bg-white table-responsive" id="dtBasicExample">
+
+      <thead>
+        <tr>
+          <th width="10%">Full Name</th>
+          <th width="10%">Email</th>
+          <th width="10%">Status</th>
+          <th width="10%">Joining date</th>
+          <th width="10%">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of dataSource">
+
+
+          <td>
+           {{ data.fullname }}
+          </td>
+          <td>
+           {{data.email}}
+          </td>
+          <td>
+            {{ getStatus(data.access)}}
+          </td>
+          <td>
+            {{ data.joinedAt | date:'mediumDate' }}
+          </td>
+          <td> <a class="btn btn-sm rounded-pill fs-7"
+            style="background-color: rgb(255, 99, 99); color:rgb(102, 0, 0)" (click)="delete(data._id)" >Edit Access</a></td>
+
+
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

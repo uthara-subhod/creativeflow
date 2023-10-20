@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SocketIoConfig, Socket } from 'ngx-socket-io';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
 
@@ -12,7 +13,9 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class NotificationsComponent implements OnInit{
   @Input()userId=''
   notifications:any[]=[]
-  constructor(private profile:ProfileService){}
+  constructor(private profile:ProfileService, private authService:AuthService){}
+
+
 ngOnInit(): void {
 
   this.profile.getUser().subscribe({
@@ -24,9 +27,20 @@ ngOnInit(): void {
           for(let a of n){
             if(a.types=='follow'){
               this.notifications.push({
-                from:a.from.fullname,
-                msg:"has followeed you"
+                type:a.types,
+                from:a.from,
+                time:a.createdAt,
+                msg:"has followed you"
               })
+            }else if(a.types=='book'){
+              this.notifications.push({
+                type:a.types,
+                from:a.from,
+                msg:'published ',
+                time:a.createdAt,
+                book:JSON.parse(a.item)
+              })
+
             }
           }
         },
@@ -38,7 +52,7 @@ ngOnInit(): void {
         url: 'http://localhost:3000', // socket server url;
         options: {
           transports: ['websocket'],
-          query: { userId: this.userId }
+          query: { userId: this.userId , token: this.authService.getToken()}
         }
       }
 
@@ -64,5 +78,14 @@ ngOnInit(): void {
 }
 isEmpty(){
   return this.notifications.length===0
+}
+
+clearAll(){
+  console.log("hiii")
+  this.profile.clearNotif(this.userId).subscribe({
+    next:(res)=>{
+      this.notifications=[]
+    }
+  })
 }
 }

@@ -1,0 +1,210 @@
+<app-c-navbar [book]="book"></app-c-navbar>
+
+<div class="container mt-4">
+
+
+
+  <div class="row mx-0">
+    <div class="col-lg-3 col-md-3 col-sm-12 p-5">
+      <div class="d-flex flex-column justify-content-between align-items-center  ">
+        <img [src]="book.cover" alt="Scribbles » g.port v.3" class="edit-cover">
+        <div class="d-grid col-12">
+          <button class="btn redirect rounded-pill my-3" uploadButton [uploadOptions]="options"
+            [uploadComplete]="onComplete">
+            Upload a file...
+          </button>
+        </div>
+
+      </div>
+
+
+
+    </div>
+    <div class=" col-lg-8 mx-lg-4 col-sm-12 col-md-8 pt-5 mb-3 " id="main-edit-container">
+      <div class="row ">
+
+
+        <div class="work-section px-0 mat-elevation-z8 bg-white pb-4">
+          <ul class="nav nav-underline mb-3 py-3 px-3 " style="border-bottom: 2px solid #5e3e5c;" role="tablist">
+            <li class="nav-item px-lg-4 px-0" role="presentation">
+              <a class="nav-link active" data-bs-toggle="tab" href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1"
+                aria-selected="true">Story Details</a>
+            </li>
+            <li class="nav-item px-lg-4 px-0" role="presentation">
+              <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2" role="tab"
+                aria-controls="ex1-tabs-2" aria-selected="false">Table of Contents</a>
+            </li>
+
+          </ul>
+          <div class="tab-content" id="ex1-content">
+
+            <div id="ex1-tabs-1" role="tabpanel" class="tab-pane fade show active">
+
+              <form class="main-edit-form px-5 pt-2">
+
+                <div class="mb-4 mt-2">
+                  <label for="exampleFormControlInput1" class="form-label">Title</label>
+                  <input type="text" class="form-control" name="title" [(ngModel)]="book.title">
+                </div>
+                <div class="mb-5">
+                  <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="description"
+                    [(ngModel)]="book.description"></textarea>
+                </div>
+
+                <div class="required-form-wrapper">
+
+
+
+                  <div class="form-group category-form">
+                    <div class="form-wrapper">
+                      <label for="categoryselect" class="mb-2">Category</label>
+
+                      <select id="categoryselect" class="form-select mb-4" name="cat" [(ngModel)]="book.category">
+                        <option *ngFor="let c of categories" [value]="c._id">{{c.name}}</option>
+                      </select>
+
+                    </div>
+                  </div>
+                  <div class="form-group tags-form">
+                    <div class="form-wrapper">
+                      <label class="mb-2">Tags</label>
+
+                    </div>
+                    <div class="tag-container">
+                      <div id="editable-tags" class=" card border pt-3 mb-3" style="margin-bottom: 5px;">
+                        <div class="component-wrapper"
+                          id="component-storytags-storytags-%2fmyworks%2f309326541-scribbles-%25c2%25bb-g-port-v-3">
+                          <div class="">
+                            <ul class="tag-list" style="text-decoration: none; list-style: none ;">
+                              <li *ngFor="let tag of book.tags"><a
+                                  class="btn btn-sm rounded-pill btn-secondary mx-1 px-2 py-0">{{tag}}</a></li>
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="add-tag" class="tag-item with-icon on-add-tag mb-2">
+                        <span>Add a tag</span>
+                      </div>
+                      <span id="tag-input-wrapper">
+                        <input class="form-control p-2 mb-4" placeholder="Separate tags with a space" name="tag"
+                          [(ngModel)]="tag" (keydown)="onInputKeydown($event)" autocomplete="off">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="inline-form-wrapper">
+                  <div class="form-group language-form mb-4">
+                    <div class="form-wrapper">
+                      <label>Language</label>
+
+                      <select id="languageselect" class="form-select " aria-label="Story language" name="lan"
+                        [(ngModel)]="book.language">
+                        <option *ngFor="let l of languages" [value]="l">{{l}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group copyright-form mb-4">
+                    <div class="form-wrapper">
+                      <div class="component-wrapper"
+                        id="component-copyright-copyright-%2fmyworks%2f309326541-scribbles-%25c2%25bb-g-port-v-3">
+                        <div class="form-field">
+                          <div class="form-field-label mb-2"><label>Copyright<button  mat-flat-button matTooltip="You do not allow your work to be used or adapted in any way without
+                            your permission." [matTooltipPosition]="'after'"
+                              aria-label="Button that displays a tooltip in various positions" class="tool">
+                              <mat-icon >info</mat-icon>
+                            </button></label>
+
+                          </div><select class="form-select" id="select-form-component" aria-label="Copyright options"
+                            name="copyright" [(ngModel)]="book.copyright">
+                            <option value="All Rights Reserved">All Rights Reserved</option>
+                            <option value="Public Domain">Public Domain</option>
+                            <option value="Creative Commons (CC) Attribution">Creative Commons (CC) Attribution</option>
+                            <option value="(CC) Attrib. NonCommercial">(CC) Attrib. NonCommercial</option>
+                            <option value="(CC) Attrib. NonComm. NoDeriv">(CC) Attrib. NonComm. NoDerivs</option>
+                            <option value="(CC) Attrib. NonComm. ShareAlike">(CC) Attrib. NonComm. ShareAlike</option>
+                            <option value="(CC) Attribution-ShareAlike">(CC) Attribution-ShareAlike</option>
+                            <option value="(CC) Attribution-NoDerivs">(CC) Attribution-NoDerivs</option>
+                          </select>
+                        </div>
+
+                        <!-- <p class="copyright-description"></p> -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group rating-form mb-2">
+                    <div class="form-wrapper d-flex justify-content-between w-75 ">
+                      <label class="rating-label">Does you story contain mature content? </label>
+
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="form11Example4" name="mature"
+                          [(ngModel)]="book.mature" />
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="form-group status-form">
+                    <div class="form-wrapper d-flex  justify-content-between w-75 ">
+                      <label class="rating-label">Is your story complete?</label>
+
+
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="form11Example4" name="complete"
+                          [disabled]="book.chapters.length === 0" [(ngModel)]="book.complete" />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+            <div id="ex1-tabs-2" role="tabpanel" class="tab-pane fade">
+
+              <div class="d-grid gap-2 px-4">
+                <button class="btn redirect " (click)="addChapter()"><i class="fa fa-plus"></i> Add new Chapter</button>
+              </div>
+              <div class="book-list px-0">
+                <mat-card *ngFor="let ch of book.chapters" class="book-card container">
+                  <mat-card-content>
+                    <div class="book-details col-5">
+                      <mat-card-title>{{ ch.title}}</mat-card-title>
+                      <!-- Published Chapters -->
+                      <mat-card-subtitle *ngIf="ch.published ">Published - {{ch.publishedAt | date:'short' }}</mat-card-subtitle>
+                      <mat-card-subtitle *ngIf="!ch.published ">Draft - {{ch.publishedAt | date:'short' }}</mat-card-subtitle>
+                    </div>
+                    <mat-card-actions class="d-lg-flex d-none">
+                      <button class="px-5" mat-flat-button color="primary" ><a class="text-decoration-none text-white" [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter</a> </button>
+                      <div class="d-flex" style="gap:7px">
+
+                      </div>
+                    </mat-card-actions>
+                  </mat-card-content>
+                  <mat-card-actions class="d-lg-none d-flex"  width="50vw !important">
+                    <button class="px-5" mat-flat-button color="primary" ><a class="text-decoration-none text-white" [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter</a> </button>
+                    <div class="d-flex" style="gap:7px">
+
+                    </div>
+                  </mat-card-actions>
+
+                </mat-card>
+              </div>
+              <div *ngIf="book.chapters.length==0"  class="container fs-5 py-4 text-center">You do not have any chapters</div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

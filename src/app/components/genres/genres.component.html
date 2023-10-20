@@ -1,0 +1,29 @@
+<div class="banner-container mt-2">
+  <div class="scroll-arrow left-arrow" (click)="scrollLeft()">&#9664;</div>
+  <div class="banners" #banners>
+    <!-- Your individual banners go here -->
+    <div class="banner" (click)="filter('')" >
+      <div  class="col-12 h-100 text-uppercase" style="background-color: rgba(0, 0, 0, 0.233); z-index:1; display: flex; flex: 0 0 auto;  justify-content: center;align-items: center;">
+        <h4>All</h4>
+      </div>
+      <div class="col-12 h-100 img-cover"  style="background-color: rgb(178, 140, 213); position: absolute; background-size: cover;">
+
+      </div>
+    </div>
+    <a *ngFor="let g of genres" (click)="filter(g._id)">
+
+      <div  class="banner"  >
+        <div  class="col-12 h-100 text-uppercase" style="background-color: rgba(0, 0, 0, 0.233); z-index:1; display: flex; flex: 0 0 auto;  justify-content: center;align-items: center;">
+          <h4>{{g.name}}</h4>
+        </div>
+        <div class="col-12 h-100 img-cover" [style.background-image]="'url(' + g.cover + ')'" style=" position: absolute; background-size: cover;">
+
+        </div>
+      </div>
+    </a>
+
+    <!-- Add more banners as needed -->
+  </div>
+  <div class="scroll-arrow right-arrow" (click)="scrollRight()">&#9654;</div>
+</div>
+ 

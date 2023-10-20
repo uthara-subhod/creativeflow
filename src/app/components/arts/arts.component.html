@@ -1,0 +1,96 @@
+
+<div class="row">
+
+  <mat-card class="p-2 col-lg-3 mx-lg-2 artwork" *ngFor="let a of artworks">
+    <!-- <button class="btn btn-dark rounded-pill info"><i class="fa fa-info"></i>  <span class="title">Artwork Title</span></button> -->
+    <button class="heart-button btn btn-light">
+      <i class="fa fa-heart px-1" style="font-size:15px"></i>{{a.votes.length}}
+    </button>
+    <div class="artwork-info">
+      <button class="info-button btn btn-dark rounded-pill" (click)="getArtwork(a)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa fa-info"></i>
+        <span class="title">{{a.title}}</span>
+      </button>
+    </div>
+    <img [src]="a.artwork" >
+    <mat-card-footer class="pt-2 px-2 d-flex justify-content-between ">
+      <div class="author-profile">
+        <!-- Author's profile pic (replace 'book.authorProfilePic' with actual URL) -->
+        <img [src]="a.artist.profile==''? '../../../../assets/images/dummy-image.jpeg':a.artist.profile " alt="Author's Profile">
+        <!-- Author's name -->
+        <p class="my-0">{{ a.artist.fullname }}</p>
+      </div>
+      <div class="d-flex align-items-center text-secondary "> {{a.publishedAt|date:'shortDate'}} </div>
+
+    </mat-card-footer>
+  </mat-card>
+</div>
+  <mat-paginator [pageSizeOptions]="[9]"></mat-paginator>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="isLoggedIn">
+<div class="modal-dialog modal-fullscreen">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body p-0" *ngIf="artwork">
+      <div class="container-fluid d-flex justify-content-center flex-column align-items-center p-4" style="background-color: rgb(238, 238, 238);">
+      <img [src]="artwork.artwork" alt="" class="col-lg-5 col-12" >
+      <div class="d-flex justify-content-between align-items-center mt-3" style="gap:10px;">
+        <button class="btn btn-secondary rounded-pill"><i class="fa fa-plus"></i></button>
+        <button class="btn btn-secondary rounded-pill" (click)="vote(artwork)">
+
+          <i class="fa-regular fa-heart" *ngIf="!artwork.votes.includes(user._id)||!artwork.votes"></i>
+          <i class="fa fa-heart" *ngIf="artwork.votes.includes(this.user._id)"></i>
+        </button>
+        <a class="btn btn-secondary rounded-pill" *ngIf="user.user_id!==artwork.artist.user_id" data-bs-dismiss="modal" [routerLink]="'/report/artwork/'+artwork.artwork_id" >Report Work</a>
+      </div>
+      </div>
+      <div class="row mx-0 p-4">
+       <div class="col-lg-9">
+        <mat-card>
+          <mat-card-content>
+            <h2>{{artwork.title}}</h2>
+            <h5 class="text-secondary">{{artwork.publishedAt | date : 'medium'}}</h5>
+            <hr>
+            <h6>{{artwork.description}}</h6>
+          </mat-card-content>
+        </mat-card>
+        <app-comments [id]="artwork.artwork_id" [place]="'artwork'"></app-comments>
+
+       </div>
+       <div class="col-lg-2">
+        <mat-card>
+          <mat-card-content>
+
+            <div class="author-profile-big ">
+              <!-- Author's profile pic (replace 'book.authorProfilePic' with actual URL) -->
+              <img [src]="artwork.artist.profile==''? '../../../../assets/images/dummy-image.jpeg':artwork.artist.profile " alt="Author's Profile">
+              <!-- Author's name -->
+              <div class="d-flex justify-content-between   flex-column">
+
+                <p class="my-0 fs-5" >{{ artwork.artist.fullname }}</p>
+                <p class="my-0">
+                  <span *ngIf="artwork.artist.artist" >Artist</span>
+                  <span *ngIf="artwork.artist.artist&&artwork.artist.author" class="px-lg-2">|</span>
+                  <span *ngIf="artwork.artist.author">Author</span>
+                  <span *ngIf="artwork.artist.artist||artwork.artist.author" class="px-lg-2">|</span>
+                  <span *ngIf="artwork.artist.pro">Pro</span>
+                <span *ngIf="!artwork.artist.pro">Hobbyist</span>
+                </p>
+
+                <a [routerLink]="['/user', artwork.artist.user_id]" class="btn redirect col-lg-12 rounded-pill btn-sm my-0 py-0 mt-2" data-bs-dismiss="modal" aria-label="Close">View Profile</a>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+       </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+</div>

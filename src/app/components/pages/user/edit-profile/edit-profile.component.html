@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
-<div class="row mx-0 mt-5 px-lg-5">
+<div class="d-flex justify-content-center mx-0 mt-5 px-lg-3">
 
-  <div class="col-lg-4">
+  <div class="col-lg-3 mx-3">
     <nav class="list-group list-group-flush">
       <a class="list-group-item" *ngFor="let tab of tabs" [class.active]="tab.active" (click)="selectTab(tab)">
         {{ tab.title }}
@@ -10,7 +10,7 @@
     <ul>
     </ul>
   </div>
-  <div class="col-lg-8">
+  <div class="col-lg-6">
     <div *ngIf="tabs[0].active" class="bg-white p-2 py-4">
       <div class="container">
         <h4>Edit Profile</h4>
@@ -40,13 +40,36 @@
               {{msg}}
 
             </div>
-            <h3>Personal info</h3>
+
 
             <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <div class="d-flex mb-2 ">
+                  <label class="col-2 control-label">Banner:</label>
+                  <div class="col-8">
+                    <button class="btn redirect my-0 py-0 btn-small"
+                  uploadButton
+                  [uploadOptions]="option2"
+                  [uploadComplete]="bannerComplete"
+                >
+                  Upload banner
+                </button>
+                  </div>
+                </div>
+                <div class="card p-4 mb-4">
+                  <img [src]="user.banner">
+                </div>
+              </div>
               <div class="form-group">
                 <label class="col-lg-3 control-label">Full name:</label>
                 <div class="col-lg-8">
                   <input class="form-control" [type]="'text'" [(ngModel)]="user.fullname" name="fullname">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Bio:</label>
+                <div class="col-lg-8">
+                  <textarea class="form-control" [(ngModel)]="user.bio" name="bio"></textarea>
                 </div>
               </div>
               <div class="form-group">

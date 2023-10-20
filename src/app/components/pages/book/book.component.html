@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+<!-- <div class="row mx-0">
+  <div class="col-xl-6 col-lg-8 col-12 ">
+
+    <main class="mt-2 p-lg-5 m-lg-4">
+      <div class="book-cover">
+        <img [src]="book.cover==''?'../../../../assets/images/cover-dummy.jpg':book.cover" alt="">
+      </div>
+      <div class="book-info">
+        <h1>{{book.title}}</h1>
+      <h5><img [src]="book.author.profile==''?  '../../../../assets/images/dummy-image.jpeg': book.author.profile" alt="" width="50px"> {{book.author.fullname}}</h5>
+          <h6 class="text-secondary">{{book.publishedAt|date:'medium'}}</h6>
+          <a class="redirect btn fs-5 rounded-pill px-lg-5 " [routerLink]="'/browse/books/chapter/'+book.chapters[0].chapter_id">Start book from beginning</a>
+      </div>
+    </main>
+    <div class="table-of-contents mt-4 p-lg-5 m-lg-4">
+      <h3>Table of Contents</h3>
+      <hr>
+      <ul>
+          <li *ngFor="let chapter of book.chapters"><a class="btn fs-5 col-12 text-start" [routerLink]="'/browse/books/chapter/'+chapter.chapter_id">{{chapter.title}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div  class="banner"  >
+      <div  class="col-12 h-100 text-uppercase" style="background-color: rgba(0, 0, 0, 0.233); z-index:1; display: flex; flex: 0 0 auto;  justify-content: center;align-items: center;">
+        <h4>{{book.category.name}}</h4>
+      </div>
+      <div class="col-12 h-100 img-cover" [style.background-image]="'url(' + book.category.cover + ')'" style=" position: absolute; background-size: cover;">
+
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class=" bg-white container-fluid col-lg-10 d-flex flex-lg-row flex-column justify-content-center mt-lg-5 mt-3 py-3 border" style="gap:15px;">
+  <img class="book-cover" [src]="book.cover!=''? book.cover: 'https://via.placeholder.com/340x533'" />
+<!--
+  <div class="divider"></div>
+  <div class="page-indicator"></div> -->
+
+  <!-- Repeat the above divider and page-indicator divs as needed -->
+
+  <div class="info-container col-lg-4 col-12 px-4 d-flex flex-column ">
+    <div class="book-title mt-lg-5 mt-3"><h1>{{book.title}}</h1></div>
+    <hr>
+    <div class="book-info px-lg-2 px-0 py-0 mb-0" >
+      <div class="info-item">
+        <div class="value">{{book.chapters.length}} Parts available to read</div>
+      </div>
+    </div>
+    <div class="d-flex mb-5 col-12">
+      <a class="btn fs-5 read-button justify-content-between px-lg-5 mx-0 col-10" [routerLink]="'/browse/books/chapter/'+book.chapters[0].chapter_id">Start reading book  </a>
+       <div  style="background-color: rgb(157, 101, 123);  margin: 20px auto;border-top-right-radius: 400px; border-bottom-right-radius: 400px;" class="col-2 mx-0 text-center pt-2"><i class=" fa fa-plus text-white text-center p-2"></i> </div>
+      </div>
+  </div>
+</div>
+<div class="container-fluid col-lg-10 d-flex flex-lg-row flex-column justify-content-between mt-lg-5 mt-3 py-3" >
+  <div class="col-lg-8">
+    <div class="card my-3">
+      <div class="m-lg-4 m-2 d-flex " style="gap:10px"><img [src]="book.author.profile==''?  '../../../../assets/images/dummy-image.jpeg': book.author.profile" alt="" width="100px">
+        <div>
+          <span class="fs-5 py-0 my-0 d-block">{{book.author.fullname}}</span>
+          <span style="font-size: 16px;" class="d-block" >
+            <span *ngIf="book.author.artist" >Artist</span>
+            <span *ngIf="book.author.artist&&book.author.author" class="px-2">|</span>
+            <span *ngIf="book.author.author">Author</span>
+            <span *ngIf="book.author.artist||book.author.author" class="px-2">|</span>
+            <span *ngIf="book.author.pro">Pro</span>
+          <span *ngIf="!book.author.pro">Hobbyist</span>
+            </span>
+            <a class="btn redirect py-0 mt-2 col-12" [routerLink]="['/user', book.author.user_id]">View Profile</a>
+        </div>
+      </div>
+      <p class="fs-6 m-lg-4 m-2">{{book.description}}</p>
+    </div>
+    <div class="card my-3">
+      <h3 class="m-4" >Table of contents</h3>
+      <hr class="m-0">
+      <!-- <ul class="list-group"> -->
+        <div class="list-group col-12 mt-3">
+          <a *ngFor="let chapter of book.chapters" [routerLink]="'/browse/books/chapter/'+chapter.chapter_id" class="list-group-item list-group-item-action">{{chapter.title}}</a>
+        </div>
+        <!-- <li *ngFor="let chapter of book.chapters" class="list-group-item"><a class="fs-5 text-start" [routerLink]="'/browse/books/chapter/'+chapter.chapter_id">{{chapter.title}}</a></li>
+    </ul> -->
+
+    </div>
+  </div>
+  <div class="col-lg-3 ">
+    <div class="card banners my-3">
+      <h4 class="mt-2 pb-2 col-12 text-center text-uppercase" style="border-bottom: 1px solid rgb(203, 203, 203) !important; letter-spacing: 5px;">Genre </h4>
+      <div  class="banner m-4"  >
+        <div  class="col-12 h-100 text-uppercase" style="background-color: rgba(0, 0, 0, 0.233); z-index:1; display: flex; flex: 0 0 auto;  justify-content: center;align-items: center;">
+          <h4>{{book.category.name}}</h4>
+        </div>
+        <div class="col-12 h-100 img-cover" [style.background-image]="'url(' + book.category.cover + ')'" style=" position: absolute; background-size: cover;">
+
+        </div>
+      </div>
+    </div>
+    <a [routerLink]="'/report/book/'+book.book_id" style="text-decoration: none;">
+
+      <div class="card p-4 mb-3 text-danger">
+        <h4><i class="fa-solid fa-flag"></i> Report this story</h4>
+      </div>
+    </a>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,359 @@
+.redirect{
+  background-color: #5e3e5c;
+  color:rgb(255, 251, 251);
+  border-radius: 20px;
+}
+/* Styling for the filter options */
+.filter-options {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.filter-options label {
+  font-weight: bold;
+}
+
+.filter-options select,
+.filter-options input[type="checkbox"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 10px;
+  width: auto; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+}
+
+.filter-options button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+/* Styling for the book list */
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.book {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  width: 250px;
+}
+
+
+
+.wrapper .search-input{
+  background: #fff;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+}
+
+.search-input input{
+  height: 55px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0 60px 0 20px;
+  font-size: 18px;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+.search-input.active input{
+  border-radius: 5px 5px 0 0;
+}
+
+.search-input .autocom-box{
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.search-input.active .autocom-box{
+  padding: 10px 8px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.author-profile {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  gap:5px;
+}
+
+.author-profile img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+}
+
+
+.search-input .icon{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 55px;
+  width: 55px;
+  text-align: center;
+  line-height: 55px;
+  font-size: 20px;
+  color: #4b2c45;
+  cursor: pointer;
+}
+
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.book-card {
+  min-height: 250px;
+  display: flex;
+
+  text-align: left;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+  font-size: 27px;
+  font-weight: semi-bold;
+}
+
+mat-card-subtitle {
+  font-size: 16px;
+  color: #888;
+}
+
+mat-card-content {
+  margin-top: 0;
+  display: flex; /* Display the cover image and details in a flex container */
+  align-items: center;
+
+}
+
+mat-card-actions {
+  flex-direction: column;
+  justify-content: flex-end;
+  gap:10px;
+}
+
+.book-details {
+  flex-grow: 1; /* Allow the book details to expand and fill available space */
+}
+
+.cover-image {
+  width: 96px; /* Set the desired width for the cover image */
+  height: 150px; /* Set the desired height for the cover image */
+  margin-right: 10px; /* Adjust the spacing between cover and details */
+  overflow: hidden; /* Ensure the cover image doesn't exceed its container */
+}
+
+.cover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the cover image maintains its aspect ratio and covers the container */
+}
+
+.description {
+  font-size: 14px; /* Adjust font size for the description */
+  margin-top: 10px; /* Add spacing between description and other details */
+}
+
+
+.filters-container {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 20px;
+  border: 1px solid rgb(216, 216, 216);
+}
+
+
+
+.stories-count {
+  color: #888;
+}
+
+/* Styles for filters */
+.filter {
+  margin-bottom: 20px;
+}
+
+.filter__title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.filter__description {
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.filter__options label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+.c-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c-checkbox__content {
+  margin-left: 10px;
+}
+
+.checked {
+  width: 20px;
+  height: 20px;
+  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.checked svg {
+  width: 12px;
+  height: 12px;
+  stroke: #fff;
+}
+
+/* Styles for tag filter container */
+.tag-filter-container {
+  margin-top: 20px;
+}
+
+.refine-by-tag-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-items li {
+  list-style: none;
+}
+
+.tag-pill__yrFxu {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tag-pill__yrFxu:hover {
+  background-color: #0056b3;
+}
+
+.add-tag {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.tag-text-box {
+  flex-grow: 1;
+}
+
+.tag-text-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-tag-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-tag-btn:hover {
+  background-color: #0056b3;
+}
+
+.add-tag-error-message {
+  color: #ff0000;
+  margin-top: 5px;
+}
+
+.ftr-btn{
+  width:100%;
+  font-size: medium;
+  letter-spacing: 4px;
+  background-color: #fff;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 0;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.last-updated {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+/* Button row styles */
+.button-row {
+  display: flex;
+  gap: 8px;
+}
+
+
+/* Styling for specific buttons */
+.right-side button.mat-icon-button {
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+

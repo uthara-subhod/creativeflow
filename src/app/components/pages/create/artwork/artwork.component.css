@@ -1,0 +1,33 @@
+
+
+h1 {
+  font-size: 24px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+}
+
+
+.redirect{
+  background-color: #5e3e5c;
+  color:rgb(255, 251, 251);
+  border-radius: 15px;
+}

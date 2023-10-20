@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<div class="container-fluid h-100 bg-white">
+  <div class="chapter-header d-flex flex-column">
+    <!-- Input field for editing the chapter title -->
+    <h2 class="chapter-title">{{chapter.title}}</h2>
+    <div class="d-flex justify-content-center align-items-center  " style="gap:8px">
+      <span class="text-center text-secondary" style="font-size: 15px;"><i class="fa fa-star text-center me-1" ></i>{{chapter.votes.length}}</span>
+      <span class="mx-1" style="font-size: 15px;">|</span>
+      <span class="text-center text-secondary" style="font-size: 15px;"><i class="fa fa-comment text-center me-1" ></i>{{count}}</span>
+    </div>
+  </div>
+  <hr>
+  <div [innerHTML]="chapter.content" class="container px-lg-5 px-2 mt-5" style="min-height: 300px;">
+  </div>
+  <app-read-button *ngIf="next&&next.chapter_id!=''" [chapter_id]="next.chapter_id"></app-read-button>
+  <div class="d-flex justify-content-center col-12 mt-3" style="gap:10px;">
+    <button mat-stroked-button [color]="'primary'" class="col-3 btn" *ngIf="!chapter.votes.includes(user._id)" (click)="vote()" >Vote</button>
+    <button mat-flat-button [color]="'primary'" class="col-3 btn" *ngIf="chapter.votes.includes(user._id)&&chapter.votes" (click)="vote()">Voted!</button>
+    <a [routerLink]="'/report/chapter/'+chapter.chapter_id" style="text-decoration: none;" class="btn btn-outline-danger col-3 py-0" style="border-radius: 0;">
+       <i class="fa-solid fa-flag"></i> Report this chapter
+    </a>
+  </div>
+
+  <hr>
+  <div class="d-flex justify-content-center align-items-center ">
+
+    <div class="col-8">
+      <app-comments [id]="chapter.chapter_id"  [place]="'chapter'" (commentCount)="findCount($event)"></app-comments>
+
+    </div>
+  </div>
+
+  </div>

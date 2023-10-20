@@ -1,0 +1,203 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="d-flex align-items-center mt-4 justify-content-center " style="gap:10px;">
+    <button class="btn btn-dark col-6 fs-6" (click)="choose(true)">Books</button>
+    <button class="btn btn-dark col-6 fs-6" (click)="choose(false)">Artworks</button>
+  </div>
+
+  <section class="book p-lg-5 d-lg-flex justify-content-center align-items-start" *ngIf="isBook">
+    <div class="work-section px-0 pb-4 col-lg-12">
+      <ul class="nav nav-underline py-3 px-lg-3 px-2 bg-white col-12"  style="border-bottom: 2px solid #e4d8d8; position: relative;" role="tablist">
+        <li class="nav-item px-lg-4" role="presentation">
+          <a
+            class="nav-link active"
+            data-bs-toggle="tab"
+            href="#ex1-tabs-1"
+            role="tab"
+            aria-controls="ex1-tabs-1"
+            aria-selected="true"
+            >Published</a
+          >
+        </li>
+        <li class="nav-item px-lg-4" role="presentation">
+          <a
+            class="nav-link"
+            id="ex1-tab-2"
+            data-bs-toggle="tab"
+            href="#ex1-tabs-2"
+            role="tab"
+            aria-controls="ex1-tabs-2"
+            aria-selected="false"
+            >Drafts</a
+          >
+        </li>
+        <a  class=" btn rounded-pill text-white p-1 px-3 d-lg-block d-none mx-3" style="position: absolute; right:0; background-color: #8a3d85;  font-size: 18px;  " (click)="create()">Create New</a>
+      </ul>
+      <div class="d-flex justify-content-end bg-white col-12 p-2">
+        <a class=" btn rounded-pill d-lg-none d-block text-white p-1 px-3 col-12" style="background-color: #8a3d85;  font-size: 18px;  " (click)="create()">Create New Story</a>
+      </div>
+      <div class="tab-content bg-white col-12" id="ex1-content">
+
+        <div id="ex1-tabs-1" role="tabpanel"  class="tab-pane show active">
+          <div class="book-list px-0">
+            <mat-card *ngFor="let book of publishedBooks" class="book-card container">
+              <mat-card-content>
+
+                <div class="cover-image">
+                  <img [src]="book.cover" alt="Book Cover">
+                </div>
+                <div class="book-details col-5">
+                  <!-- Book Cover (You can replace 'book.coverURL' with the actual URL) -->
+
+                  <!-- Title -->
+                  <mat-card-title>{{ book.title }}</mat-card-title>
+                  <!-- Published Chapters -->
+                  <mat-card-subtitle>{{ book.chapters.length }}  Chapters</mat-card-subtitle>
+                  <div  style="width:350px">
+
+                    <p class="description col-lg-12 col-6">{{ book.description | truncate:20}}</p>
+                  </div>
+                </div>
+                <mat-card-actions class="d-lg-flex d-none">
+                  <button class="px-5" mat-flat-button color="primary" (click)="page(book.book_id)">Continue Writing</button>
+                  <div class="d-flex" style="gap:7px">
+                    <!-- <button class="px-2" mat-button >Unpublish Story</button>
+                    <button class="px-3" mat-button >Delete Story</button> -->
+                  </div>
+                </mat-card-actions>
+              </mat-card-content>
+              <mat-card-actions class="d-lg-none d-flex"  width="50vw !important">
+                <button class="px-5" mat-raised-button color="accent" (click)="page(book.book_id)">Continue Writing</button>
+                <!-- <div class="d-flex" style="gap:7px">
+                  <button class="px-2" mat-button >Unpublish Story</button>
+                  <button class="px-3" mat-button >Delete Story</button>
+                </div> -->
+              </mat-card-actions>
+
+            </mat-card>
+            <mat-card *ngIf="publishedBooks.length==0"  class="container fs-5 pb-4">You do not have any published books</mat-card>
+          </div>
+
+        </div>
+        <div id="ex1-tabs-2" role="tabpanel" class="tab-pane">
+          <div class="book-list px-0">
+            <mat-card *ngFor="let book of unpublishedBooks" class="book-card container-fluid">
+              <mat-card-content>
+
+                <div class="cover-image">
+                  <img [src]="book.cover" alt="Book Cover">
+                </div>
+                <div class="book-details col-5">
+                  <!-- Book Cover (You can replace 'book.coverURL' with the actual URL) -->
+
+                  <!-- Title -->
+                  <mat-card-title>{{ book.title }}</mat-card-title>
+                  <!-- Published Chapters -->
+                  <mat-card-subtitle>{{ book.chapters.length }} Chapters</mat-card-subtitle>
+                  <p class="description">{{ book.description }}</p>
+                </div>
+                <mat-card-actions class="d-lg-flex d-none">
+                  <button class="px-5" mat-flat-button color="primary" (click)="page(book.book_id)">Continue Writing</button>
+                  <div class="d-flex" style="gap:7px">
+                    <!-- <button class="px-2" mat-button >Unpublish Story</button>
+                    <button class="px-3" mat-button >Delete Story</button> -->
+                  </div>
+                </mat-card-actions>
+              </mat-card-content>
+              <mat-card-actions class="d-lg-none d-flex">
+                <button class="px-5" mat-raised-button color="accent" (click)="page(book.book_id)">Continue Writing</button>
+                <div class="d-flex" style="gap:7px">
+                  <!-- <button class="px-2" mat-button >Unpublish Story</button>
+                  <button class="px-3" mat-button >Delete Story</button> -->
+                </div>
+              </mat-card-actions>
+
+            </mat-card>
+            <mat-card *ngIf="unpublishedBooks.length==0"  class="container fs-5 pb-4">You do not have any drafts</mat-card>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-xl-3 col-lg-6 mx-xl-4 d-lg-flex d-none flex-column justify-content-end" style="height:600px !important; position: relative; background-image: url('../../../../../assets/images/Standee 08-ai.jpg'); background-size: contain; background-repeat: no-repeat; ">
+
+
+      <a [routerLink]="" class="btn redirect  border border-light mx-3 mb-4
+      " style="font-size: 2vh;">Use Flow Services ></a>
+
+      <!-- <div class="d-flex flex-column justify-content-between text-light align-items-center">
+         <h2 style="  text-shadow: 3px 3px 0 #463d50">Looking to <br>hire a <br> freelancer?</h2>
+
+      </div> -->
+      <!-- <img src="../../../../../assets/images/girl.png" class="img-fluid" style=""> -->
+    </div>
+  </section>
+  <section class="book p-lg-5 d-lg-flex justify-content-center align-items-start" *ngIf="!isBook">
+    <div class="work-section px-0 pb-4 col-lg-12">
+      <ul class="nav nav-underline py-3 px-lg-3 px-2 bg-white col-12"  style="border-bottom: 2px solid #e4d8d8; position: relative;" role="tablist">
+        <li class="nav-item px-lg-4" role="presentation">
+          <a
+            class="nav-link active"
+            data-bs-toggle="tab"
+            href="#ex1-tabs-1"
+            role="tab"
+            aria-controls="ex1-tabs-1"
+            aria-selected="true"
+            >Published</a
+          >
+        </li>
+        <li class="nav-item px-lg-4" role="presentation">
+          <a
+            class="nav-link"
+            id="ex1-tab-2"
+            data-bs-toggle="tab"
+            href="#ex1-tabs-2"
+            role="tab"
+            aria-controls="ex1-tabs-2"
+            aria-selected="false"
+            >Drafts</a
+          >
+        </li>
+        <a  class=" btn rounded-pill text-white p-1 px-3 d-lg-block d-none mx-3" style="position: absolute; right:0; background-color: #8a3d85;  font-size: 18px;  " (click)="artwork()">Create New</a>
+      </ul>
+      <div class="d-flex justify-content-end bg-white col-12 p-2">
+        <a class=" btn rounded-pill d-lg-none d-block text-white p-1 px-3 col-12" style="background-color: #8a3d85;  font-size: 18px;  "(click)="artwork()">Create New </a>
+      </div>
+      <div class="tab-content bg-white col-12" id="ex1-content">
+
+        <div id="ex1-tabs-1" role="tabpanel"  class="tab-pane show active">
+          <div class="row mx-0 px-0">
+            <mat-card *ngFor="let artwork of publishedArt"  class="fs-5 pb-4 col-6 pt-2">
+              <img [src]="artwork.artwork==''?'../../../../../assets/images/arkwork_dummy.png':artwork.artwork" width="100%">
+              <a mat-raised-button color="primary" [routerLink]="'/create/artwork/'+artwork.artwork_id">Edit Artwork</a>
+            </mat-card>
+            <mat-card *ngIf="publishedArt.length==0"  class="container fs-5 pb-4">You do not have any published artworks</mat-card>
+          </div>
+
+        </div>
+        <div id="ex1-tabs-2" role="tabpanel" class="tab-pane">
+          <div class=" px-0 row mx-0">
+            <mat-card *ngFor="let artwork of unpublishedArt"  class="fs-5 pb-4 col-6 pt-2">
+              <img [src]="artwork.artwork==''?'../../../../../assets/images/arkwork_dummy.png':artwork.artwork" width="100%">
+              <a mat-raised-button color="primary" [routerLink]="'/create/artwork/'+artwork.artwork_id">Edit Artwork</a>
+            </mat-card>
+            <mat-card *ngIf="unpublishedArt.length==0"  class="container fs-5 pb-4">You do not have any drafts</mat-card>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-xl-3 col-lg-6 mx-xl-4 d-lg-flex d-none flex-column justify-content-end" style="height:600px !important; position: relative; background-image: url('../../../../../assets/images/Standee 08-ai.jpg'); background-size: contain; background-repeat: no-repeat; ">
+
+
+      <a [routerLink]="" class="btn redirect  border border-light mx-3 mb-4
+      " style="font-size: 2vh;">Use Flow Services ></a>
+
+      <!-- <div class="d-flex flex-column justify-content-between text-light align-items-center">
+         <h2 style="  text-shadow: 3px 3px 0 #463d50">Looking to <br>hire a <br> freelancer?</h2>
+
+      </div> -->
+      <!-- <img src="../../../../../assets/images/girl.png" class="img-fluid" style=""> -->
+    </div>
+  </section>
+</div>

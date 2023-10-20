@@ -1,0 +1,111 @@
+.author-profile {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  gap:5px;
+}
+
+.author-profile img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+}
+
+.artwork{
+  position: relative;
+}
+
+.info{
+  position: absolute;
+  right:20px;
+  top:20px;
+  width:50px;
+  height:50px;
+}
+
+
+
+.artwork-info {
+  position: absolute;
+  top:20px;
+  right:20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: end;
+}
+
+.info-button {
+  border: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  position: relative;
+}
+
+
+.heart-button{
+   position: absolute;
+  left:20px;
+  top:20px;
+
+}
+.info-button i {
+  position: absolute;
+
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s; /* Add a transform transition */
+}
+
+.redirect{
+  background-color: #5e3e5c;
+  color:rgb(255, 251, 251);
+  border-radius: 20px;
+}
+
+
+.custom-tooltip {
+  background-color: rgb(53, 30, 74);
+  color:white;
+}
+
+.info-button .title {
+  position: absolute;
+  top: 50%;
+  right:50px;
+  transform: translateY(-50%);
+  display: none;
+  white-space: nowrap;
+  transition: right 0.3s; /* Add a right transition */
+}
+
+.info-button:hover .title {
+  display: block;
+}
+
+.info-button:hover {
+  width: 60%; /* Adjust to the desired width for title */
+}
+.info-button:hover i{
+  right:20px;
+}
+
+.info-button:hover + .artwork-info {
+  opacity: 1;
+}
+
+.author-profile-big {
+  display: flex;
+  margin-top: 5px;
+  gap:10px;
+  font-size: 18px;
+}
+
+.author-profile-big img {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+
+}

@@ -1,0 +1,122 @@
+<div class="t-comments-box mb-4">
+  <div class="comment-title">
+    Comments ({{comments.length}})
+  </div>
+  <div class="add-comment">
+
+    <div class="comment-input">
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        placeholder="Add a comment.."
+        [(ngModel)]="c_input"
+      />
+      <div class="comment-send" (click)="submit()"><i class="fab fa-telegram-plane"></i></div>
+    </div>
+  </div>
+  <div *ngFor="let c of comments.reverse()">
+    <ng-container *ngIf="!c.reply">
+      <div class="comment comment-level-1">
+        <img [src]="c.user.profile==''? '../../../assets/images/dummy-image.jpeg':c.user.profile" alt="" />
+        <div>
+          <div class="comment-label">
+            <span class="comment-name">{{c.user.fullname}}</span>
+            <span class="comment-time"> - {{ c.dateAt | date }}</span>
+          </div>
+          <div class="comment-content">
+            {{c.message}}
+          </div>
+          <div class="comment-action">
+            <span (click)="reply(c.comment_id)"> <i class="far fa-comment-alt"></i> Reply ({{c.replies.length}})</span>
+            <span *ngIf="c.user._id === user._id"> <a style="text-decoration: none; color:#c3ccd3;" (click)="edit(c.message)" data-bs-toggle="modal" data-bs-target="#edit">Edit</a></span>
+            <span *ngIf="c.user._id === user._id" (click)="deleteComment(c.comment_id)">Delete</span>
+          </div>
+          <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="add-comment">
+
+                    <div class="comment-input">
+                      <input
+                        type="text"
+                        placeholder="Add a comment.."
+                        [(ngModel)]="e_input"
+                        [value]="c.message"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" (click)="editComment(c.comment_id)" data-bs-dismiss="modal">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comment-level-2">
+
+        <div class="add-comment" *ngIf="isReply.reply&&isReply.id==c.comment_id">
+
+          <div class="comment-input">
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              placeholder="Add a comment.."
+              [(ngModel)]="r_input"
+            />
+            <div class="comment-send" (click)="submit(c.comment_id)"><i class="fab fa-telegram-plane"></i></div>
+          </div>
+        </div>
+      </div>
+        <div class="comment comment-level-2" *ngFor="let r of c.replies.reverse()">
+          <img [src]="r.user.profile==''? '../../../assets/images/dummy-image.jpeg':r.user.profile" alt="" />
+          <div>
+            <div class="comment-label">
+              <span class="comment-name">{{r.user.fullname}}</span>
+              <span class="comment-time"> - {{ r.dateAt | date }}</span>
+            </div>
+            <div class="comment-content">
+              {{r.message}}
+            </div>
+            <div class="comment-action">
+              <span *ngIf="r.user._id === user._id"> <a style="text-decoration: none; color:#c3ccd3;" (click)="edit(r.message)" data-bs-toggle="modal" data-bs-target="#redit">Edit</a> </span>
+              <span *ngIf="r.user._id === user._id" (click)="deleteComment(r.comment_id)">Delete</span>
+            </div>
+            <div class="modal fade" id="redit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="add-comment">
+
+                      <div class="comment-input">
+                        <input
+                          type="text"
+                          placeholder="Add a comment.."
+                          [(ngModel)]="e_input"
+                          [value]="r.message"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"  (click)="editComment(r.comment_id)">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </ng-container>
+
+  </div>
+</div>
+

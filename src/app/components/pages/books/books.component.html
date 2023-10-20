@@ -1,0 +1,213 @@
+<app-navbar></app-navbar>
+<app-genres [type]="'genres'" (cardClick)="getGenre($event)"></app-genres>
+<div class="d-flex flex-column justify-content-center my-4 align-items-center">
+  <h3 class="mb-3">Search to browse Our Books</h3>
+  <div class="wrapper col-lg-5  px-2">
+    <div class="search-input">
+      <a href="" target="_blank" hidden></a>
+      <input type="text" placeholder="Type to search.." [(ngModel)]="searchQuery">
+      <div class="icon"><i class="fas fa-search"></i></div>
+    </div>
+  </div>
+
+</div>
+<div class="row mx-0">
+
+  <div class="component-wrapper col-lg-3 mb-3" >
+    <a class="btn ftr-btn " data-bs-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Filters
+    </a>
+    <div class="d-lg-block d-none">
+
+      <div class="filters-container collapse show" id="filters">
+        <div class="filter">
+          <div class="filter__title">Length</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" [value]="[1,10]" (change)="applyLength($event)">
+              1 - 10 Parts
+            </label>
+            <label>
+              <input type="checkbox" [value]="[10,20]" (change)="applyLength($event)">
+              10 - 20 Parts
+            </label>
+            <label>
+              <input type="checkbox" [value]="[20,50]" (change)="applyLength($event)">
+              20 - 50 Parts
+            </label>
+            <label>
+              <input type="checkbox" [value]="[50,99999]" (change)="applyLength($event)">
+              50 Parts or more
+            </label>
+          </div>
+        </div>
+
+        <div class="filter">
+          <div class="filter__title">Last updated</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" [value]="'day'" (change)="applyTime($event)">
+              Today
+            </label>
+            <label>
+              <input type="checkbox" [value]="'week'" (change)="applyTime($event)">
+              This week
+            </label>
+            <label>
+              <input type="checkbox" [value]="'month'" (change)="applyTime($event)">
+              This month
+            </label>
+            <label>
+              <input type="checkbox" [value]="'year'" (change)="applyTime($event)">
+              This year
+            </label>
+          </div>
+        </div>
+
+        <div class="filter">
+          <div class="filter__title">Content</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" [(ngModel)]="complete">
+              Only show completed stories
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="ongoing">
+              Only show ongoing stories
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="mature">
+              Hide mature stories
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="free">
+              Hide free stories
+            </label>
+            <label>
+              <input type="checkbox" value="paid" [(ngModel)]="paid">
+              Hide paid stories
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-lg-none d-block">
+
+      <div class="filters-container collapse" id="filters">
+        <div class="filter">
+          <div class="filter__title">Length</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" [value]="[1,10]">
+              1 - 10 Parts
+            </label>
+            <label>
+              <input type="checkbox" [value]="[10,20]">
+              10 - 20 Parts
+            </label>
+            <label>
+              <input type="checkbox" [value]="[20,50]">
+              20 - 50 Parts
+            </label>
+            <label>
+              <input type="checkbox" [value]="[50,-1]">
+              50 Parts or more
+            </label>
+          </div>
+        </div>
+
+        <div class="filter">
+          <div class="filter__title">Last updated</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" value="day">
+              Today
+            </label>
+            <label>
+              <input type="checkbox" value="week">
+              This week
+            </label>
+            <label>
+              <input type="checkbox" value="month">
+              This month
+            </label>
+            <label>
+              <input type="checkbox" value="year">
+              This year
+            </label>
+          </div>
+        </div>
+
+        <div class="filter">
+          <div class="filter__title">Content</div>
+          <div class="filter__description">You can select multiple options</div>
+          <div class="filter__options">
+            <label>
+              <input type="checkbox" value="complete">
+              Only show completed stories
+            </label>
+            <label>
+              <input type="checkbox" value="mature">
+              Hide mature stories
+            </label>
+            <label>
+              <input type="checkbox" value="free">
+              Hide free stories
+            </label>
+            <label>
+              <input type="checkbox" value="paid">
+              Hide Wattpad Originals
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-list col-lg-9">
+    <mat-card *ngFor="let book of filteredBooks.reverse()" class="book-card container">
+      <mat-card-content class="flex-lg-row flex-column">
+
+        <div class="cover-image">
+          <img [src]="book.cover" alt="Book Cover">
+        </div>
+        <div class="book-details col-lg-5">
+          <mat-card-title>{{ book.title }}</mat-card-title>
+          <!-- Published Chapters -->
+          <mat-card-subtitle> <div class="author-profile">
+            <!-- Author's profile pic (replace 'book.authorProfilePic' with actual URL) -->
+            <img [src]="book.author.profile==''? '../../../../assets/images/dummy-image.jpeg':book.author.profile " alt="Author's Profile">
+            <!-- Author's name -->
+            <p class="my-0">{{ book.author.fullname }}</p>
+          </div></mat-card-subtitle>
+          <p class="description"> {{ book.description | truncate:50 }}</p>
+        </div>
+        <div class="right-side col-lg-5">
+          <!-- Last updated date (replace 'book.lastUpdated' with actual date) -->
+          <mat-card-subtitle> <p class="last-updated">Last Updated: {{ book.updatedAt | date }}</p></mat-card-subtitle>
+
+          <!-- Start Reading button -->
+          <a mat-flat-button color="primary" class="btn rounded-pill px-5" [routerLink]="'/browse/books/'+book.book_id">Start Reading</a>
+          <!-- Two small buttons in a row -->
+          <div class="button-row">
+            <button mat-icon-button>
+              <mat-icon>info</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>library_add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+
+      </mat-card-content>
+
+
+    </mat-card>
+  </div>
+</div>

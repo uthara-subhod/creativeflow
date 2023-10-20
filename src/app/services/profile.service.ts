@@ -28,6 +28,23 @@ export class ProfileService {
     return this.http.get<any>(`${this.apiUrl}/user/${id}/notifications`)
   }
 
+  getArtworks(id:string){
+    return this.http.get<any>(`${this.apiUrl}/user/${id}/artworks`)
+  }
+
+  getBooks(id:string){
+    return this.http.get<any>(`${this.apiUrl}/user/${id}/books`)
+  }
+
+
+  getMessages(user1:string, user2:string){
+    return this.http.get<any>(`${this.apiUrl}/chat/${user1}/${user2}`)
+  }
+
+  sendMessage(user1:string, user2:string,message:string){
+    return this.http.post<any>(`${this.apiUrl}/chat/${user1}/${user2}`,{message:message})
+  }
+
   isFollow(id:string){
     return this.http.get<any>(`${this.apiUrl}/user/${id}/isfollow`);
   }
@@ -40,8 +57,19 @@ export class ProfileService {
     return this.http.post<any>(`${this.apiUrl}/user/edit`,data);
   }
 
-  async getCountries(){
-    return axios.get(`https://restcountries.com/v3.1/all`)
+  clearNotif(id:string){
+    return this.http.get<any>(`${this.apiUrl}/user/${id}/notifications/clear`)
+  }
+
+  getCountries(){
+    return this.http.get<any>(`https://restcountries.com/v3.1/all`)
+  }
+
+  plan(plan:string){
+    return this.http.post<any>(`${this.apiUrl}/user/plan`,{plan:plan});
+  }
+  roles(data:any){
+    return this.http.post<any>(`${this.apiUrl}/user/roles`,data);
   }
 
 }

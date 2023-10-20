@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SocketService } from 'src/app/services/socket.service';
 import * as AuthActions from '../../../../store/auth/auth.actions'
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-navbar',
@@ -14,21 +15,30 @@ import * as AuthActions from '../../../../store/auth/auth.actions'
 export class NavbarComponent implements OnInit{
   showDropdown: boolean = false;
   userId=''
+  isSocial=false
   logIn:boolean = false
-  constructor(private profile:ProfileService, private socket:SocketService, private auth:AuthService, private store:Store){}
+  constructor(private profile:ProfileService,private socialAuthService:SocialAuthService, private socket:SocketService, private auth:AuthService, private store:Store){}
 ngOnInit(): void {
-  this.profile.getUser().subscribe({
-    next: (res: any) => {
-      this.userId=res.user.user_id
-      this.logIn=true
-    },
-    error: (err) => {
-      this.userId=''
-      this.logIn = false
-     console.log('no user')
+  this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
+    this.logIn = isAuthenticated;
+  });
 
-    }
-  })
+
+  if(this.logIn ||this.auth.getToken()!=''||this.auth.getToken()){
+
+    this.profile.getUser().subscribe({
+      next: (res: any) => {
+        this.userId=res.user.user_id
+        this.logIn=true
+        this.isSocial=res.user.isSocial
+      },
+      error: (err) => {
+        this.userId=''
+        this.logIn = false
+        localStorage.removeItem('token')
+      }
+    })
+  }
 }
 
 toggleDropdown() {
@@ -37,11 +47,17 @@ toggleDropdown() {
 }
 
 logout(){
-  console.log("Hey")
-  this.store.dispatch(AuthActions.logout());
-  this.userId=''
-  this.ngOnInit()
+  if(this.isSocial){
+      this.socialAuthService.signOut();
+      localStorage.removeItem('token')
+      this.userId=''
+      this.ngOnInit()
+
+  }else{
+
+    this.store.dispatch(AuthActions.logout())
+    this.userId=''
+    this.ngOnInit()
+  }
 }
-
-
 }
