@@ -61,7 +61,7 @@ import { ArtworkComponent } from './components/pages/create/artwork/artwork.comp
 import { ANavbarComponent } from './components/pages/create/a-navbar/a-navbar.component';
 import { ArtsComponent } from './components/arts/arts.component';
 import { ReadButtonComponent } from './components/chapter/read-button/read-button.component';
-import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule, GoogleSigninButtonDirective,} from '@abacritt/angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule} from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { NotifComponent } from './components/pages/notif/notif.component';
 import { ProviderFormComponent } from './components/pages/provider-form/provider-form.component';
