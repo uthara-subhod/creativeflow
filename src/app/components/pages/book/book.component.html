@@ -1,38 +1,5 @@
 <app-navbar></app-navbar>
-<!-- <div class="row mx-0">
-  <div class="col-xl-6 col-lg-8 col-12 ">
 
-    <main class="mt-2 p-lg-5 m-lg-4">
-      <div class="book-cover">
-        <img [src]="book.cover==''?'../../../../assets/images/cover-dummy.jpg':book.cover" alt="">
-      </div>
-      <div class="book-info">
-        <h1>{{book.title}}</h1>
-      <h5><img [src]="book.author.profile==''?  '../../../../assets/images/dummy-image.jpeg': book.author.profile" alt="" width="50px"> {{book.author.fullname}}</h5>
-          <h6 class="text-secondary">{{book.publishedAt|date:'medium'}}</h6>
-          <a class="redirect btn fs-5 rounded-pill px-lg-5 " [routerLink]="'/browse/books/chapter/'+book.chapters[0].chapter_id">Start book from beginning</a>
-      </div>
-    </main>
-    <div class="table-of-contents mt-4 p-lg-5 m-lg-4">
-      <h3>Table of Contents</h3>
-      <hr>
-      <ul>
-          <li *ngFor="let chapter of book.chapters"><a class="btn fs-5 col-12 text-start" [routerLink]="'/browse/books/chapter/'+chapter.chapter_id">{{chapter.title}}</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="col-6">
-    <div  class="banner"  >
-      <div  class="col-12 h-100 text-uppercase" style="background-color: rgba(0, 0, 0, 0.233); z-index:1; display: flex; flex: 0 0 auto;  justify-content: center;align-items: center;">
-        <h4>{{book.category.name}}</h4>
-      </div>
-      <div class="col-12 h-100 img-cover" [style.background-image]="'url(' + book.category.cover + ')'" style=" position: absolute; background-size: cover;">
-
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class=" bg-white container-fluid col-lg-10 d-flex flex-lg-row flex-column justify-content-center mt-lg-5 mt-3 py-3 border" style="gap:15px;">
   <img class="book-cover" [src]="book.cover!=''? book.cover: 'https://via.placeholder.com/340x533'" />
 <!--
@@ -44,15 +11,51 @@
   <div class="info-container col-lg-4 col-12 px-4 d-flex flex-column ">
     <div class="book-title mt-lg-5 mt-3"><h1>{{book.title}}</h1></div>
     <hr>
-    <div class="book-info px-lg-2 px-0 py-0 mb-0" >
+    <div class="book-info">
+
       <div class="info-item">
-        <div class="value">{{book.chapters.length}} Parts available to read</div>
+        <div class="label"> Votes</div>
+        <div class="d-flex">
+          <i class=" fa-regular fa-star pe-2 mt-0 pt-0" style="font-size: 15px; line-height: 25px;"></i>
+          <div class="value">{{votes}}</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="label">Words</div>
+        <div class="d-flex">
+          <i class="fa-solid fa-align-justify pe-2 mt-0 pt-0" style="font-size: 15px; line-height: 25px;"></i>
+          <div class="value">{{words}}</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="label">Parts</div>
+        <div class="d-flex">
+          <i class="fa fa-book-open pe-2 mt-0 pt-0" style="font-size: 15px; line-height: 25px;"></i>
+          <div class="value">{{book.chapters.length}}</div>
+        </div>
       </div>
     </div>
-    <div class="d-flex mb-5 col-12">
+    <!-- <div class="book-info px-lg-2 px-0 py-0 mb-0" >
+      <div class="info-item">
+        <div class="value">{{book.chapters.length}} parts</div>
+      </div>
+      <p>|</p>
+      <div class="info-item">
+        <div class="value">{{words}} words</div>
+      </div>
+      <p>|</p>
+      <div class="info-item">
+        <div class="value">{{votes}} votes</div>
+      </div>
+    </div> -->
+    <div class="d-flex mb-5 col-12" *ngIf="!book.premium">
       <a class="btn fs-5 read-button justify-content-between px-lg-5 mx-0 col-10" [routerLink]="'/browse/books/chapter/'+book.chapters[0].chapter_id">Start reading book  </a>
        <div  style="background-color: rgb(157, 101, 123);  margin: 20px auto;border-top-right-radius: 400px; border-bottom-right-radius: 400px;" class="col-2 mx-0 text-center pt-2"><i class=" fa fa-plus text-white text-center p-2"></i> </div>
       </div>
+      <div class="d-flex mb-5 col-12" *ngIf="book.premium">
+        <a class="btn fs-5 read-button justify-content-between px-lg-5 mx-0 col-10" (click)="pay()">Buy this for ₹{{book.pricing}}  </a>
+         <div  style="background-color: rgb(157, 101, 123);  margin: 20px auto;border-top-right-radius: 400px; border-bottom-right-radius: 400px;" class="col-2 mx-0 text-center pt-2"><i class=" fa fa-plus text-white text-center p-2"></i> </div>
+        </div>
   </div>
 </div>
 <div class="container-fluid col-lg-10 d-flex flex-lg-row flex-column justify-content-between mt-lg-5 mt-3 py-3" >
@@ -79,8 +82,17 @@
       <hr class="m-0">
       <!-- <ul class="list-group"> -->
         <div class="list-group col-12 mt-3">
-          <a *ngFor="let chapter of book.chapters" [routerLink]="'/browse/books/chapter/'+chapter.chapter_id" class="list-group-item list-group-item-action">{{chapter.title}}</a>
+          <ng-container *ngFor="let chapter of book.chapters"  class="list-group-item list-group-item-action">
+            <a [routerLink]="'/browse/books/chapter/' + chapter.chapter_id"
+            class="list-group-item list-group-item-action"
+               *ngIf="chapter.published">
+              {{chapter.title}}
+            </a>
+          </ng-container>
+
         </div>
+
+
         <!-- <li *ngFor="let chapter of book.chapters" class="list-group-item"><a class="fs-5 text-start" [routerLink]="'/browse/books/chapter/'+chapter.chapter_id">{{chapter.title}}</a></li>
     </ul> -->
 

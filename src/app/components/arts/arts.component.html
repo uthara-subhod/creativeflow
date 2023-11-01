@@ -1,7 +1,6 @@
 
-<div class="row">
-
-  <mat-card class="p-2 col-lg-3 mx-lg-2 artwork" *ngFor="let a of artworks">
+<div class="row " *ngIf="isPaginator">
+  <mat-card class="p-2 col-lg-3 mx-lg-2 artwork" *ngFor="let a of obs | async">
     <!-- <button class="btn btn-dark rounded-pill info"><i class="fa fa-info"></i>  <span class="title">Artwork Title</span></button> -->
     <button class="heart-button btn btn-light">
       <i class="fa fa-heart px-1" style="font-size:15px"></i>{{a.votes.length}}
@@ -25,8 +24,32 @@
     </mat-card-footer>
   </mat-card>
 </div>
-  <mat-paginator [pageSizeOptions]="[9]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[9]" *ngIf="isPaginator"></mat-paginator>
+  <div class="d-flex justify-content-lg-center flex-grow justify-content-start mx-lg-2 px-lg-auto px-lg-2 ms-lg-auto ms-5 ps-4" *ngIf="!isPaginator" >
+    <mat-card class="p-2 col-lg-3 col-9 mx-lg-2 artwork" *ngFor="let a of artworks">
+      <!-- <button class="btn btn-dark rounded-pill info"><i class="fa fa-info"></i>  <span class="title">Artwork Title</span></button> -->
+      <button class="heart-button btn btn-light">
+        <i class="fa fa-heart px-1" style="font-size:15px"></i>{{a.votes.length}}
+      </button>
+      <div class="artwork-info">
+        <button class="info-button btn btn-dark rounded-pill" (click)="getArtwork(a)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <i class="fa fa-info"></i>
+          <span class="title">{{a.title}}</span>
+        </button>
+      </div>
+      <img [src]="a.artwork" class="img-fluid">
+      <mat-card-footer class="pt-2 px-2 d-flex justify-content-between ">
+        <div class="author-profile">
+          <!-- Author's profile pic (replace 'book.authorProfilePic' with actual URL) -->
+          <img [src]="a.artist.profile==''? '../../../../assets/images/dummy-image.jpeg':a.artist.profile " alt="Author's Profile">
+          <!-- Author's name -->
+          <p class="my-0">{{ a.artist.fullname }}</p>
+        </div>
+        <div class="d-flex align-items-center text-secondary "> {{a.publishedAt|date:'shortDate'}} </div>
 
+      </mat-card-footer>
+    </mat-card>
+  </div>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="isLoggedIn">
@@ -58,7 +81,7 @@
             <h6>{{artwork.description}}</h6>
           </mat-card-content>
         </mat-card>
-        <app-comments [id]="artwork.artwork_id" [place]="'artwork'"></app-comments>
+        <app-comments [id]="artwork.artwork_id" [place]="'artwork'" [item]="artwork"></app-comments>
 
        </div>
        <div class="col-lg-2">

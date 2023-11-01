@@ -25,7 +25,7 @@ import { ActionButtonComponent } from './components/action-button/action-button.
 import { LoginComponent } from './components/login/login.component';
 import { GFormComponent } from './components/genre/form/form.component';
 import { GListComponent } from './components/genre/list/list.component';
-
+import { PListComponent } from './components/providers/list/list.component';
 import { FormsModule } from '@angular/forms';
 import { UploadWidgetModule } from '@bytescale/upload-widget-angular';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
@@ -48,6 +48,7 @@ import { CategoryFormComponent } from './components/category-form/category-form.
     SListComponent,
     SFormComponent,
     TListComponent,
+    PListComponent,
     MFormComponent,
     TableComponent,
     ActionButtonComponent,

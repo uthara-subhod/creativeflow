@@ -119,8 +119,9 @@ footer {
 /* Book info items */
 .book-info {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  justify-content: start;
+  gap:40px;
+
 }
 
 /* Individual info items */
@@ -131,7 +132,7 @@ footer {
 
 /* Label and value within info item */
 .label {
-  font-size: 21px;
+  font-size: 23px;
   font-weight: 400;
   color: rgba(18, 18, 18, 0.64);
   font-family: 'Source Sans Pro';
@@ -140,11 +141,11 @@ footer {
 }
 
 .value {
-  font-size: 21px;
+  font-size: 23px;
   font-weight: 400;
   color: #121212;
   font-family: 'Source Sans Pro';
-  line-height: 20px;
+  line-height: 25px;
   word-wrap: break-word;
 }
 

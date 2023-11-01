@@ -37,7 +37,8 @@ export class OtpComponent {
     const payload = {
         fullname:this.user.fullname,
         email:this.user.email,
-        password:this.user.password
+        password:this.user.password,
+        banner:this.user.banner
       }
     this.store.dispatch(AuthActions.registerRequest({credentials:payload}))
 

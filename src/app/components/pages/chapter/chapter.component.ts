@@ -28,7 +28,7 @@ export class BChapterComponent implements OnInit {
     let id=''
     this.route.paramMap.subscribe((params: any) => {
     id = params.get('id');
-    if(id!=''){
+    if(id){
       this.browse.getChapter(id).subscribe({
         next:(res)=>{
           this.chapter=res.chapter

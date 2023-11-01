@@ -72,4 +72,8 @@ export class ProfileService {
     return this.http.post<any>(`${this.apiUrl}/user/roles`,data);
   }
 
+  account(data:any){
+    return this.http.post<any>(`${this.apiUrl}/razorpay`,data);
+  }
+
 }

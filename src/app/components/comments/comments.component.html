@@ -27,9 +27,9 @@
             {{c.message}}
           </div>
           <div class="comment-action">
-            <span (click)="reply(c.comment_id)"> <i class="far fa-comment-alt"></i> Reply ({{c.replies.length}})</span>
-            <span *ngIf="c.user._id === user._id"> <a style="text-decoration: none; color:#c3ccd3;" (click)="edit(c.message)" data-bs-toggle="modal" data-bs-target="#edit">Edit</a></span>
-            <span *ngIf="c.user._id === user._id" (click)="deleteComment(c.comment_id)">Delete</span>
+            <span (click)="reply(c.comment_id)" style="cursor: pointer;"> <i class="far fa-comment-alt"></i> Reply ({{c.replies.length}})</span>
+            <span *ngIf="c.user._id === user._id" style="cursor: pointer;"> <a style="text-decoration: none; color:#c3ccd3;" (click)="edit(c.message)" data-bs-toggle="modal" data-bs-target="#edit">Edit</a></span>
+            <span *ngIf="c.user._id === user._id||user._id==owner" (click)="deleteComment(c.comment_id)" style="cursor: pointer;">Delete</span>
           </div>
           <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -84,8 +84,8 @@
               {{r.message}}
             </div>
             <div class="comment-action">
-              <span *ngIf="r.user._id === user._id"> <a style="text-decoration: none; color:#c3ccd3;" (click)="edit(r.message)" data-bs-toggle="modal" data-bs-target="#redit">Edit</a> </span>
-              <span *ngIf="r.user._id === user._id" (click)="deleteComment(r.comment_id)">Delete</span>
+              <span *ngIf="r.user._id === user._id" style="cursor: pointer;"> <a style="text-decoration: none; color:#c3ccd3;" (click)="edit(r.message)" data-bs-toggle="modal" data-bs-target="#redit">Edit</a> </span>
+              <span *ngIf="r.user._id === user._id||user._id==owner" (click)="deleteComment(r.comment_id)" style="cursor: pointer;">Delete</span>
             </div>
             <div class="modal fade" id="redit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">

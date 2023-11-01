@@ -1,6 +1,6 @@
 <app-c-navbar [book]="book" [chapter]="chapter"></app-c-navbar>
 <!-- <div #editor></div> -->
-<div class="container-fluid h-100 bg-white">
+<div class="container-fluid  bg-white">
   <div class="chapter-header">
     <!-- Input field for editing the chapter title -->
     <input type="text" class="chapter-title fs-3" [(ngModel)]="chapter.title" placeholder="Chapter Title" />
@@ -9,7 +9,7 @@
 
   <!-- <div id="toolbar-toolbar" class="toolbar ql-toolbar ql-snow sticky-top" #toolbar>
   </div> -->
-  <div id="quill-editor" class="bg-white" #editor>
+  <div id="quill-editor" class="bg-white" #editor [scrollTop]="editor.scrollHeight">
 
   </div>
   <div class="quill-text-output"></div>
@@ -34,3 +34,4 @@
 
   </div> -->
 </div>
+<footer class="bg-white sticky-bottom text-secondary text-end py-2 px-4 border">{{words}} words</footer>

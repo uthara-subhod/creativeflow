@@ -16,11 +16,9 @@
         <h4>Edit Profile</h4>
         <hr>
       <div class="row">
-          <!-- left column -->
           <div class="col-md-3">
             <div class="text-center">
               <div class="pro-img">
-
                 <img [src]="user.profile==''? uploadedFileUrl: user.profile" alt="user">
               </div>
               <button class="btn redirect my-3"
@@ -99,7 +97,7 @@
     </div>
     <hr>
     </div>
-    <div *ngIf="tabs[1].active">
+    <div *ngIf="tabs[1].active" class="bg-white p-2 py-4">
       <div class="form-group">
         <label class="col-md-3 control-label">Password:</label>
         <div class="col-md-8">
@@ -113,10 +111,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="tabs[2].active">
-      <!-- Content for Tab 3 -->
-      <p>Tab 3 Content</p>
-    </div>
+    <div *ngIf="tabs[2].active" class="bg-white p-2 py-4">
   </div>
 </div>
 

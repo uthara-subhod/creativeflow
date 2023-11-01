@@ -12,7 +12,7 @@ export class SListComponent {
   columns=['cover','name'];
   constructor(private admin:AdminService){}
 ngOnInit(): void {
-  this.admin.fetchTable('artfields').subscribe({
+  this.admin.fetchTable('services').subscribe({
     next:(res)=>{
       this.data=res.data
     }

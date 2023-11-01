@@ -38,7 +38,7 @@
 }
 
 .t-comments-box .add-comment .comment-input input::placeholder {
-  color: #c3ccd3;
+  color: #a6b0b7;
 }
 
 .t-comments-box .add-comment .comment-input .comment-send {
@@ -89,7 +89,7 @@
 }
 
 .t-comments-box .comment .comment-action {
-  color: #c3ccd3;
+  color: #95a3ae;
   line-height: 1.2;
 }
 

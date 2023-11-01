@@ -11,6 +11,8 @@ import { AuthGuard, loggedIn } from './services/admin.guard';
 import { GListComponent } from './components/genre/list/list.component';
 import { GFormComponent } from './components/genre/form/form.component';
 import { FormComponent } from './components/artist/form/form.component';
+import { SFormComponent } from './components/service/form/form.component';
+import { PListComponent } from './components/providers/list/list.component';
 
 
 
@@ -21,10 +23,12 @@ const adminRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: HomeComponent },
-      { path: 'users', component: UsersComponent },
+      { path: 'providers', component: PListComponent },
       { path: 'moderators', component: MListComponent },
       { path: 'authors', component: WListComponent },
       { path: 'services', component: SListComponent },
+      { path: 'services/add', component: SFormComponent },
+      { path: 'services/:id/edit', component: SFormComponent },
       { path: 'genres', component: GListComponent },
       { path: 'genres/add', component: GFormComponent },
       { path: 'genres/:id/edit', component: GFormComponent },

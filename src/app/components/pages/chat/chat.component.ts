@@ -18,18 +18,19 @@ ngOnInit(){
   let user=''
   this.route.params.subscribe(params => {
     user = params['user'];
+    this.profile.getUser().subscribe({
+      next:(res)=>{
+        console.log(res.user.chat)
+        this.chatlist = res.user.chat
+      }
+    })
     if(user){
       this.isChat=true
-      this.profile.getUser().subscribe({
-        next:(res)=>{
-          this.chatlist = res.user.chat
-        }
-      })
     }
   });
   this.profile.getUsers().subscribe({
     next: (res: any) => {
-      this.users=res.users
+      this.users=res.users 
     },
     error: (err) => {
       this.router.navigate(['/error'])

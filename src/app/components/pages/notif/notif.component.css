@@ -1,0 +1,8 @@
+.redirect {
+  background-color: rgb(70, 35, 103);
+}
+
+.redirect:hover
+{
+  background-color: rgb(38, 19, 56);
+}

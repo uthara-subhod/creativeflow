@@ -27,4 +27,12 @@ export class BrowseService {
   getBooks(){
     return this.http.get<any>(`${this.apiUrl}/books`)
   }
+
+  getProviders(){
+    return this.http.get<any>(`${this.apiUrl}/providers`)
+  }
+
+  getProvider(id:string){
+    return this.http.get<any>(`${this.apiUrl}/providers/${id}`)
+  }
 }

@@ -13,8 +13,8 @@
     <a *ngFor="let g of genres" (click)="filter(g._id)">
 
       <div  class="banner"  >
-        <div  class="col-12 h-100 text-uppercase" style="background-color: rgba(0, 0, 0, 0.233); z-index:1; display: flex; flex: 0 0 auto;  justify-content: center;align-items: center;">
-          <h4>{{g.name}}</h4>
+        <div  class="col-12 h-100 text-uppercase d-flex align-items-center justify-content-center" style="background-color: rgba(0, 0, 0, 0.233); z-index:1; display: flex; flex: 0 0 auto;  justify-content: center;align-items: center;">
+          <h4 class="text-center">{{g.name}}</h4>
         </div>
         <div class="col-12 h-100 img-cover" [style.background-image]="'url(' + g.cover + ')'" style=" position: absolute; background-size: cover;">
 
@@ -26,4 +26,4 @@
   </div>
   <div class="scroll-arrow right-arrow" (click)="scrollRight()">&#9654;</div>
 </div>
- 
+

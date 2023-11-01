@@ -6,5 +6,7 @@ export const payenvironment = {
   }
 };
 
+export const uploadKey = 'public_W142iJJ8ubA5b6m53y24hm2q4kt3'
+
 export const apiURL = 'http://localhost:3000'
 

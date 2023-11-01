@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+
+<mat-card class="container p-4 my-4" style="background-color: rgb(255, 255, 255);">
+  <div class="row">
+
+    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+      <img src="../../../../assets/images/slazzer-edit-image.png" alt=""  class="img-fluid">
+      <h1 class="fw-bolder text-lg-end me-4">Hire Flow Serivces here! </h1>
+    </div>
+      <form class="col-lg-6">
+        <div class="form-group my-3">
+          <label for="violation">Choose Service</label>
+          <div>
+            <select class="form-select" id="violation" name="violation" required="required" [(ngModel)]="service">
+              <option *ngFor="let s of services" [value]="s._id">{{s.name}}</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="form-group my-3">
+          <label for="desc">Title</label>
+          <input id="desc" name="title" required="true" class="form-control" [(ngModel)]="title">
+        </div>
+        <div class="form-group my-3">
+          <label for="desc">Description of your expertise</label>
+          <textarea id="desc" name="desc" cols="40" rows="4" required="required" class="form-control" [(ngModel)]="description"></textarea>
+        </div>
+        <label for="minPrice">Price Range:</label>
+        <input type="number" id="minPrice" [(ngModel)]="minPrice" name="minPrice" class="col-1 me-2">-
+        <input type="number" id="maxPrice" [(ngModel)]="maxPrice" name="maxPrice" class="col-1 ms-2">
+        <div class="form-group my-3">
+
+          <label for="deliveryTime">Delivery Time:</label>
+          <select class="form-select" id="violation" name="delivery" required="required" [(ngModel)]="deliveryTime">
+            <option value="3-5 days">3-5 days</option>
+            <option value="1 week">1 week</option>
+            <option value="1 week">10-14 days</option>
+            <option value="within a month">Within a month</option>
+            <option value="varies on request">Varies on request</option>
+          </select>
+        </div>
+
+
+        <div class="form-group my-3">
+          <label for="links">Links to your works</label>
+          <input id="link" name="link" cols="40" rows="3" class="form-control" (keydown)="onInputKeydown($event)" [(ngModel)]="link">
+        </div>
+        <div class="form-group my-3" *ngFor="let l of links">
+         <div class=" p-2 d-flex justify-content-between border">
+          <a [href]="l" class="col-8">{{l}}</a>
+          <button class="btn-close" (click)="removeLink(l)"></button>
+         </div>
+        </div>
+
+
+        <div class="form-group my-3">
+          <button name="submit" type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+        </div>
+      </form>
+  </div>
+</mat-card>

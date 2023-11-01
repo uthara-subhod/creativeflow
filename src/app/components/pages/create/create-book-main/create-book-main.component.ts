@@ -33,7 +33,7 @@ interface Book {
 })
 export class CreateBookMainComponent implements OnInit , OnChanges{
   constructor(private user: UserService, private browse:BrowseService, private profile: ProfileService, private router:Router, private route:ActivatedRoute, private create: CreateService) { }
-
+  words = 0
   book:Book = {
     title: 'Untitled',
     description: '',
@@ -100,6 +100,9 @@ export class CreateBookMainComponent implements OnInit , OnChanges{
           if(this.book.cover==''){
             this.book.cover='../../../../../assets/images/cover-dummy.jpg'
           }
+          this.book.chapters.forEach((chapter) => {
+            this.words += chapter.words;
+          });
           this.book.category = res.book.category._id
         },
         error:()=>{
@@ -225,5 +228,6 @@ export class CreateBookMainComponent implements OnInit , OnChanges{
       }
     });
   }
+
 
 }

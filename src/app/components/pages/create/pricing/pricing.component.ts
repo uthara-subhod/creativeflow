@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaymentService } from 'src/app/services/payment.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import Swal from 'sweetalert2';
 
 declare let Razorpay: any;
 
@@ -18,20 +19,12 @@ export class PricingComponent implements OnInit {
       .subscribe();
   }
 
-  options = {
-    "key": "",
-    "amount": ""+400*100+"",
-    "currency": "INR",
-    "order_id": "",
-    "handler":(response:any)=>{}
-
-  }
-
   free() {
     this.user.plan('free').subscribe({
       next: (res) => {
         if (res.plan) {
-          this.router.navigate(['/create'])
+
+          this.router.navigate(['/create/roles'])
         }
       },
       error: (err) => {
@@ -40,13 +33,21 @@ export class PricingComponent implements OnInit {
     })
   }
 
+  options = {
+    "key": "",
+    "subscription_id": "",
+    "handler":(response:any)=>{}
+  }
+
+
+
 
   pay() {
     this.user.plan('paid').subscribe({
       next: (res) => {
         if (res.plan) {
           this.options.key=res.key_id
-          this.options.order_id=res.id
+          this.options.subscription_id=res.id
           this.options['handler'] = this.razorPaySuccessHandler.bind(this);
 
           let razorpay = new Razorpay(this.options)
@@ -65,14 +66,25 @@ export class PricingComponent implements OnInit {
     // let razorpay = new Razorpay(this.RAZORPAY_OPTIONS)
     // razorpay.open();
   }
-  razorPaySuccessHandler(response:any) {
-    console.log(response);
+ async razorPaySuccessHandler(response:any) {
     var paymentId = response.razorpay_payment_id;
     var payload = {
       paymentID: paymentId,
-      amount: 400,
+      amount: 499,
       detail: "Premium Plan"
     };
-    this.pays.transaction(payload).subscribe()
+    this.pays.transaction(payload).subscribe({
+      next: (res) => {
+        Swal.fire(
+          'Payment Success!',
+          'You have successfully subscribed!',
+          'success'
+        )
+          this.router.navigate(['/create/roles'])
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
   }
 }

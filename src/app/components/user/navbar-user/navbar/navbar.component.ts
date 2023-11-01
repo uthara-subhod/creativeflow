@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SocketIoConfig, Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SocketService } from 'src/app/services/socket.service';
@@ -17,6 +16,7 @@ export class NavbarComponent implements OnInit{
   userId=''
   isSocial=false
   logIn:boolean = false
+  count= 0
   constructor(private profile:ProfileService,private socialAuthService:SocialAuthService, private socket:SocketService, private auth:AuthService, private store:Store){}
 ngOnInit(): void {
   this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
@@ -43,7 +43,11 @@ ngOnInit(): void {
 
 toggleDropdown() {
   this.showDropdown = !this.showDropdown;
-  console.log(this.showDropdown)
+
+}
+
+findCount(e){
+  this.count = e
 }
 
 logout(){

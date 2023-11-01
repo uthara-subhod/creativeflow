@@ -28,6 +28,10 @@ export class AdminService {
     return this.http.get<any>(`${this.apiUrl}` )
   }
 
+  editProvider(id:string, approved:boolean):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/providers/${id}/edit`,{approved:approved});
+  }
+
 
   editUser(id:string):Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/users/${id}/edit`);
@@ -52,5 +56,13 @@ export class AdminService {
 
   category(type:string, id:string){
     return this.http.get<any>(`${this.apiUrl}/${type}/${id}`)
+  }
+
+  createMod(data){
+    return this.http.post<any>(`${this.apiUrl}/moderators`,data)
+  }
+
+  getMods(){
+    return this.http.get<any>(`${this.apiUrl}/moderators`)
   }
 }

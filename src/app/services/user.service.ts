@@ -22,4 +22,17 @@ export class UserService {
   report(data:any){
     return this.http.post<any>(`${this.apiUrl}/report`, data)
   }
+
+  provider(data:any){
+    return this.http.post<any>(`${this.apiUrl}/provider`, data)
+  }
+
+  buyBook(book:string){
+    return this.http.get<any>(`${this.apiUrl}/book/${book}/buy`)
+  }
+
+  paidBook(book:string){
+    return this.http.get<any>(`${this.apiUrl}/book/paid/${book}`)
+  }
+
 }

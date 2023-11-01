@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class ArtsComponent implements OnInit {
 @Input() artworks:any[]=[]
+@Input() isPaginator=false
 artwork:any
 isLoggedIn=false
 user:any
@@ -45,12 +46,17 @@ ngOnInit(): void {
       }
     })
   }
-  this.dataSource = new MatTableDataSource<any>(this.artworks);
-        this.changeDetectorRef.detectChanges();
-        this.dataSource.paginator = this.paginator;
-        this.obs = this.dataSource.connect();
+  if(this.isPaginator){
+
+    this.dataSource = new MatTableDataSource<any>(this.artworks);
+          this.changeDetectorRef.detectChanges();
+          this.dataSource.paginator = this.paginator;
+          this.obs = this.dataSource.connect();
 
 
+    }else{
+      this.obs = this.artworks
+    }
   }
 
   vote(artwork){

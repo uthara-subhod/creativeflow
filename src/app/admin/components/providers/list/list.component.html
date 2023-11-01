@@ -1,0 +1,120 @@
+
+<app-navbar></app-navbar>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Genres</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a >Admin</a></li>
+        <li class="breadcrumb-item active">Genres</li>>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="slno">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>SL No</th>
+              <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+            </ng-container>
+            <ng-container  matColumnDef="user">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+              <td mat-cell *matCellDef="let element">
+              {{element.user.fullname}}
+              </td>
+            </ng-container>
+            <ng-container  matColumnDef="service">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Service</th>
+              <td mat-cell *matCellDef="let element">
+              {{element.service.name}}
+              </td>
+            </ng-container>
+            <ng-container  matColumnDef="deliveryTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Time</th>
+              <td mat-cell *matCellDef="let element">
+              {{element.deliveryTime}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="approval">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Approval Status</th>
+              <td mat-cell *matCellDef="let element">
+                <button  class="btn rounded-pill btn-success py-0" *ngIf="element.approved==true">Accepted
+                </button>
+                <button class="btn rounded-pill btn-danger py-0" *ngIf="element.approved==false">
+                  Rejected
+                </button>
+                <button class="btn rounded-pill btn-danger py-0" *ngIf="element.approved!=false&&element.approved!=true">
+                  Pending
+                </button>
+              </td>
+            </ng-container>
+            <ng-container  matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Applied Date</th>
+              <td mat-cell *matCellDef="let element">
+              {{element.date | date:'short'}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Edit">
+              <th mat-header-cell *matHeaderCellDef>Edit</th>
+              <td mat-cell *matCellDef="let element">
+                <a class="btn rounded-pill redirect"  data-bs-toggle="modal" data-bs-target="#approval" (click)="openModal(element.provider_id)">Edit</a>
+              </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="['slno'].concat(['user'],['service'],['deliveryTime'],['approval'],['date'],['Edit']);"></tr>
+
+
+            <tr mat-row *matRowDef="let row; columns: ['slno'].concat(['user'],['service'],['deliveryTime'],['approval'],['date'],['Edit']);"></tr>
+          </table>
+          <mat-paginator  [pageSizeOptions]="[5,10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+          </div>
+
+          <div class="modal fade" id="approval" tabindex="-1" aria-hidden="true" *ngIf="id!=''">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-3" >
+                  <h5>Provider: {{pr.user.fullname}}</h5>
+                  <h5>Service: {{pr.service.name}}</h5>
+                  <h5>Title: {{pr.title}}</h5>
+                  <h5>Description: </h5>
+                  <h6>{{pr.description}}</h6>
+                  <h5>Price Range: {{pr.lower}} - {{pr.higher}}</h5>
+                  <h5>Delivery Time: {{pr.deliveryTime}}</h5>
+                  <h5>Links to Examples: </h5>
+                  <div class="card">
+                    <a *ngFor="let l of pr.links" [href]="l"></a>
+                  </div>
+                  <div class="form-group my-3">
+                    <label for="violation">Choose Approval Status</label>
+                    <div>
+                      <select class="form-select" id="violation" name="violation" required="required" [(ngModel)]="approved">
+                        <option [value]="true">Approve</option>
+                        <option [value]="false">Reject</option>
+                      </select>
+                    </div>
+                  </div>
+                <button class="btn redirect" (click)="submit()">Submit</button>
+
+                </div>
+              </div>
+            </div>
+            </div>
+      </div>
+
+    </div>
+  </section>
+
+  </main>
+
+
+
+
+

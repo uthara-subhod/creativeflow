@@ -12,6 +12,7 @@ import {
   SocialUser,
 } from '@abacritt/angularx-social-login';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import axios from 'axios';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,8 +31,12 @@ export class LoginComponent implements OnInit {
   }
   hide = true;
   ngOnInit(){
-    this.socialAuthService.authState.subscribe((user) => {
+    this.socialAuthService.authState.subscribe((user:any) => {
       if(user!=null){
+        const no =Math.floor(Math.random() * 1084)+'';
+        axios.get(`https://picsum.photos/id/${no}/info`)
+      .then(response => {
+        user.banner = response.data.download_url
         this.auth.googleAuth(user).subscribe({
           next:(res)=>{
           this.cookie.set('token',res.token)
@@ -48,6 +53,11 @@ export class LoginComponent implements OnInit {
           );
           }
         })
+      })
+      .catch(error => {
+        console.error('Error fetching the random image:', error);
+      });
+
       }
     });
   }

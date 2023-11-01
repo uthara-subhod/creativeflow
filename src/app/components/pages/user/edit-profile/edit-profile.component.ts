@@ -22,15 +22,22 @@ export class EditProfileComponent {
     bio:'',
     banner:''
   }
+  isAcount=false
+  account = {
+    bank:'',
+    beneficiary:'',
+    acc:0
+  }
   countries: any[] = [];
   error=false
-  msg = ''
+  msg =''
+  // 304030434
 
 
   tabs = [
-    { title: 'Edit Profile', active: true },
+    { title: 'Edit Profile', active: false },
     { title: 'Change Password', active: false },
-    { title: 'Manage Access', active: false },
+    { title: 'Bank Account', active: false },
   ];
 
   uploadedFileUrl: string = '../../../assets/images/dummy-image.jpeg';
@@ -38,6 +45,13 @@ export class EditProfileComponent {
 
   constructor(private profile:ProfileService, private route:ActivatedRoute, private router:Router){}
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const tab = params['tab'];
+      this.tabs[tab].active=true
+      if(!tab){
+        this.tabs[0].active=true
+      }
+    });
     this.profile.getUser().subscribe({
       next:(res)=>{
         this.user.fullname=res.user.fullname
@@ -45,6 +59,9 @@ export class EditProfileComponent {
         this.user.country = res.user.country
         this.user.bio = res.user.bio
         this.user.banner=res.user.banner
+        if(res.user.account_id){
+          this.isAcount=true
+        }
 
       }
     })
@@ -107,9 +124,13 @@ export class EditProfileComponent {
   };
 
   selectTab(tab: any): void {
+    const i = this.tabs.indexOf(tab)
     this.tabs.forEach(t => (t.active = false)); // Deselect all tabs
     tab.active = true; // Select the clicked tab
+    this.router.navigateByUrl(`/profile/edit?tab=${i}`)
+
   }
+  // HDFC0001524
 
 
   async getCountries(){
@@ -173,4 +194,6 @@ export class EditProfileComponent {
   onCountryChange(selectedCountry: string) {
     this.user.country = selectedCountry;
   }
+
+
 }

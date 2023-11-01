@@ -22,17 +22,25 @@ import { ChatComponent } from './components/pages/chat/chat.component';
 import { ArtworksComponent } from './components/pages/artworks/artworks.component';
 import { ArtworkComponent } from './components/pages/create/artwork/artwork.component';
 import { CopyrightFormComponent } from './components/copyright-form/copyright-form.component';
+import { NotifComponent } from './components/pages/notif/notif.component';
+import { ProviderFormComponent } from './components/pages/provider-form/provider-form.component';
+import { ServicesComponent } from './components/pages/services/services.component';
+import { ServiceComponent } from './components/pages/service/service.component';
 
 
 const routes: Routes = [
   {path:'login',component:LoginComponent, canActivate: [loggedIn]},
   {path:'register',component:RegisterComponent, canActivate: [loggedIn]},
   {path:'',component:HomeComponent},
+  {path:'notification',component:NotifComponent},
   {path:'user/:id',component:ProfileComponent, canActivate: [AuthGuard]},
+  {path:'services/join',component:ProviderFormComponent, canActivate: [AuthGuard]},
   {path:'profile',component:ProfileComponent, canActivate: [AuthGuard]},
   {path:'profile/edit',component:EditProfileComponent, canActivate: [AuthGuard]},
   {path:'browse/people',component:PeopleComponent},
   {path:'browse/books',component:BooksComponent},
+  {path:'browse/services',component:ServicesComponent},
+  {path:'services/:id',component:ServiceComponent},
   {path:'browse/artworks',component:ArtworksComponent},
   {path:'report/book/:book_id',component:CopyrightFormComponent},
   {path:'report/chapter/:chapter_id',component:CopyrightFormComponent},
@@ -40,7 +48,7 @@ const routes: Routes = [
   {path:'browse/books/:id',component:BookComponent},
   {path:'browse/books/chapter/:id',component:BChapterComponent, canActivate: [AuthGuard]},
   {path:'create/plans',component:PricingComponent, canActivate: [AuthGuard]},
-  {path:'create/roles',component:RolesComponent},
+  {path:'create/roles',component:RolesComponent,  canActivate: [AuthGuard]},
   {path:'create',component:CworksComponent, canActivate: [AuthGuard, isCreator]},
   {path:'create/book/:id',component:CreateBookMainComponent, canActivate: [AuthGuard, isCreator], canDeactivate:[(component: CreateBookMainComponent) => component.canDeactivate()]},
   {path:'create/chapter/:id',component:ChapterComponent, canActivate: [AuthGuard, isCreator]},

@@ -5,7 +5,7 @@ import { User } from 'src/app/models/user';
 
 export const registerRequest = createAction(
   '[Auth] Register Request',
-   props<{ credentials: { fullname: string; email: string; password:string; }}>()
+   props<{ credentials: { fullname: string; email: string; password:string;banner:string }}>()
 )
 
 export const loginRequest = createAction(

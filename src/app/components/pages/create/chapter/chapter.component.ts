@@ -15,8 +15,9 @@ export class ChapterComponent implements OnInit, AfterViewInit {
   renderedContent: SafeHtml | undefined; // Rendered HTML content
   chapter: any;
   book: any
+  words = 0
 
-  private quill: Quill | any
+  private quill!: Quill
 
   constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private router: Router, private browse: BrowseService) { }
   ngOnInit(): void {
@@ -45,8 +46,8 @@ export class ChapterComponent implements OnInit, AfterViewInit {
     })
 
   }
-  @ViewChild('editor') editorElement: ElementRef | null = null;
-  @ViewChild('toolbar') toolbarElement: ElementRef | null = null;
+  @ViewChild('editor') editorElement!: ElementRef ;
+  @ViewChild('toolbar') toolbarElement!: ElementRef ;
 
   ngAfterViewInit(): void {
     this.quill = new Quill(this.editorElement?.nativeElement, {
@@ -81,29 +82,53 @@ export class ChapterComponent implements OnInit, AfterViewInit {
 
     // Add a custom class to the toolbar element
     toolbarElement.classList.add('sticky-top');
+    toolbarElement.classList.add('bg-white');
+    const content = this.quill.getText();
+    this.words = this.countWords(content)
+    console.log(content)
+    this.chapter.words = this.words
     this.quill.on('text-change', () => {
+      const content = this.quill.getText();
+      this.words = this.countWords(content)
+      this.chapter.words = this.words
+
       this.saveFormattedContent(); // Call your save method when text changes
+      console.log(this.editorElement.nativeElement.clientHeight, this.editorElement.nativeElement.offsetHeight)
+      if ( this.editorElement.nativeElement.offsetHeight > this.editorElement.nativeElement.clientHeight) {
+        // If content exceeds viewport, scroll to the bottom
+        this.scrollToBottom();
+      }
     });
   }
 
   saveFormattedContent() {
     const formattedText = this.quill.root.innerHTML;
+
     const sanitizedText = DOMPurify.sanitize(formattedText);
     this.chapter.content = sanitizedText;
   }
 
-  // Retrieve and render the content from the database
-  getFormattedContent() {
-    // this.myService.getContent().subscribe(content => {
-    //   // Assuming 'content' is the sanitized and formatted content from the database
-    //   this.renderedContent = this.sanitizer.bypassSecurityTrustHtml(content);
-    // });
+
+
+  countWords(content: string): number {
+    const words = content.split(/\s+/).filter(word => word.trim() !== '');
+    console.log(words)
+    return words.length;
   }
 
   // Sanitize and format content (simplified example)
   sanitizeAndFormatContent(content: string): string {
-    // In a real application, you would use a library like DOMPurify for sanitization
-    // For simplicity, we're just wrapping the content in a <div> here
+
     return `<div>${content}</div>`;
   }
+
+   scrollToBottom() {
+    const editor = this.editorElement.nativeElement
+
+    if (editor) {
+
+      editor.scrollTop = editor.offsetHeight;
+    }
+  }
+
 }

@@ -58,10 +58,10 @@ export class RegisterComponent {
     this.user.password=this.user.password.trim()
     this.repass=this.repass.trim()
     this.user.email=this.user.email.trim()
-    if(this.user.email==''){
+    if(this.user.email==''||!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.user.email)){
       Swal.fire({
         icon: 'error',
-        title: 'Email cannot be empty',
+        title: 'Email is invalid',
         background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
       })
       return
@@ -93,6 +93,7 @@ export class RegisterComponent {
 
       },
       error:(err)=>{
+        this.isOtp=false
         alert(err.error.msg)
       }
     })

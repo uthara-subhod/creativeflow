@@ -148,7 +148,7 @@
                   </div>
 
 
-                  <div class="form-group status-form">
+                  <div class="form-group status-form mb-2">
                     <div class="form-wrapper d-flex  justify-content-between w-75 ">
                       <label class="rating-label">Is your story complete?</label>
 
@@ -159,6 +159,26 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="form-group rating-form mb-2" *ngIf="words>=100">
+                    <div class="form-wrapper d-flex justify-content-between w-75 ">
+                      <label class="rating-label">Do you want to sell this ? </label>
+
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="form11Example4" name="premium"
+                          [(ngModel)]="book.premium" />
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="d-flex justify-content-between mb-3" *ngIf="book.premium">
+                    <label for="exampleFormControlInput1" class="col-sm-7 col-form-label">Price</label>
+
+                    <div class="col-sm-4">
+                      <input type="number" class="form-control" name="price" [(ngModel)]="book.pricing">
+                    </div>
+                    </div>
+
 
                 </div>
               </form>
@@ -178,14 +198,14 @@
                       <mat-card-subtitle *ngIf="!ch.published ">Draft - {{ch.publishedAt | date:'short' }}</mat-card-subtitle>
                     </div>
                     <mat-card-actions class="d-lg-flex d-none">
-                      <button class="px-5" mat-flat-button color="primary" ><a class="text-decoration-none text-white" [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter</a> </button>
+                      <a class="px-5 text-decoration-none text-white" mat-flat-button color="primary" [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter </a>
                       <div class="d-flex" style="gap:7px">
 
                       </div>
                     </mat-card-actions>
                   </mat-card-content>
                   <mat-card-actions class="d-lg-none d-flex"  width="50vw !important">
-                    <button class="px-5" mat-flat-button color="primary" ><a class="text-decoration-none text-white" [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter</a> </button>
+                    <a class="px-5 text-decoration-none text-white" mat-flat-button color="primary" [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter </a>
                     <div class="d-flex" style="gap:7px">
 
                     </div>

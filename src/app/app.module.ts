@@ -39,7 +39,6 @@ import { ClarityModule } from "@clr/angular";
 import { NgxOtpInputModule } from "ngx-otp-input";
 import { PricingComponent } from './components/pages/create/pricing/pricing.component';
 import { CreateBookMainComponent } from './components/pages/create/create-book-main/create-book-main.component';
-import { payenvironment } from 'src/environments/environment';
 import { CworksComponent } from './components/pages/create/cworks/cworks.component';
 import { RolesComponent } from './components/pages/create/roles/roles.component';
 import { AdminEffects } from './store/auth/admin.effects';
@@ -64,6 +63,11 @@ import { ArtsComponent } from './components/arts/arts.component';
 import { ReadButtonComponent } from './components/chapter/read-button/read-button.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule, GoogleSigninButtonDirective,} from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { NotifComponent } from './components/pages/notif/notif.component';
+import { ProviderFormComponent } from './components/pages/provider-form/provider-form.component';
+import { ServicesComponent } from './components/pages/services/services.component';
+import { RatingModule } from 'primeng/rating';
+import { ServiceComponent } from './components/pages/service/service.component';
 
 
 
@@ -107,6 +111,10 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     ANavbarComponent,
     ArtsComponent,
     ReadButtonComponent,
+    NotifComponent,
+    ProviderFormComponent,
+    ServicesComponent,
+    ServiceComponent,
   ],
   imports: [
     SocialLoginModule,
@@ -117,6 +125,7 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     PasswordModule,
     InputTextModule,
     InputMaskModule,
+    RatingModule,
     GoogleSigninButtonModule,
     NgxPageScrollCoreModule,
     BrowserAnimationsModule,

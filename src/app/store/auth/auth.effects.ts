@@ -83,7 +83,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.loginFailure),
         tap(({ error }) => {
-          alert("you have logged out")
+          alert(error)
         })
       ),
     { dispatch: false }

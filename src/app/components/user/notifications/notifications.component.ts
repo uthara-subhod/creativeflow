@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SocketIoConfig, Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -12,6 +12,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class NotificationsComponent implements OnInit{
   @Input()userId=''
+  @Output() count = new EventEmitter<number>();
   notifications:any[]=[]
   constructor(private profile:ProfileService, private authService:AuthService){}
 
@@ -24,6 +25,7 @@ ngOnInit(): void {
         next:(res)=>{
           const n:any[] = res.notifications
           this.notifications=[]
+          this.count.emit(res.notifications.length)
           for(let a of n){
             if(a.types=='follow'){
               this.notifications.push({
@@ -60,11 +62,14 @@ ngOnInit(): void {
       customSocket.connect()
       customSocket.fromEvent('notification').subscribe({
         next:(res)=>{
+          if('Notification' in window && Notification.permission=='granted'){
+            const audio = new Audio('../../../../assets/audio/water_droplet.mp3');
+            audio.play();
+          }
           this.ngOnInit()
 
         },
         error:(err)=>{
-          console.log("oops")
         }
       })
 

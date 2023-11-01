@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class PaymentService {
-
+  private apiUrl = 'http://localhost:3000'
     private _loadedLibraries: { [url: string]: ReplaySubject<any> } = {};
 
     constructor(@Inject(DOCUMENT) private readonly document: any, private http:HttpClient) {}
@@ -40,6 +40,10 @@ export class PaymentService {
     }
 
     transaction(data:any): Observable<any> {
-      return this.http.post<any>(`http://localhost:3000/pay`,data);
+      return this.http.post<any>(`${this.apiUrl}/pay`,data);
+    }
+
+    buy(data:any){
+      return this.http.post<any>(`${this.apiUrl}/buy`, data)
     }
 }

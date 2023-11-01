@@ -85,7 +85,7 @@
               <mat-card-content>
 
                 <div class="cover-image">
-                  <img [src]="book.cover" alt="Book Cover">
+                  <img [src]="book.cover==''?'../../../../../assets/images/cover-dummy.jpg':book.cover" alt="Book Cover">
                 </div>
                 <div class="book-details col-5">
                   <!-- Book Cover (You can replace 'book.coverURL' with the actual URL) -->
@@ -167,7 +167,7 @@
 
         <div id="ex1-tabs-1" role="tabpanel"  class="tab-pane show active">
           <div class="row mx-0 px-0">
-            <mat-card *ngFor="let artwork of publishedArt"  class="fs-5 pb-4 col-6 pt-2">
+            <mat-card *ngFor="let artwork of publishedArt"  class="fs-5 pb-4 col-4 pt-2">
               <img [src]="artwork.artwork==''?'../../../../../assets/images/arkwork_dummy.png':artwork.artwork" width="100%">
               <a mat-raised-button color="primary" [routerLink]="'/create/artwork/'+artwork.artwork_id">Edit Artwork</a>
             </mat-card>
@@ -177,7 +177,7 @@
         </div>
         <div id="ex1-tabs-2" role="tabpanel" class="tab-pane">
           <div class=" px-0 row mx-0">
-            <mat-card *ngFor="let artwork of unpublishedArt"  class="fs-5 pb-4 col-6 pt-2">
+            <mat-card *ngFor="let artwork of unpublishedArt"  class="fs-5 pb-4 col-4 pt-2">
               <img [src]="artwork.artwork==''?'../../../../../assets/images/arkwork_dummy.png':artwork.artwork" width="100%">
               <a mat-raised-button color="primary" [routerLink]="'/create/artwork/'+artwork.artwork_id">Edit Artwork</a>
             </mat-card>

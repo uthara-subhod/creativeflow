@@ -13,7 +13,7 @@ export class ANavbarComponent {
   @Input() artwork: any
 
   constructor(private create: CreateService, private route: ActivatedRoute, private router: Router) { }
-  save() {
+  save(isToast?:boolean) {
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -33,11 +33,13 @@ export class ANavbarComponent {
       data.artwork = ''
     }
     if (this.artwork.title == '') {
+      if(isToast){
       Swal.fire({
         icon: 'error',
         title: 'Title Cant be empty!',
         showConfirmButton: false,
       })
+    }
       if (this.artwork.artwork = '') {
         this.artwork.artwork = '../../../../../assets/images/arkwork_dummy.png'
       }
@@ -54,21 +56,23 @@ export class ANavbarComponent {
           if (this.artwork.artwork == '') {
             this.artwork.artwork = '../../../../../assets/images/arkwork_dummy.png'
           }
+          if(isToast){
 
-          Toast.fire({
-            icon: "success",
-            title: "artwork saved successfully",
-          })
+            Toast.fire({
+              icon: "success",
+              title: "artwork saved successfully",
+            })
+          }
         }
       })
     }
 
   }
   togglepublish() {
-    this.save()
+
     const currentRoute = this.router.url;
     if (!this.artwork.published) {
-      if (!this.artwork.copyright || this.artwork.copyright == '' || !this.artwork.category || this.artwork.category == '' || this.artwork.title == '' ||this.artwork=='../../../../../assets/images/arkwork_dummy.png') {
+      if (!this.artwork.copyright || this.artwork.copyright == '' || !this.artwork.category || this.artwork.category == '' || this.artwork.title == '' ||this.artwork=='../../../../../assets/images/arkwork_dummy.png' || this.artwork=='') {
         Swal.fire({
           icon: 'error',
           title: 'Miising Fields',
@@ -77,6 +81,7 @@ export class ANavbarComponent {
         })
         return
       }
+      this.save(false)
       Swal.fire({
         icon: 'warning',
         title: 'Are you sure?',
@@ -101,6 +106,7 @@ export class ANavbarComponent {
           Swal.fire('Error publishing', '', 'info')
         }
       })
+
     } else {
       Swal.fire({
         icon: 'warning',

@@ -19,7 +19,7 @@ export class CategoryFormComponent implements OnInit {
   cover = '';
   name = '';
   cover_url = false;
-  options: UploadWidgetConfig = {
+  options :UploadWidgetConfig |any = {
     apiKey: 'free', // Get API key: https://www.bytescale.com/get-started
     maxFileCount: 1,
     editor: {
@@ -36,6 +36,9 @@ export class CategoryFormComponent implements OnInit {
   constructor(private admin: AdminService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if(this.type=='services'){
+      this.options.editor.images.cropRatio=208/136
+    }
     let id = '';
     this.route.params.subscribe((params) => {
       id = params['id'];

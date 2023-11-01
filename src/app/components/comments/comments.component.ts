@@ -14,6 +14,7 @@ export class CommentsComponent implements OnInit{
   c_input = ''
   r_input = ''
   e_input = ''
+  owner = ''
   isReply={
     reply:false,
     id:''
@@ -22,12 +23,19 @@ export class CommentsComponent implements OnInit{
   comments :any
   @Input() id =''
   @Input() place = ''
+  @Input() item:any
   constructor(private comment:CommentService, private profile:ProfileService){}
 
   ngOnInit(): void {
+    if(this.place=='chapter'){
+      this.owner= this.item.book.author
+    }else{
+      this.owner =this.item.artist._id
+    }
     this.profile.getUser().subscribe({
       next: (res: any) => {
         this.user=res.user
+       
 
       },
       error: (err) => {
@@ -69,7 +77,8 @@ export class CommentsComponent implements OnInit{
           id:this.id
         },
         reply:true,
-        reply_id:id
+        reply_id:id,
+        item:this.item
       }
 
       this.comment.addComment(data).subscribe({
@@ -96,7 +105,8 @@ export class CommentsComponent implements OnInit{
           place:this.place,
           id:this.id
         },
-        reply:false
+        reply:false,
+        item:this.item
       }
       this.comment.addComment(data).subscribe({
         next:(res)=>{
