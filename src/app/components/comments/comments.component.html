@@ -14,7 +14,7 @@
       <div class="comment-send" (click)="submit()"><i class="fab fa-telegram-plane"></i></div>
     </div>
   </div>
-  <div *ngFor="let c of comments.reverse()">
+  <div *ngFor="let c of comments">
     <ng-container *ngIf="!c.reply">
       <div class="comment comment-level-1">
         <img [src]="c.user.profile==''? '../../../assets/images/dummy-image.jpeg':c.user.profile" alt="" />
