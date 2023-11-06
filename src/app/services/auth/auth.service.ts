@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
+import { apiURL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000'
+  private apiUrl = apiURL
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
@@ -44,5 +45,10 @@ export class AuthService {
 
   editProfile(formData:any):Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/profile`,formData)
+  }
+
+
+  password(data:any){
+    return this.http.post<any>(`${this.apiUrl}/password`, data);
   }
 }

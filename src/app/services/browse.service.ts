@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { apiURL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrowseService {
-  private apiUrl = 'http://localhost:3000'
+  private apiUrl = apiURL
   constructor(private http:HttpClient) { }
 
   getBook(id:string){

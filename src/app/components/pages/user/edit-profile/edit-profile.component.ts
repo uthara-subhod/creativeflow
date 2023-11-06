@@ -4,6 +4,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { UploadWidgetConfig, UploadWidgetResult } from '@bytescale/upload-widget';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { PaymentService } from 'src/app/services/payment.service';
 
 
 
@@ -22,6 +23,7 @@ export class EditProfileComponent {
     bio:'',
     banner:''
   }
+  plan:any
   isAcount=false
   account = {
     bank:'',
@@ -36,14 +38,13 @@ export class EditProfileComponent {
 
   tabs = [
     { title: 'Edit Profile', active: false },
-    { title: 'Change Password', active: false },
-    { title: 'Bank Account', active: false },
+    { title: 'Transactions', active: false },
   ];
 
   uploadedFileUrl: string = '../../../assets/images/dummy-image.jpeg';
   following:boolean=false
 
-  constructor(private profile:ProfileService, private route:ActivatedRoute, private router:Router){}
+  constructor(private profile:ProfileService, private route:ActivatedRoute, private router:Router, private pay:PaymentService){}
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const tab = params['tab'];
@@ -58,6 +59,7 @@ export class EditProfileComponent {
         this.user.profile=res.user.profile
         this.user.country = res.user.country
         this.user.bio = res.user.bio
+        this.plan = res.user.plan
         this.user.banner=res.user.banner
         if(res.user.account_id){
           this.isAcount=true
@@ -193,6 +195,14 @@ export class EditProfileComponent {
 
   onCountryChange(selectedCountry: string) {
     this.user.country = selectedCountry;
+  }
+
+  cancel(){
+    this.pay.cancel().subscribe({
+      next:(res)=>{
+        this.ngOnInit()
+      }
+    })
   }
 
 

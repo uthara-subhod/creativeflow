@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import Swal from 'sweetalert2';
 import { ScrollDirective } from 'src/app/directives/scroll.directive';
+import { apiURL } from 'src/environments/environment';
 
 @Component({
   selector: 'app-messages',
@@ -34,7 +35,7 @@ export class MessagesComponent implements OnInit{
                   next:(res)=>{
                     this.messages=res.messages
                     const config: SocketIoConfig = {
-                      url: 'http://localhost:3000', // socket server url;
+                      url: apiURL, // socket server url;
                       options: {
                         transports: ['websocket'],
                         query: { userId: this.user.user_id , token: this.authService.getToken()}

@@ -1,0 +1,53 @@
+<app-create-navbar></app-create-navbar>
+<div class="d-flex justify-content-center gap-3 mt-5">
+  <div class="col-xl-3 col-lg-4">
+    <div class="card info-card revenue-card" style="background-color: rgb(255, 245, 251);">
+
+      <div class="card-body d-flex flex-column justify-content-center align-items-center">
+        <h5 class="card-title text-center">Total Books</h5>
+
+        <div class="d-flex align-items-center">
+          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+            <i class="bi bi-currency-dollar"></i>
+          </div>
+          <div class="ps-3">
+            <h6 class="text-center">3</h6>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-4">
+    <div class="card info-card revenue-card" style="background-color: rgb(255, 245, 251);">
+
+      <div class="card-body d-flex flex-column justify-content-center align-items-center">
+        <h5 class="card-title text-center">Total Artworks</h5>
+
+        <div class="d-flex align-items-center">
+          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+            <i class="bi bi-currency-dollar"></i>
+          </div>
+          <div class="ps-3">
+            <h6 class="text-center">1</h6>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class=" container mt-5 p-4 bg-white border">
+  <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [type]="'bar'">
+  </canvas>
+</div>

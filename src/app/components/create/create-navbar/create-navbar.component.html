@@ -1,0 +1,56 @@
+<div class="col-12">
+  <div class="top d-flex align-items-center justify-content-between" >
+    <span class="d-flex mx-2 align-items-center">
+      <img
+      src="../../../../../assets/images/CreativeFlow-logos_white.png"
+      alt=""
+      width="50px"
+    />
+    <p class="text-5 fs-5 mt-3">CreativeStudio</p>
+    </span>
+
+    <div class="d-flex justify-content-end col-5">
+      <button class="btn menu py-1 d-md-none d-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-bars"></i></button>
+    <a class="d-lg-block d-none rectangle-5 mx-3 btn rounded-pill py-0"  [routerLink]="'/'"><i class="fa-solid fa-pen-to-square"></i> Go back to creativeflow
+    </a>
+
+    </div>
+
+  </div>
+  <div class="bottom d-flex justify-content-lg-between justify-content-center align-items-center py-lg-0 py-4" >
+    <div class="d-md-flex d-none justify-content-start align-items-center mx-3">
+      <a routerLink="/create" class="link navlink">Dashboard</a>
+      <a class="mx-2 navlink">|</a>
+      <a routerLink="/create/works" class="link navlink">Works</a>
+      <a class="mx-2 navlink">|</a>
+      <a routerLink="/create" class="link navlink">Services</a>
+      <a class="mx-2 navlink">|</a>
+      <a routerLink="/create/transactions" class="link navlink">Transactions</a>
+    </div>
+    <a class="d-lg-none d-block rectangle-5 mx-3 btn btn rounded-pill py-0" [routerLink]="'/'"><i class="fa-solid fa-pen-to-square"></i>Go back to creativeflow
+    </a>
+  </div>
+  </div>
+
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="background-color: #b39eb1;">
+    <div class="offcanvas-header d-flex justify-content-center">
+    <span class="d-flex mx-2 align-items-center">
+      <img
+      src="../../../../../assets/images/CreativeFlow-logos_white.png"
+      alt=""
+      width="50px"
+    />
+    <p class="text-5 fs-5 mt-3 text-light">CreativeFlow</p>
+    </span>
+    <button type="button" class="btn-close text-reset text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="d-flex flex-column align-items-center text-light">
+      <a routerLink="/create" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Dashboard</a>
+      <a routerLink="/create/works" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Works</a>
+      <a routerLink="/create" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Services</a>
+      <a routerLink="/create/transactions" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Transactions</a>
+    </div>
+  </div>
+</div>

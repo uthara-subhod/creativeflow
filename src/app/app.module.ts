@@ -68,6 +68,12 @@ import { ProviderFormComponent } from './components/pages/provider-form/provider
 import { ServicesComponent } from './components/pages/services/services.component';
 import { RatingModule } from 'primeng/rating';
 import { ServiceComponent } from './components/pages/service/service.component';
+import { ForgotComponent } from './components/pages/user/forgot/forgot.component';
+import { CreateNavbarComponent } from './components/create/create-navbar/create-navbar.component';
+import { DashboardComponent } from './components/pages/create/dashboard/dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
+import { TransactionsComponent } from './components/pages/create/transactions/transactions.component';
+
 
 
 
@@ -115,6 +121,10 @@ import { ServiceComponent } from './components/pages/service/service.component';
     ProviderFormComponent,
     ServicesComponent,
     ServiceComponent,
+    ForgotComponent,
+    CreateNavbarComponent,
+    DashboardComponent,
+    TransactionsComponent,
   ],
   imports: [
     SocialLoginModule,
@@ -126,6 +136,7 @@ import { ServiceComponent } from './components/pages/service/service.component';
     InputTextModule,
     InputMaskModule,
     RatingModule,
+    NgChartsModule,
     GoogleSigninButtonModule,
     NgxPageScrollCoreModule,
     BrowserAnimationsModule,

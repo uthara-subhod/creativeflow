@@ -98,20 +98,16 @@
     <hr>
     </div>
     <div *ngIf="tabs[1].active" class="bg-white p-2 py-4">
-      <div class="form-group">
-        <label class="col-md-3 control-label">Password:</label>
-        <div class="col-md-8">
-          <input class="form-control" type="password" value="11111122333">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-3 control-label">Confirm password:</label>
-        <div class="col-md-8">
-          <input class="form-control" type="password" value="11111122333">
+      <div class="container">
+        <div class="card p-4">
+          <div class=" d-flex justify-content-between">
+
+            Your plan : {{plan}}
+            <button class="btn btn-primary " (click)="cancel()" *ngIf="plan!='free'">Cancel Subscription</button>
+          </div>
         </div>
       </div>
     </div>
-    <div *ngIf="tabs[2].active" class="bg-white p-2 py-4">
-  </div>
+
 </div>
 

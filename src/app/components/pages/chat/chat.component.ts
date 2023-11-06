@@ -30,7 +30,7 @@ ngOnInit(){
   });
   this.profile.getUsers().subscribe({
     next: (res: any) => {
-      this.users=res.users 
+      this.users=res.users
     },
     error: (err) => {
       this.router.navigate(['/error'])

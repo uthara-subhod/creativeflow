@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable , BehaviorSubject} from 'rxjs';
+import { apiURL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AdminService {
 
   userUpdated$ = this.userUpdateSubject.asObservable();
 
-  private apiUrl = 'http://localhost:3000/admin'
+  private apiUrl = `${apiURL}/admin`
 
   constructor(private http: HttpClient, private cookie:CookieService) { }
 
@@ -64,5 +65,17 @@ export class AdminService {
 
   getMods(){
     return this.http.get<any>(`${this.apiUrl}/moderators`)
+  }
+
+  getTransactions(){
+    return this.http.get<any>(`${this.apiUrl}/transactions`)
+  }
+
+  getSeller(id:String){
+    return this.http.get<any>(`${this.apiUrl}/transactions/seller/${id}`)
+  }
+
+  pay(id:String){
+    return this.http.get<any>(`${this.apiUrl}/transactions/${id}`)
   }
 }

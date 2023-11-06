@@ -18,6 +18,7 @@ export class BChapterComponent implements OnInit {
   chapter:any
   book:any
   next:any
+  chapter_id=''
   user:any
   ngOnInit(): void {
     this.profile.getUser().subscribe({
@@ -35,6 +36,7 @@ export class BChapterComponent implements OnInit {
           const content = res.chapter.content
           this.chapter.content = this.sanitizer.bypassSecurityTrustHtml(content);
           this.book=res.chapter.book
+          this.chapter_id=res.chapter.chapter_id
           this.browse.getBook(this.book.book_id).subscribe({
             next:(res)=>{
               this.book=res.book

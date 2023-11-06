@@ -40,12 +40,12 @@
 
 
 <div class="p-3 d-flex flex-column align-items-center mt-5">
-<div class="card py-0 pt-2 border-none col-lg-7 text-center" style="background-color: #5e3e5c;"> <h3 class="text-uppercase text-center font-monospace text-white" style="letter-spacing: 7px;">Discover Books </h3></div>
+<div class="card py-0 pt-2 border-none col-lg-7 text-center px-2" style="background-color: #5e3e5c;"> <h3 class="text-uppercase text-center font-monospace text-white" style="letter-spacing: 7px;">Discover Books </h3></div>
 <div class="banner-container mt-4">
   <div class="scroll-arrow left-arrow" (click)="scrollLeft()">&#9664;</div>
-  <div class="d-flex col-11 books justify-content-lg-center" #book>
-   <mat-card *ngFor="let book of books.reverse()" class="book-card container mx-1 col-lg-3 col-12">
-      <mat-card-content class="flex-lg-row flex-column">
+  <div class="d-flex col-11 books justify-content-start" #book>
+   <mat-card *ngFor="let book of books" class="book-card container mx-1 col-xl-3 col-lg-6 col-12 ">
+      <mat-card-content class="flex-lg-row flex-column align-items-lg-start">
 
         <div class="cover-image ms-lg-auto ms-2 mb-lg-0 mb-3">
           <img [src]="book.cover" alt="Book Cover">
@@ -60,6 +60,8 @@
             <p class="my-0">{{ book.author.fullname }}</p>
           </div></mat-card-subtitle>
           <p class="description  text-lg-start text-center"> {{ book.description | truncate:15 }}</p>
+          <a mat-flat-button [color]="'primary'" class="col-12" [href]="'/browse/books/'+book.book_id">View Details</a>
+
         </div>
 
 
@@ -104,7 +106,7 @@
   <div class="card py-0 pt-2 border-none col-lg-7 text-center" style="background-color: #5e3e5c;"> <h3 class="text-uppercase text-center font-monospace text-white" style="letter-spacing: 7px;">Discover Artworks </h3></div>
   <div class="banner-container mt-4">
     <div class="scroll-arrow left-arrow" (click)="leftArt()">&#9664;</div>
-    <div class="d-flex col-11 books justify-content-center px-5" #art style="overflow-y:hidden;">
+    <div class="d-flex  books justify-content-start " #art style="overflow-y:hidden;">
      <app-arts [artworks]="artworks" [isPaginator]="false"></app-arts>
     </div>
     <div class="scroll-arrow right-arrow" (click)="rightArt()">&#9654;</div>

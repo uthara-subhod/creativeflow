@@ -26,6 +26,10 @@ export class CommentsComponent implements OnInit{
   @Input() item:any
   constructor(private comment:CommentService, private profile:ProfileService){}
 
+  ngOnChanges(){
+    this.ngOnInit()
+  }
+
   ngOnInit(): void {
     if(this.place=='chapter'){
       this.owner= this.item.book.author
@@ -35,8 +39,6 @@ export class CommentsComponent implements OnInit{
     this.profile.getUser().subscribe({
       next: (res: any) => {
         this.user=res.user
-       
-
       },
       error: (err) => {
         this.user=null
@@ -45,6 +47,7 @@ export class CommentsComponent implements OnInit{
     this.comment.getComments(this.id).subscribe({
       next:(res)=>{
         this.comments = res.comments
+        console.log(res.comments)
         this.commentCount.emit(res.comments.length)
       },
       error:()=>{
@@ -59,6 +62,7 @@ export class CommentsComponent implements OnInit{
 
   submit(id?:any){
     if(id){
+
       this.r_input=this.r_input.trim()
       if(this.r_input==''){
         Swal.fire({
@@ -69,6 +73,7 @@ export class CommentsComponent implements OnInit{
         })
         return
       }
+      console.log(this.r_input)
       const data ={
         user:this.user._id,
         message:this.r_input,
@@ -83,8 +88,11 @@ export class CommentsComponent implements OnInit{
 
       this.comment.addComment(data).subscribe({
         next:(res)=>{
+
           this.r_input=''
           this.ngOnInit()
+        },error:(err)=>{
+          console.log(err.error.msg)
         }
       })
     }else{

@@ -7,6 +7,7 @@ import * as AuthActions from './auth.actions';
 import { AuthService } from '../../services/auth/auth.service';
 // import { AdminService } from 'src/app/services/admin.service';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 
 
 
@@ -68,11 +69,16 @@ export class AuthEffects {
           const username = loginSuccessResponse.user.fullname? loginSuccessResponse.user.fullname :email.split('@')[0]
           this.router.navigateByUrl('/');
 
-          alert(
-            'Login Successful! ' +
-            'Welcome, ' +
-            username
-          );
+          Swal.fire({
+            toast: true,
+            icon:'success',
+            title:`Welcome back, ${username}`,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          })
+
         })
       ),
     { dispatch: false }
@@ -83,7 +89,15 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.loginFailure),
         tap(({ error }) => {
-          alert(error)
+          Swal.fire({
+            toast: true,
+            icon:'error',
+            title:`${error}`,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          })
         })
       ),
     { dispatch: false }
@@ -98,92 +112,22 @@ export class AuthEffects {
       localStorage.removeItem('token');
       this.authService.setAuthenticated(false);
       this.router.navigateByUrl('/');
-      alert(
-        "you have logged out"
-      );
+      Swal.fire({
+        toast: true,
+        icon:'success',
+        title:`You have logged out`,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      })
     })
   ),
     { dispatch: false }
   )
 
-  // getUser$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.getUserRequest),
-  //     switchMap(() =>
-  //       this.authService.getUser().pipe(
-  //         map((res) =>{}),
-  //         catchError(() => of(AuthActions.getUserFailure()))
-  //       )
-  //     )
-  //   )
-  // );
 
-  // adminLogin$ = createEffect(()=>
-  // this.actions$.pipe(
-  //   ofType(AuthActions.adminLogin),
-  //   mergeMap((action) =>
-  //     this.adminService.login(action.admin).pipe(
-  //       map((response) => {
-  //         if(response.status){
 
-  //           return AuthActions.adminLoginSuccess({
-  //             loginSuccessResponse: {
-  //               status: response.status,
-  //               token: response.token,
-  //               admin: response.user
-  //             }
-  //           });
-  //         }else{
-  //           return AuthActions.adminLoginFailure({ error: "Incorrect Credentials" })
-  //         }
-
-  //       }),
-  //       catchError((error) => of(AuthActions.adminLoginFailure({ error: "Incorrect Credentials" })))
-  //     )
-  //   )
-
-  // ))
-
-  // adminLoginSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(AuthActions.adminLoginSuccess),
-  //       tap(({ loginSuccessResponse }) => {
-  //         localStorage.setItem('admin', loginSuccessResponse.token);
-  //         this.router.navigateByUrl('/admin');
-  //         alert(
-  //           'Login Successful! ' +
-  //           'Welcome, ' +
-  //           loginSuccessResponse.admin.firstname
-  //         );
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  // adminLoginFailure$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(AuthActions.adminLoginFailure),
-  //       tap(({ error }) => {
-  //         alert(error)
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  // $adminLogout = createEffect(() => this.actions$.pipe(
-  //   ofType(AuthActions.adminLogout),
-  //   tap((user) => {
-  //     localStorage.removeItem('admin');
-  //     this.router.navigateByUrl('/admin/login');
-  //     alert(
-  //       'You have logged out! '
-  //     );
-  //   })
-  // ),
-  //   { dispatch: false }
-  // )
 
 
 }

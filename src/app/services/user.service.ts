@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { apiURL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000'
+  private apiUrl = apiURL
   constructor(private http: HttpClient) { }
   categories(type:string){
     return this.http.get<any>(`${this.apiUrl}/${type}`);

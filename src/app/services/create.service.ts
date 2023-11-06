@@ -21,6 +21,10 @@ export class CreateService {
     return this.http.get<any>(`${this.apiUrl}/books`)
   }
 
+  book(id:string){
+    return this.http.get<any>(`${this.apiUrl}/book/${id}`)
+  }
+
   artworks(){
     return this.http.get<any>(`${this.apiUrl}/artworks`)
   }
@@ -75,6 +79,14 @@ export class CreateService {
 
   deleteChapter(data:any){
     return this.http.post<any>(`${this.apiUrl}/chapter/delete`, data)
+  }
+
+  transactions(){
+    return this.http.get<any>(`${this.apiUrl}/transactions`)
+  }
+
+  status(status:string,id:string){
+    return this.http.post<any>(`${this.apiUrl}/transactions/${id}`, {status:status})
   }
 
 

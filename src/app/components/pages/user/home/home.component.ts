@@ -31,12 +31,12 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
       this.browse.getBooks().subscribe({
         next:(res)=>{
-          this.books= res.books
+          this.books= res.books.reverse()
         }
       })
       this.browse.getArtworks().subscribe({
         next:(res)=>{
-          this.artworks= res.artworks
+          this.artworks= res.artworks.reverse()
         }
       })
   }

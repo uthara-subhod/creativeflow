@@ -13,6 +13,7 @@ import { CreateBookMainComponent } from './components/pages/create/create-book-m
 import { CworksComponent } from './components/pages/create/cworks/cworks.component';
 import { RolesComponent } from './components/pages/create/roles/roles.component';
 import { BooksComponent } from './components/pages/books/books.component';
+
 import { ChapterComponent } from './components/pages/create/chapter/chapter.component';
 import { BookComponent } from './components/pages/book/book.component';
 import { BChapterComponent } from './components/pages/chapter/chapter.component';
@@ -26,11 +27,15 @@ import { NotifComponent } from './components/pages/notif/notif.component';
 import { ProviderFormComponent } from './components/pages/provider-form/provider-form.component';
 import { ServicesComponent } from './components/pages/services/services.component';
 import { ServiceComponent } from './components/pages/service/service.component';
+import { DashboardComponent } from './components/pages/create/dashboard/dashboard.component';
+import { TransactionsComponent } from './components/pages/create/transactions/transactions.component';
+import { ForgotComponent } from './components/pages/user/forgot/forgot.component';
 
 
 const routes: Routes = [
   {path:'login',component:LoginComponent, canActivate: [loggedIn]},
   {path:'register',component:RegisterComponent, canActivate: [loggedIn]},
+  {path:'forgot',component:ForgotComponent, canActivate: [loggedIn]},
   {path:'',component:HomeComponent},
   {path:'notification',component:NotifComponent},
   {path:'user/:id',component:ProfileComponent, canActivate: [AuthGuard]},
@@ -49,13 +54,15 @@ const routes: Routes = [
   {path:'browse/books/chapter/:id',component:BChapterComponent, canActivate: [AuthGuard]},
   {path:'create/plans',component:PricingComponent, canActivate: [AuthGuard]},
   {path:'create/roles',component:RolesComponent,  canActivate: [AuthGuard]},
-  {path:'create',component:CworksComponent, canActivate: [AuthGuard, isCreator]},
+  {path:'create',component:DashboardComponent, canActivate: [AuthGuard, isCreator]},
+  {path:'create/works',component:CworksComponent, canActivate: [AuthGuard, isCreator]},
   {path:'create/book/:id',component:CreateBookMainComponent, canActivate: [AuthGuard, isCreator], canDeactivate:[(component: CreateBookMainComponent) => component.canDeactivate()]},
   {path:'create/chapter/:id',component:ChapterComponent, canActivate: [AuthGuard, isCreator]},
   {path:'create/artwork/:id',component:ArtworkComponent, canActivate: [AuthGuard, isCreator]},
+  {path:'create/transactions',component:TransactionsComponent, canActivate: [AuthGuard, isCreator]},
   {path:'message',component:ChatComponent, canActivate: [AuthGuard]},
   {path:'message/:user',component:ChatComponent, canActivate: [AuthGuard]},
-  { path: 'error', component: ErrorComponent },
+
   {
     path: 'behindflow',
     loadChildren: () =>
@@ -67,10 +74,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./moderator/moderator.module').then((m) => m.ModeratorModule),
   },
+  { path: 'error', component: ErrorComponent },
+  { path: '**', redirectTo: '/error' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{ scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

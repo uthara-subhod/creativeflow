@@ -55,6 +55,7 @@ mat-card-subtitle {
 mat-card-content {
   margin-top: 0;
   display: flex; /* Display the cover image and details in a flex container */
+  flex-grow: 1;
   align-items: center;
 
 }
@@ -100,7 +101,6 @@ mat-card-actions {
   align-items: center;
   overflow: hidden;
   position: relative;
-  justify-content: center;
   max-width: 100%;
 }
 

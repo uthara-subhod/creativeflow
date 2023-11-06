@@ -94,27 +94,14 @@ export class RegisterComponent {
       },
       error:(err)=>{
         this.isOtp=false
-        alert(err.error.msg)
+        Swal.fire({
+          icon:'error',
+          title:`${err.error.msg}`,
+          background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+        })
       }
     })
-    // const payload = {
-    //   fullname:this.user.fullname,
-    //   email:this.user.email,
-    //   password:this.user.password
-    // }
-      // this.store.dispatch(AuthActions.registerRequest({credentials:payload}));
 
-    // this.auth.register(this.user).subscribe({
-    //   next: (res: any) => {
-    //     localStorage.setItem('token',res.token)
-    //     this.router.navigate(['/'])
-    //    console.log(res.token)
-    //   },
-    //   error: (err) => {
-    //     console.log(err.error.error)
-    //     alert(err.error.error);
-    //   }
-    // })
   }
 
    censorEmail(): string {
@@ -145,7 +132,11 @@ export class RegisterComponent {
         this.startTimer();
       },
       error:(err)=>{
-        alert(err.error.msg)
+        Swal.fire({
+          icon:'error',
+          title:`${err.error.msg}`,
+          background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+        })
       }
     })
   }

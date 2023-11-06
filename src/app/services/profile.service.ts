@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import axios from 'axios';
+import { apiURL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private apiUrl = 'http://localhost:3000'
+  private apiUrl = apiURL
   constructor(private http: HttpClient) { }
   follow(id:string){
     return this.http.get<any>(`${this.apiUrl}/user/${id}/follow`);

@@ -3,11 +3,12 @@ import { Injectable, Inject } from '@angular/core';
 import { ReplaySubject, Observable, forkJoin } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { apiURL } from 'src/environments/environment';
 
 
 @Injectable({providedIn: 'root'})
 export class PaymentService {
-  private apiUrl = 'http://localhost:3000'
+  private apiUrl = apiURL
     private _loadedLibraries: { [url: string]: ReplaySubject<any> } = {};
 
     constructor(@Inject(DOCUMENT) private readonly document: any, private http:HttpClient) {}
@@ -45,5 +46,9 @@ export class PaymentService {
 
     buy(data:any){
       return this.http.post<any>(`${this.apiUrl}/buy`, data)
+    }
+
+    cancel(){
+      return this.http.get<any>(`${this.apiUrl}/user/subscription`)
     }
 }

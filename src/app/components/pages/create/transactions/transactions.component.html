@@ -1,0 +1,56 @@
+<app-create-navbar></app-create-navbar>
+<div class="container mt-5 bg-white p-4">
+  <h2>Transactions</h2>
+  <p>Take a look at your sales</p>
+</div>
+  <div class="container mt-5 p-4 bg-white"  style="overflow-x:auto;">
+    <table mat-table [dataSource]="dataSource" matSort class="px-0 mx-0">
+
+    <ng-container matColumnDef="slno">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">SL No</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+
+      <ng-container *ngFor="let column of columns;let i = index;" matColumnDef="{{ column }}">
+
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">{{ displayedColumns[i] }}</th>
+        <td mat-cell *matCellDef="let element" class="text-wrap" >
+          <div *ngIf="column!='buyer'&&column!='createdAt'">{{ element[column] }} </div>
+          <div *ngIf="column=='buyer'"> {{ element[column].fullname }} </div>
+          <div *ngIf="column=='createdAt'"> {{ element[column] | date : 'shortDate' }} </div>
+
+      </ng-container>
+
+      <ng-container  matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef class="text-center">Status</th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="element.status">
+            <span class="badge rounded-pill text-bg-warning p-2"  *ngIf="element.status=='pending'">Pending</span>
+            <span class="badge rounded-pill text-bg-primary  p-2 px-4"  *ngIf="element.status=='paid'">Paid</span>
+            <span class="badge rounded-pill text-bg-success p-2"  *ngIf="element.status=='completed'">Success</span>
+            <span class="badge rounded-pill text-bg-danger p-2"  *ngIf="element.status=='error'">Rejected</span>
+          </div>
+          <div *ngIf="element.seller=='CreativeFlow'">---</div>
+        </td>
+      </ng-container>
+
+      <ng-container *ngFor="let action of actions" matColumnDef="{{ action }}">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ action }}</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="d-flex gap-1" >
+
+            <button class="btn btn-success py-0 rounded-pill" *ngIf="element.status=='paid'" (click)="status('confirm',element.transaction_id)"> Confirm </button>
+            <button class="btn btn-danger py-0 rounded-pill" *ngIf="element.status=='paid'" (click)="status('reject',element.transaction_id)"> Reject </button>
+          </div>
+          <div *ngIf="element.status!='paid'">---</div>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="['slno'].concat(columns,['Status'],actions);"></tr>
+
+
+      <tr mat-row *matRowDef="let row; columns: ['slno'].concat(columns,['Status'],actions);"></tr>
+    </table>
+    <mat-paginator  [pageSizeOptions]="[5,10, 25, 50, 100]" showFirstLastButtons class="mt-4"></mat-paginator>
+    </div>
+

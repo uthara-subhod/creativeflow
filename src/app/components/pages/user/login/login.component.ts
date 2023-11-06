@@ -46,10 +46,16 @@ export class LoginComponent implements OnInit {
           const username = res.user.fullname
           this.router.navigateByUrl('/');
 
-          alert(
-            'Login Successful! ' +
-            'Welcome, ' +
-            username
+          Swal.fire({
+            toast: true,
+            icon:'success',
+            title:`Welcome back, ${username}`,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          }
+
           );
           }
         })
@@ -63,7 +69,16 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.user.password = this.user.password.trim()
-    if (this.user.email == '' || this.user.password == '') {
+    this.user.email = this.user.email.trim()
+    if (this.user.email == '' || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.user.email)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email is invalid',
+        background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+      })
+      return
+    }
+    if (this.user.password == '') {
       Swal.fire({
         icon: 'error',
         title: 'Fields cannot be empty',
@@ -71,13 +86,13 @@ export class LoginComponent implements OnInit {
       })
       return
     }
-    this.user.email = this.user.email.trim()
+
+
     const payload = {
       email: this.user.email,
       password: this.user.password,
       remember:this.user.remember
     }
-
 
 
     this.store.dispatch(AuthActions.loginRequest({ credentials: payload }));
