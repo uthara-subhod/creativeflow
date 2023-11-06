@@ -34,7 +34,7 @@ export class CommentsComponent implements OnInit{
       if(id){
         this.comment.getComments(id).subscribe({
           next:(res)=>{
-            this.comments = res.comments
+            this.comments = res.comments.reverse()
           },
           error:()=>{
             this.comments =[]
@@ -49,7 +49,7 @@ export class CommentsComponent implements OnInit{
       this.owner =this.item.artist._id
       this.comment.getComments(this.id).subscribe({
         next:(res)=>{
-          this.comments = res.comments
+          this.comments = res.comments.reverse()
           console.log(res.comments)
           this.commentCount.emit(res.comments.length)
         },
