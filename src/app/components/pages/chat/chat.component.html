@@ -1,11 +1,12 @@
-<div class=" p-0 m-0 col-12">
+<div class=" p-0 m-0 col-12" style="height:100vh; display: flex;
+flex-direction: column;">
 
   <app-navbar></app-navbar>
   <!-- <h2 class="my-4 text-center">Socialize with our users!</h2> -->
-  <div class="d-flex justify-content-center" >
+  <main class="d-flex justify-content-center" style="flex:1;">
 
-    <div class="col-12 wrap d-flex justify-content-center">
-      <div class="people-list col-3 m-4 mb-0 mr-0" id="people-list">
+    <div class="col-12 wrap d-lg-flex justify-content-center" style="flex:1;" >
+      <div class="people-list col-lg-3 col-12 my-4 mx-lg-4 mx-0 mb-0 ms-1" id="people-list"  >
         <div class="search input">
           <input type="text" placeholder="search" [(ngModel)]="searchQuery" />
           <i class="fa fa-search"></i>
@@ -28,5 +29,5 @@
         <img src="../../../../assets/images/pngegg.png" width="60%" alt="">
         <h3 >You are not in any chatroom currently</h3></div>
     </div> <!-- end container -->
-  </div>
+  </main>
 </div>

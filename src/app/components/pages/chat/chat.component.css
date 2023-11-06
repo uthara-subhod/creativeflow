@@ -12,7 +12,7 @@
 
 .people-list {
   float: left;
- 
+
 }
 
 .search{
@@ -36,7 +36,6 @@
 }
 
 .people-list ul {
-  height: 80vh;
   padding:0;
   width:95%;
   overflow-y: scroll;
@@ -103,7 +102,7 @@
 
 .clearfix{
   padding:20px;
-  
+
   border:1px solid rgb(72, 52, 72)
 }
 

@@ -1,6 +1,6 @@
 
 <div class="chat container-fluid">
-  <div class="chat-header clearfix">
+  <div class="chat-header clearfix ">
     <img [src]="receiver.profile!=''? receiver.profile : '../../../assets/images/dummy-image.jpeg'" alt="avatar" width="50px" />
 
     <div class="chat-about">
@@ -19,7 +19,7 @@
         <div class="message-data"  [ngClass]="m.from==user._id?'align-right':''">
           <span class="message-data-time" >{{m.createdAt | date:'medium'}}</span> &nbsp; &nbsp;
         </div>
-        <div class="message"  [ngClass]="{
+        <div class="message col-lg-6 col-12"  [ngClass]="{
           'float-right other-message': m.from === user._id,
           'my-message': m.from !== user._id
         }">
@@ -41,16 +41,19 @@
     </ul>
 
   </div> <!-- end chat-history -->
-
-  <div class="chat-message clearfix">
+  <div class="footer-chat py-4 ">
+    <i class="icon fa fa-smile-o clickable " style="font-size:25pt;" aria-hidden="true" (click)="toggleEmojiPicker()"></i>
+    <emoji-mart (emojiSelect)="onEmojiSelect($event)" *ngIf="showEmojiPicker" class="emoji"></emoji-mart>
+    <input type="text" class="write-message" placeholder="Type your message here" [(ngModel)]="msg">
+    <i class="icon send fa fa-paper-plane-o clickable" aria-hidden="true" (click)="send()"></i>
+  </div>
+  <!-- <div class="chat-message clearfix ">
     <textarea name="message-to-send border border-secondary" id="message-to-send" placeholder ="Type your message" rows="3" [(ngModel)]="msg"></textarea>
 
-    <!-- <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-    <i class="fa fa-file-image-o"></i> -->
 
     <button (click)="send()">Send</button>
 
-  </div> <!-- end chat-message -->
+  </div> -->
 
 </div> <!-- end chat -->
 

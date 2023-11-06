@@ -6,6 +6,8 @@ import { ProfileService } from 'src/app/services/profile.service';
 import Swal from 'sweetalert2';
 import { ScrollDirective } from 'src/app/directives/scroll.directive';
 import { apiURL } from 'src/environments/environment';
+import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+
 
 @Component({
   selector: 'app-messages',
@@ -16,6 +18,15 @@ export class MessagesComponent implements OnInit{
   @ViewChild(ScrollDirective) scroll:ScrollDirective|any
   user:any
   messages:any[]=[]
+  showEmojiPicker = false;
+
+  toggleEmojiPicker() {
+    this.showEmojiPicker = !this.showEmojiPicker;
+  }
+
+  onEmojiSelect(event: EmojiEvent) {
+    this.msg += event.emoji.native;
+  }
 
   receiver:any
   msg=''

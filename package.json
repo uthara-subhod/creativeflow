@@ -30,6 +30,7 @@
     "@cloudinary/url-gen": "^1.11.2",
     "@clr/angular": "^15.12.2",
     "@clr/ui": "^15.12.2",
+    "@ctrl/ngx-emoji-mart": "^9.2.0",
     "@ngrx/effects": "^16.3.0",
     "@ngrx/store": "^16.3.0",
     "@types/socket.io-client": "^3.0.0",

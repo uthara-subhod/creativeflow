@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/pages/user/register/register.component';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
@@ -127,6 +128,7 @@ import { TransactionsComponent } from './components/pages/create/transactions/tr
     TransactionsComponent,
   ],
   imports: [
+    PickerComponent,
     SocialLoginModule,
     BrowserModule,
     AppRoutingModule,
