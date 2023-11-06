@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CommentService } from 'src/app/services/comment.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import Swal from 'sweetalert2';
@@ -24,17 +25,37 @@ export class CommentsComponent implements OnInit{
   @Input() id =''
   @Input() place = ''
   @Input() item:any
-  constructor(private comment:CommentService, private profile:ProfileService){}
+  constructor(private comment:CommentService, private profile:ProfileService, private route:ActivatedRoute){}
 
-  ngOnChanges(){
-    this.ngOnInit()
-  }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params: any) => {
+      let id = params.get('id');
+      if(id){
+        this.comment.getComments(id).subscribe({
+          next:(res)=>{
+            this.comments = res.comments
+          },
+          error:()=>{
+            this.comments =[]
+          }
+        })
+      }
+    });
     if(this.place=='chapter'){
       this.owner= this.item.book.author
+
     }else{
       this.owner =this.item.artist._id
+      this.comment.getComments(this.id).subscribe({
+        next:(res)=>{
+          this.comments = res.comments
+          console.log(res.comments)
+          this.commentCount.emit(res.comments.length)
+        },
+        error:()=>{
+          this.comments =[]
+        }})
     }
     this.profile.getUser().subscribe({
       next: (res: any) => {
@@ -44,15 +65,7 @@ export class CommentsComponent implements OnInit{
         this.user=null
       }
     })
-    this.comment.getComments(this.id).subscribe({
-      next:(res)=>{
-        this.comments = res.comments
-        console.log(res.comments)
-        this.commentCount.emit(res.comments.length)
-      },
-      error:()=>{
-        this.comments =[]
-      }})
+
   }
 
   reply(id){
