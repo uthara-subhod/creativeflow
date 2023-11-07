@@ -13,6 +13,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfileCardComponent implements OnInit {
 @Input() user:any
 @Input() following:boolean|null=false
+@Input() works = 0
 users:any = []
 followings:any =[]
 loggedIn =false

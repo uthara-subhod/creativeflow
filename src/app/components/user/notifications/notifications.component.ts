@@ -44,6 +44,15 @@ ngOnInit(): void {
                 book:JSON.parse(a.item)
               })
 
+            }else if(a.types=='vote'){
+
+              this.notifications.push({
+                type:a.types,
+                from:a.from,
+                msg:'has voted on your book, ',
+                time:a.createdAt,
+                item:JSON.parse(a.item)
+              })
             }
           }
         },

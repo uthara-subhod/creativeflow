@@ -12,7 +12,7 @@
 
     <div class="col-xl-3 px-0 col-12 padding">
 
-      <app-profile-card [user]="user" [following]="following"></app-profile-card>
+      <app-profile-card [user]="user" [following]="following" [works]="artworks.length+books.length"></app-profile-card>
     </div>
     <div class="col-xl-8 col-12 padding mx-xl-4 mx-0 ">
       <button class="btn btn-dark rounded-pill mx-4 mb-4 mt-3" (click)="art()">Artworks</button>
