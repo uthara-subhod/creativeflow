@@ -30,6 +30,7 @@ import { ServiceComponent } from './components/pages/service/service.component';
 import { DashboardComponent } from './components/pages/create/dashboard/dashboard.component';
 import { TransactionsComponent } from './components/pages/create/transactions/transactions.component';
 import { ForgotComponent } from './components/pages/user/forgot/forgot.component';
+import { ChatroomComponent } from './components/pages/chatroom/chatroom.component';
 
 
 const routes: Routes = [
@@ -61,7 +62,7 @@ const routes: Routes = [
   {path:'create/artwork/:id',component:ArtworkComponent, canActivate: [AuthGuard, isCreator]},
   {path:'create/transactions',component:TransactionsComponent, canActivate: [AuthGuard, isCreator]},
   {path:'message',component:ChatComponent, canActivate: [AuthGuard]},
-  {path:'message/:user',component:ChatComponent, canActivate: [AuthGuard]},
+  {path:'message/:user',component:ChatroomComponent, canActivate: [AuthGuard]},
 
   {
     path: 'behindflow',

@@ -16,6 +16,7 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 })
 export class MessagesComponent implements OnInit{
   @ViewChild(ScrollDirective) scroll:ScrollDirective|any
+  
   user:any
   messages:any[]=[]
   showEmojiPicker = false;
@@ -32,6 +33,7 @@ export class MessagesComponent implements OnInit{
   msg=''
   constructor(private authService:AuthService, private profile:ProfileService, private route:ActivatedRoute){}
   ngOnInit(){
+
     let user=''
     this.route.params.subscribe(params => {
       user = params['user'];
@@ -81,7 +83,6 @@ export class MessagesComponent implements OnInit{
         })
       }
     });
-
 
 
   }

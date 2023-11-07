@@ -1,11 +1,10 @@
-<div *ngIf="!isEmpty()">
+<div *ngIf="!isEmpty()" class="notif">
 
-  <div *ngFor="let n of notifications">
+  <div *ngFor="let n of notifications" >
     <div *ngIf="n.type=='follow'" class="border bg-white p-2">
       <img [src]="n.from.profile==''?  '../../../../assets/images/dummy-image.jpeg': n.from.profile" width="50px" height="50px">
-      <a [routerLink]="['/user', n.from.user_id]" class="btn text-start">
+      <a [routerLink]="['/user', n.from.user_id]" class="btn text-start col-9">
         <div class="my-0 py-0">
-
           {{n.from.fullname.split(' ')[0]}} has followed you
         </div>
         <div class="text-secondary py-0 my-0 col-12" style="font-size: 13px;">{{n.time | date:'long'}}</div>
@@ -13,16 +12,36 @@
     </div>
     <div *ngIf="n.type=='book'" class="border bg-white p-2">
       <img [src]="n.book.cover==''?  '../../../../assets/images/cover-dummy.jpg': n.book.cover"  height="50px">
-      <a [routerLink]="['/browse/books/', n.book.book_id]" class="btn text-start col-10">
+      <a [routerLink]="['/browse/books/', n.book.book_id]" class="btn text-start col-8">
         <div class="my-0 py-0">
-          {{n.from.fullname.split(' ')[0]}} has published a new book {{n.book.title}}
+         has published a new book {{n.book.title}}
         </div>
          <div style="font-size: 13px;" class="text-secondary col-12">{{n.time | date:'long'}}</div> </a>
+    </div>
+    <div *ngIf="n.type=='vote'" class="border bg-white p-2">
+      <img [src]="n.from.profile==''?  '../../../../assets/images/dummy-image.jpeg': n.from.profile" width="50px" height="50px">
+      <a [routerLink]="['/user', n.from.user_id]" class="btn text-start col-9">
+        <div class="my-0 py-0">
+          {{n.from.fullname.split(' ')[0]}} {{n.msg}}, {{n.item.title}}
+        </div>
+        <div class="text-secondary py-0 my-0 col-12" style="font-size: 13px;">{{n.time | date:'long'}}</div>
+      </a>
+    </div>
+    <div *ngIf="n.type=='comment'" class="border bg-white p-2">
+      <img [src]="n.from.profile==''?  '../../../../assets/images/dummy-image.jpeg': n.from.profile" width="50px" height="50px">
+      <a [routerLink]="n.link" class="btn text-start col-9">
+        <div class="my-0 py-0">
+          {{n.from.fullname.split(' ')[0]}} {{n.msg}} "{{n.comment}}"
+        </div>
+        <div class="text-secondary py-0 my-0 col-12" style="font-size: 13px;">{{n.time | date:'long'}}</div>
+      </a>
     </div>
 
   </div>
 </div>
 <div *ngIf="isEmpty()">
+<div class="border bg-white p-2">
 
   You have no notifications
+</div>
 </div>

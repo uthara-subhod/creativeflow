@@ -36,6 +36,10 @@ export class ProfileService {
     return this.http.get<any>(`${this.apiUrl}/user/${id}/books`)
   }
 
+  getChatList(){
+    return this.http.get<any>(`${this.apiUrl}/chat/list`)
+  }
+
 
   getMessages(user1:string, user2:string){
     return this.http.get<any>(`${this.apiUrl}/chat/${user1}/${user2}`)

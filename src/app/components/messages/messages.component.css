@@ -59,6 +59,11 @@
 
   overflow-y: scroll;
   max-height:70vh;
+  scrollbar-width: none; /* Hide the scrollbar on Firefox */
+  -ms-overflow-style: none;
+}
+.chat .chat-history::-webkit-scrollbar {
+  width: 0; /* Hide the scrollbar on Webkit-based browsers (Chrome, Safari) */
 }
 
 li{

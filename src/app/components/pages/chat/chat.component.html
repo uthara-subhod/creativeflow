@@ -3,31 +3,39 @@ flex-direction: column;">
 
   <app-navbar></app-navbar>
   <!-- <h2 class="my-4 text-center">Socialize with our users!</h2> -->
-  <main class="d-flex justify-content-center" style="flex:1;">
 
-    <div class="col-12 wrap d-lg-flex justify-content-center" style="flex:1;" >
-      <div class="people-list col-lg-3 col-12 my-4 mx-lg-4 mx-0 mb-0 ms-1" id="people-list"  >
-        <div class="search input">
-          <input type="text" placeholder="search" [(ngModel)]="searchQuery" />
-          <i class="fa fa-search"></i>
+  <main class="d-flex justify-content-center container" >
+    <div class=" col-12 mt-3" style="flex:1;" >
+
+      <div class="people-list col-12 my-4  d-flex flex-column justify-content-center align-items-center" id="people-list"  >
+        <div class="d-flex flex-column justify-content-center my-4 align-items-center">
+
+
+
         </div>
-        <ul class="list mt-4">
+        <div class="d-lg-flex justify-content-between col-12 px-lg-4 ">
+          <h3 class="text-lg-start text-center">My conversations</h3>
+          <div class="wrapper col-lg-6 col-12 px-2">
+            <div class="search-input">
+              <a href="" target="_blank" hidden></a>
+              <input type="text" placeholder="Search for users" [(ngModel)]="searchQuery">
+              <div class="icon"><i class="fas fa-search"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="list mt-4 ">
           <li class="clearfix d-flex align-items-center" *ngFor="let c of searchUsers" (click)="openChat(c.user_id)"
             style="gap:10px">
             <img [src]="c.profile!=''? c.profile : '../../../assets/images/dummy-image.jpeg'">
-            <div class="about">
+            <div class="about col-10">
               <div class="name fs-4">{{c.fullname}}</div>
+              <div class="d-flex justify-content-between"><p>Last message: {{c.msg[0].message}}</p><p class="text-secondary">on {{c.msg[0].createdAt|date:'medium'}}</p> </div>
             </div>
           </li>
         </ul>
       </div>
 
-      <div class="chat container-fluid" *ngIf="isChat">
-        <app-messages></app-messages>
-      </div>
-      <div class="chat container-fluid d-flex justify-content-center align-items-center flex-column" *ngIf="!isChat">
-        <img src="../../../../assets/images/pngegg.png" width="60%" alt="">
-        <h3 >You are not in any chatroom currently</h3></div>
-    </div> <!-- end container -->
+    </div>
   </main>
 </div>

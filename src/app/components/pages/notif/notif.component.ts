@@ -45,7 +45,30 @@ ngOnInit(): void {
                 time:a.createdAt,
                 book:JSON.parse(a.item)
               })
-
+            }else if (a.types=='vote'){
+              this.notifications.push({
+                type:a.types,
+                from:a.from,
+                msg:'voted your work',
+                time:a.createdAt,
+                item:JSON.parse(a.item)
+              })
+            }else if (a.types=='comment'){
+              const item = JSON.parse(a.item)
+              let link = ''
+              if(item.location=='chapter'){
+                link+='/browse/books/chapter/'+item.id
+              }else{
+                link+='/user/'+a.from.user_id
+              }
+              this.notifications.push({
+                type:a.types,
+                from:a.from,
+                msg:'commented',
+                time:a.createdAt,
+                comment:item.message,
+                link:link
+              })
             }
           }
         },

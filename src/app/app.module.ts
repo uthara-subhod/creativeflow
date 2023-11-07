@@ -74,6 +74,7 @@ import { CreateNavbarComponent } from './components/create/create-navbar/create-
 import { DashboardComponent } from './components/pages/create/dashboard/dashboard.component';
 import { NgChartsModule } from 'ng2-charts';
 import { TransactionsComponent } from './components/pages/create/transactions/transactions.component';
+import { ChatroomComponent } from './components/pages/chatroom/chatroom.component';
 
 
 
@@ -126,6 +127,7 @@ import { TransactionsComponent } from './components/pages/create/transactions/tr
     CreateNavbarComponent,
     DashboardComponent,
     TransactionsComponent,
+    ChatroomComponent,
   ],
   imports: [
     PickerComponent,

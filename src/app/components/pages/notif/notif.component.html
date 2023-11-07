@@ -28,6 +28,24 @@
         </div>
          <div style="font-size: 13px;" class="text-secondary col-12">{{n.time | date:'long'}}</div> </a>
     </div>
+    <div *ngIf="n.type=='vote'" class="border bg-white p-2">
+      <img [src]="n.from.profile==''?  '../../../../assets/images/dummy-image.jpeg': n.from.profile" width="50px" height="50px">
+      <a [routerLink]="['/user', n.from.user_id]" class="btn text-start col-9">
+        <div class="my-0 py-0">
+          {{n.from.fullname.split(' ')[0]}} {{n.msg}}, {{n.item.title}}
+        </div>
+        <div class="text-secondary py-0 my-0 col-12" style="font-size: 13px;">{{n.time | date:'long'}}</div>
+      </a>
+    </div>
+    <div *ngIf="n.type=='comment'" class="border bg-white p-2">
+      <img [src]="n.from.profile==''?  '../../../../assets/images/dummy-image.jpeg': n.from.profile" width="50px" height="50px">
+      <a [routerLink]="n.link" class="btn text-start col-9">
+        <div class="my-0 py-0">
+          {{n.from.fullname.split(' ')[0]}} {{n.msg}} "{{n.comment}}"
+        </div>
+        <div class="text-secondary py-0 my-0 col-12" style="font-size: 13px;">{{n.time | date:'long'}}</div>
+      </a>
+    </div>
 
   </div>
 </div>
