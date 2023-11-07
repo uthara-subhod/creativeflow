@@ -38,19 +38,21 @@ export class ProfileComponent implements OnInit {
           this.profile.getArtworks(userId).subscribe({
             next: (res) => {
 
-              this.artworks = res.artworks
-              this.dataSource = new MatTableDataSource<any>(this.artworks);
-              this.changeDetectorRef.detectChanges();
-              this.dataSource.paginator = this.paginator;
-              this.obs = this.dataSource.connect();
-              console.log(this.obs)
+              this.artworks = res.artworks.reverse()
+
 
             },
           })
           this.profile.getBooks(userId).subscribe({
             next: (res) => {
-              this.books = res.books
-              console.log(res.books)
+              this.books = res.books.reverse()
+
+
+              this.dataSource = new MatTableDataSource<any>(this.books);
+              this.changeDetectorRef.detectChanges();
+              this.dataSource.paginator = this.paginator;
+              console.log(this.paginator)
+              this.obs = this.dataSource.connect();
             },
           })
           this.profile.isFollow(userId).subscribe({
@@ -67,19 +69,22 @@ export class ProfileComponent implements OnInit {
       this.profile.getUser().subscribe({
         next: (res: any) => {
           this.user = res.user
-          this.profile.getArtworks(res.user.user_id).subscribe({
+          this.profile.getArtworks(this.user.user_id).subscribe({
             next: (res) => {
-              this.artworks = res.artworks
-              this.dataSource = new MatTableDataSource<any>(this.artworks);
-              this.changeDetectorRef.detectChanges();
-              this.dataSource.paginator = this.paginator;
-              this.obs = this.dataSource.connect();
+              this.artworks = res.artworks.reverse()
+
 
             },
           })
-          this.profile.getBooks(res.user.user_id).subscribe({
+          this.profile.getBooks(this.user.user_id).subscribe({
             next: (res) => {
-              this.books = res.books
+              this.books = res.books.reverse()
+              this.dataSource = new MatTableDataSource<any>(this.books);
+              this.changeDetectorRef.detectChanges();
+              this.dataSource.paginator = this.paginator;
+              console.log(this.paginator)
+
+              this.obs = this.dataSource.connect();
             },
           })
 
@@ -108,10 +113,7 @@ export class ProfileComponent implements OnInit {
 
   book() {
     this.isArt = false
-    this.dataSource = new MatTableDataSource<any>(this.books);
-    this.changeDetectorRef.detectChanges();
-    this.dataSource.paginator = this.paginator;
-    this.obs2 = this.dataSource.connect();
+
   }
 
   getArtwork(a) {

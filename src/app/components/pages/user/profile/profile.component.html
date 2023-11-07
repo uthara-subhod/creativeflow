@@ -14,74 +14,44 @@
 
       <app-profile-card [user]="user" [following]="following" [works]="artworks.length+books.length"></app-profile-card>
     </div>
-    <div class="col-xl-8 col-12 padding mx-xl-4 mx-0 ">
+    <div class="col-xl-9 col-12 padding mx-0 ">
       <button class="btn btn-dark rounded-pill mx-4 mb-4 mt-3" (click)="art()">Artworks</button>
       <button class="btn btn-dark rounded-pill mb-4 mt-3" (click)="book()">Books</button>
       <div class="row mx-0 p-0" *ngIf="isArt">
         <div class="container bg-white p-5 border" *ngIf="artworks.length==0">
           <h4  class="text-center">This user has no artworks</h4>
         </div>
-        <mat-card class="p-2 col-lg-4 mx-lg-2 col-12 artwork" *ngFor="let a of obs | async">
-          <button class="heart-button btn btn-light">
-            <i class="fa fa-heart px-1" style="font-size:15px"></i>{{a.votes.length}}
-          </button>
-          <div class="artwork-info">
-            <button class="info-button btn btn-dark rounded-pill" (click)="getArtwork(a)" data-bs-toggle="modal"
-              data-bs-target="#art">
-              <i class="fa fa-info"></i>
-              <span class="title">{{a.title}}</span>
-            </button>
-          </div>
-          <img [src]="a.artwork">
-          <mat-card-footer class="pt-2 px-2 d-flex justify-content-between ">
-            <div class="author-profile">
 
-              <img [src]="a.artist.profile==''? '../../../../assets/images/dummy-image.jpeg':a.artist.profile "
-                alt="Author's Profile">
-
-              <p class="my-0">{{ a.artist.fullname }}</p>
-            </div>
-            <div class="d-flex align-items-center text-secondary "> {{a.publishedAt|date:'shortDate'}} </div>
-
-          </mat-card-footer>
-        </mat-card>
+        <app-arts [artworks]="artworks" [isPaginator]="true" *ngIf="artworks.length!=0"></app-arts>
       </div>
 
-      <mat-paginator [pageSizeOptions]="[9]" *ngIf="artworks.length>0&&isArt"></mat-paginator>
       <div class="row m-0 p-0 " *ngIf="!isArt">
         <div class="container bg-white p-5 border" *ngIf="books.length==0">
           <h4  class="text-center">This user has no books</h4>
         </div>
-        <mat-card *ngFor="let book of obs2|async" class="book-card container col-xl-6 col-12">
-          <mat-card-content >
+        <mat-card *ngFor="let book of obs|async" class="book-card container col-lg-6">
+          <mat-card-content class="flex-lg-row flex-column align-items-lg-start">
 
             <div class="cover-image">
               <img [src]="book.cover" alt="Book Cover">
             </div>
-            <div class="book-details col-lg-5">
-              <mat-card-title>{{ book.title }}</mat-card-title>
+            <div class="book-details col-lg-5 mt-lg-auto mt-2">
+              <mat-card-title class="text-lg-start text-center">{{ book.title }}</mat-card-title>
               <!-- Published Chapters -->
-              <mat-card-subtitle>
-                <div class="author-profile">
-                  <!-- Author's profile pic (replace 'book.authorProfilePic' with actual URL) -->
-                  <img
-                    [src]="book.author.profile==''? '../../../../assets/images/dummy-image.jpeg':book.author.profile "
-                    alt="Author's Profile">
-                  <!-- Author's name -->
-                  <p class="my-0">{{ book.author.fullname }}</p>
-                </div>
-              </mat-card-subtitle>
-              <p class="description"> {{ book.description | truncate:20 }}</p>
+              <mat-card-subtitle> <div class="author-profile justify-content-lg-start justify-content-center">
+                <!-- Author's profile pic (replace 'book.authorProfilePic' with actual URL) -->
+                <img [src]="book.author.profile==''? '../../../../assets/images/dummy-image.jpeg':book.author.profile " alt="Author's Profile">
+                <!-- Author's name -->
+                <p class="my-0">{{ book.author.fullname }}</p>
+              </div></mat-card-subtitle>
+              <p class="description "> {{ book.description | truncate:20 }}</p>
             </div>
-            <div class="right-side ">
+            <div class="right-side col-lg-5">
               <!-- Last updated date (replace 'book.lastUpdated' with actual date) -->
-              <mat-card-subtitle>
-                <p class="last-updated">Last Updated: {{ book.updatedAt | date }}</p>
-              </mat-card-subtitle>
+              <mat-card-subtitle> <p class="last-updated">Last Updated: {{ book.updatedAt | date }}</p></mat-card-subtitle>
 
               <!-- Start Reading button -->
-              <a mat-flat-button color="primary" class="btn rounded-pill px-4"
-                [routerLink]="'/browse/books/'+book.book_id">Start Reading</a>
+              <a mat-flat-button color="primary" class="btn rounded-pill px-5" [routerLink]="'/browse/books/'+book.book_id">Start Reading</a>
               <!-- Two small buttons in a row -->
               <div class="button-row">
                 <button mat-icon-button>
@@ -98,6 +68,7 @@
 
 
         </mat-card>
+
         <div class="col-xl-6"></div>
       </div>
       <mat-paginator [pageSizeOptions]="[9]" *ngIf="books.length>0&&!isArt"></mat-paginator>

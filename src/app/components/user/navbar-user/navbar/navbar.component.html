@@ -15,9 +15,9 @@
   <input type="text" placeholder="Search for people, artworks, and more..." class="search">
   <i class="fa fa-search search-icon"></i>
     </div> -->
-    <a class="d-lg-block d-none rectangle-5 mx-3 btn rounded-pill py-0" *ngIf="logIn" [routerLink]="'/create'"><i class="fa-solid fa-pen-to-square"></i> Creator's Studio
+    <a class="d-lg-block d-none rectangle-5 mx-3 btn rounded-pill py-0" [routerLink]="'/create'"><i class="fa-solid fa-pen-to-square"></i> Creator's Studio
     </a>
-    <a class="d-lg-none d-block rectangle-5 mx-3 btn btn rounded-pill py-0" *ngIf="logIn" [routerLink]="'/create'"><i class="fa-solid fa-pen-to-square"></i>
+    <a class="d-lg-none d-block rectangle-5 mx-3 btn btn rounded-pill py-0" [routerLink]="'/create'"><i class="fa-solid fa-pen-to-square"></i>
     </a>
     </div>
 
@@ -39,7 +39,7 @@
       <i class="fa fa-search search-icon"></i>
     </div> -->
     <div class="d-md-none justify-content-start align-items-center mx-3 d-flex">
-      <a  class="link navlink btn border rounded-pill" [routerLink]="'/message'" style="margin-right: 10px;" *ngIf="logIn"> <i class="fa-regular fa-message"></i></a>
+      <a  class="link navlink btn border rounded-pill" style="margin-right: 10px;" *ngIf="logIn"> <i class="fa-regular fa-message"></i></a>
 
       <div class="notif-wrapper"  *ngIf="logIn">
         <a class="link navlink btn border rounded-pill" *ngIf="logIn" (click)="toggleDropdown()"> <i class="fa-solid fa-bell" ></i></a>
@@ -100,8 +100,8 @@
 
       <a routerLink="/browse/services" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Services</a>
 
-      <a routerLink="/profile" *ngIf="logIn" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Account</a>
-      <button type="button" *ngIf="logIn" class="btn btn-secondary w-100 mt-3">Logout</button>
+      <a routerLink="/profile" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Account</a>
+      <button type="button" class="btn btn-secondary w-100 mt-3">Logout</button>
     </div>
   </div>
 </div>
