@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SocketIoConfig, Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
-import { apiURL } from 'src/environments/environment';
 
 
 
@@ -44,15 +43,6 @@ ngOnInit(): void {
                 book:JSON.parse(a.item)
               })
 
-            }else if(a.types=='vote'){
-
-              this.notifications.push({
-                type:a.types,
-                from:a.from,
-                msg:'has voted on your book, ',
-                time:a.createdAt,
-                item:JSON.parse(a.item)
-              })
             }
           }
         },
@@ -61,7 +51,7 @@ ngOnInit(): void {
         ]
       })
       const config: SocketIoConfig = {
-        url: apiURL, // socket server url;
+        url: 'http://localhost:3000', // socket server url;
         options: {
           transports: ['websocket'],
           query: { userId: this.userId , token: this.authService.getToken()}

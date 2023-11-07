@@ -20,14 +20,6 @@
         </div>
          <div style="font-size: 13px;" class="text-secondary col-12">{{n.time | date:'long'}}</div> </a>
     </div>
-    <div *ngIf="n.type=='vote'" class="border bg-white p-2">
-      <img [src]="n.item.cover==''?  '../../../../assets/images/cover-dummy.jpg': n.item.book.cover"  height="80px">
-      <a [routerLink]="['/browse/books/', n.item.book.book_id]" class="btn text-start col-10">
-        <div class="my-0 py-0">
-          {{n.from.fullname.split(' ')[0]}} {{n.msg}} {{n.item.title}}
-        </div>
-         <div style="font-size: 13px;" class="text-secondary col-12">{{n.time | date:'long'}}</div> </a>
-    </div>
 
   </div>
 </div>
