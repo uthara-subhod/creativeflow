@@ -107,3 +107,9 @@ a{
 .dropdown-container.active {
   display: block;
 }
+
+
+/* Hide the dropdown arrow */
+.hide-dropdown-arrow::after {
+  display: none;
+}

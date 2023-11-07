@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SocketIoConfig, Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { apiURL } from 'src/environments/environment';
 
 
 
@@ -51,7 +52,7 @@ ngOnInit(): void {
         ]
       })
       const config: SocketIoConfig = {
-        url: 'http://localhost:3000', // socket server url;
+        url: apiURL, // socket server url;
         options: {
           transports: ['websocket'],
           query: { userId: this.userId , token: this.authService.getToken()}

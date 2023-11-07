@@ -171,21 +171,21 @@
 
   <div class="book-list col-lg-9">
     <mat-card *ngFor="let book of filteredBooks.reverse()" class="book-card container">
-      <mat-card-content class="flex-lg-row flex-column align-items-lg-start">
+      <mat-card-content class="flex-lg-row flex-column">
 
         <div class="cover-image">
           <img [src]="book.cover" alt="Book Cover">
         </div>
-        <div class="book-details col-lg-5 mt-lg-auto mt-2">
-          <mat-card-title class="text-lg-start text-center">{{ book.title }}</mat-card-title>
+        <div class="book-details col-lg-5">
+          <mat-card-title>{{ book.title }}</mat-card-title>
           <!-- Published Chapters -->
-          <mat-card-subtitle> <div class="author-profile justify-content-lg-start justify-content-center">
+          <mat-card-subtitle> <div class="author-profile">
             <!-- Author's profile pic (replace 'book.authorProfilePic' with actual URL) -->
             <img [src]="book.author.profile==''? '../../../../assets/images/dummy-image.jpeg':book.author.profile " alt="Author's Profile">
             <!-- Author's name -->
             <p class="my-0">{{ book.author.fullname }}</p>
           </div></mat-card-subtitle>
-          <p class="description "> {{ book.description | truncate:20 }}</p>
+          <p class="description"> {{ book.description | truncate:50 }}</p>
         </div>
         <div class="right-side col-lg-5">
           <!-- Last updated date (replace 'book.lastUpdated' with actual date) -->
@@ -209,6 +209,5 @@
 
 
     </mat-card>
-    <mat-paginator [pageSizeOptions]="[9]" *ngIf="books.length>0"></mat-paginator>
   </div>
 </div>

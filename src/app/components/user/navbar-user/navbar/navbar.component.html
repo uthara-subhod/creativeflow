@@ -39,14 +39,20 @@
       <i class="fa fa-search search-icon"></i>
     </div> -->
     <div class="d-md-none justify-content-start align-items-center mx-3 d-flex">
-      <a  class="link navlink btn border rounded-pill" style="margin-right: 10px;" *ngIf="logIn"> <i class="fa-regular fa-message"></i></a>
-
-      <div class="notif-wrapper"  *ngIf="logIn">
+      <a  class="link navlink btn border rounded-pill " style="margin-right: 10px;" *ngIf="logIn"> <i class="fa-regular fa-message"></i></a>
+      <button class="link navlink btn border dropdown-toggle rounded-pill hide-dropdown-arrow" type="button"  *ngIf="logIn" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-bell" ></i>
+      </button>
+      <div class="dropdown-menu ">
+        <app-notifications [userId]="userId" (count)="findCount($event)"  ></app-notifications>
+        <a href="/notification" class="col-12 text-decoration-none dropdown-item text-center fw-semi-bold"  >View all notifications</a>
+      </div>
+      <!-- <div class="notif-wrapper"  *ngIf="logIn">
         <a class="link navlink btn border rounded-pill" *ngIf="logIn" (click)="toggleDropdown()"> <i class="fa-solid fa-bell" ></i></a>
         <div class="dropdown-container" [ngClass]="{'active': showDropdown}" style="width:50vw" >
-          <app-notifications [userId]="userId" (count)="findCount($event)"  ></app-notifications>
+
         </div>
-      </div>
+      </div> -->
       <a routerLink="/register" class="link navlink" *ngIf="!logIn"> Register</a>
       <a class="mx-2" *ngIf="!logIn" >|</a>
       <a routerLink="/login" class="link navlink" *ngIf="!logIn">Login</a>
@@ -55,15 +61,14 @@
     <div class="d-md-flex justify-content-start align-items-center mx-3 d-none">
       <a class="link navlink" *ngIf="logIn" [routerLink]="'/message'" ><i class="fa-regular fa-message"></i></a>
       <a class="mx-2" *ngIf="logIn" >|</a>
-      <div class="notif-wrapper"  *ngIf="logIn">
-        <a  class="link navlink" (click)="toggleDropdown()"> <i class="fa-solid fa-bell"></i>
-          <span *ngIf="count>0" class="position-absolute top-0 start-100  p-1 bg-danger border border-light rounded-circle">
-            <span class="visually-hidden">New alerts</span>
-          </span></a>
-        <div class="dropdown-container" [ngClass]="{'active': showDropdown}" style="width:20vw" >
-          <app-notifications [userId]="userId" (count)="findCount($event)" ></app-notifications>
-        </div>
+      <a class="link navlink dropdown-toggle hide-dropdown-arrow"   *ngIf="logIn" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-bell" ></i>
+      </a>
+      <div class="dropdown-menu ">
+        <app-notifications [userId]="userId" (count)="findCount($event)"  ></app-notifications>
+        <a href="/notification" class="col-12 text-decoration-none dropdown-item text-center fw-semi-bold"  >View all notifications</a>
       </div>
+
       <a class="mx-2"*ngIf="logIn" >|</a>
       <a routerLink="/profile" class="link navlink" *ngIf="logIn"><i class="fa-solid fa-user"></i> Account</a>
       <a class="mx-2" *ngIf="logIn">|</a>

@@ -19,9 +19,10 @@ export class NavbarComponent implements OnInit{
   count= 0
   constructor(private profile:ProfileService,private socialAuthService:SocialAuthService, private socket:SocketService, private auth:AuthService, private store:Store){}
 ngOnInit(): void {
-  this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
-    this.logIn = isAuthenticated;
-  });
+
+  if(this.auth.getToken()){
+    this.logIn = true;
+  }
 
 
   if(this.logIn ||this.auth.getToken()!=''||this.auth.getToken()){
