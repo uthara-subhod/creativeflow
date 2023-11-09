@@ -168,9 +168,9 @@
       </div>
     </div>
   </div>
-
   <div class="book-list col-lg-9">
-    <mat-card *ngFor="let book of filteredBooks.reverse()" class="book-card container">
+
+    <mat-card *ngFor="let book of filteredBooks|slice:firstIndex:lastIndex" class="book-card container">
       <mat-card-content class="flex-lg-row flex-column">
 
         <div class="cover-image">
@@ -209,5 +209,7 @@
 
 
     </mat-card>
+    <mat-paginator [pageSize]="pageSize" [length]="books.length" (page)="pageEvent($event)"></mat-paginator>
   </div>
+
 </div>

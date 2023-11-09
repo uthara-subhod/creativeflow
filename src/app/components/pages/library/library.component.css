@@ -1,0 +1,120 @@
+.redirect {
+  background-color: #5e3e5c;
+  color: rgb(255, 251, 251);
+  border-radius: 20px;
+}
+
+/* Styling for the book list */
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.book {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  width: 250px;
+}
+
+.wrapper .search-input {
+  background: #fff;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+}
+
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.book-card {
+  min-height: 200px;
+  display: flex;
+  position: relative;
+  text-align: left;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.book-card:hover .overlay {
+  opacity: 1;
+}
+
+
+mat-card-title {
+  font-size: 27px;
+  font-weight: semi-bold;
+}
+
+mat-card-subtitle {
+  font-size: 16px;
+  color: #888;
+}
+
+mat-card-content {
+  margin-top: 0;
+  display: flex; /* Display the cover image and details in a flex container */
+}
+
+mat-card-actions {
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.book-details {
+  flex-grow: 1; /* Allow the book details to expand and fill available space */
+}
+
+.cover-image {
+  width: 96px; /* Set the desired width for the cover image */
+  height: 150px; /* Set the desired height for the cover image */
+  margin-right: 10px; /* Adjust the spacing between cover and details */
+  overflow: hidden; /* Ensure the cover image doesn't exceed its container */
+}
+
+.cover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the cover image maintains its aspect ratio and covers the container */
+}
+
+.description {
+  font-size: 14px; /* Adjust font size for the description */
+  margin-top: 10px; /* Add spacing between description and other details */
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+/* Styling for specific buttons */
+.right-side button.mat-icon-button {
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background-color: #84547f;
+}

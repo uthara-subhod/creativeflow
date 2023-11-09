@@ -36,4 +36,11 @@ export class UserService {
     return this.http.get<any>(`${this.apiUrl}/book/paid/${book}`)
   }
 
+  getLibrary(){
+    return this.http.get<any>(`${this.apiUrl}/library`)
+  }
+  getChapter(chapter:string,book:string){
+    return this.http.get<any>(`${this.apiUrl}/library/${book}/${chapter}`)
+  }
+
 }

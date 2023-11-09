@@ -31,6 +31,10 @@ import { DashboardComponent } from './components/pages/create/dashboard/dashboar
 import { TransactionsComponent } from './components/pages/create/transactions/transactions.component';
 import { ForgotComponent } from './components/pages/user/forgot/forgot.component';
 import { ChatroomComponent } from './components/pages/chatroom/chatroom.component';
+import { LibraryComponent } from './components/pages/library/library.component';
+import { CommissionListComponent } from './components/pages/create/commission-list/commission-list.component';
+import { AgreementComponent } from './components/pages/create/agreement/agreement.component';
+import { RequestAgreeComponent } from './components/pages/user/request-agree/request-agree.component';
 
 
 const routes: Routes = [
@@ -38,11 +42,14 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent, canActivate: [loggedIn]},
   {path:'forgot',component:ForgotComponent, canActivate: [loggedIn]},
   {path:'',component:HomeComponent},
-  {path:'notification',component:NotifComponent},
+  {path:'notification',component:NotifComponent, canActivate: [AuthGuard]},
+  {path:'library',component:LibraryComponent, canActivate: [AuthGuard]},
+  {path:'library/:book_id/:id',component:BChapterComponent, canActivate: [AuthGuard]},
   {path:'user/:id',component:ProfileComponent, canActivate: [AuthGuard]},
   {path:'services/join',component:ProviderFormComponent, canActivate: [AuthGuard]},
   {path:'profile',component:ProfileComponent, canActivate: [AuthGuard]},
   {path:'profile/edit',component:EditProfileComponent, canActivate: [AuthGuard]},
+  {path:'profile/request/:request_id',component:RequestAgreeComponent, canActivate: [AuthGuard]},
   {path:'browse/people',component:PeopleComponent},
   {path:'browse/books',component:BooksComponent},
   {path:'browse/services',component:ServicesComponent},
@@ -61,6 +68,8 @@ const routes: Routes = [
   {path:'create/chapter/:id',component:ChapterComponent, canActivate: [AuthGuard, isCreator]},
   {path:'create/artwork/:id',component:ArtworkComponent, canActivate: [AuthGuard, isCreator]},
   {path:'create/transactions',component:TransactionsComponent, canActivate: [AuthGuard, isCreator]},
+  {path:'create/services',component:CommissionListComponent, canActivate: [AuthGuard, isCreator]},
+  {path:'create/services/:service_id',component:AgreementComponent, canActivate: [AuthGuard, isCreator]},
   {path:'message',component:ChatComponent, canActivate: [AuthGuard]},
   {path:'message/:user',component:ChatroomComponent, canActivate: [AuthGuard]},
 

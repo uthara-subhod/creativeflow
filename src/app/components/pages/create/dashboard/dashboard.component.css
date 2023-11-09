@@ -1,0 +1,22 @@
+
+.subscribe-button {
+  background-color: #FFDAB9; /* Light Peach */
+  color: #333; /* Text Color */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  float: right;
+}
+.plan{
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+
+}
+.catchphrase {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 20px;
+}

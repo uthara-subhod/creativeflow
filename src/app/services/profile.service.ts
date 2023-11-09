@@ -20,6 +20,10 @@ export class ProfileService {
     return this.http.get<any>(`${this.apiUrl}/people`);
   }
 
+  getDashboard(){
+    return this.http.get<any>(`${this.apiUrl}/create`);
+  }
+
   getUser(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/user`)
   }
@@ -78,6 +82,10 @@ export class ProfileService {
 
   account(data:any){
     return this.http.post<any>(`${this.apiUrl}/razorpay`,data);
+  }
+
+  getTransactions(){
+    return this.http.get<any>(`${this.apiUrl}/user/profile/transactions`)
   }
 
 }

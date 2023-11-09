@@ -1,0 +1,38 @@
+<app-create-navbar></app-create-navbar>
+<div class="container p-3 bg-white mt-4">
+
+  <h3 class="text-center" style="letter-spacing: 3px;">Take a look at your commissions</h3>
+</div>
+<div class="container mt-5 px-0">
+
+  <div class="card mb-3" *ngFor="let c of data|slice:firstIndex:lastIndex">
+
+    <div class="card-body">
+      <h6 class="fw-bold">Request Summary</h6>
+       Service: {{c.provider.title}}
+       <br>
+    Requested on: {{c.date|date :'short'}}
+    <br>
+    Requested by: <a [routerLink]="'/user/'+c.customer.user_id">{{c.customer.fullname}}</a>
+        <br>
+      Title : {{c.title}}
+          <br>
+      Description : {{c.description}}
+          <br>
+
+    </div>
+    <div class="card-footer bg-white">
+      <div class="d-flex justify-content-between align-items-center" *ngIf="c.status=='pending'">
+        <button class="btn btn-success" (click)="status('accepted',c.commission_id)">Accept</button>
+        <button class="btn btn-danger" (click)="status('rejected',c.commission_id)">Reject</button>
+      </div>
+      <div class="d-flex justify-content-between align-items-center" *ngIf="c.status=='accepted'">
+        <a class="btn btn-primary" [routerLink]="'/create/services/'+c.commission_id">Edit Agreement</a>
+        <a class="btn btn-success" [routerLink]="'/message/'+c.customer.user_id">Chat with customer</a>
+      </div>
+
+
+  </div>
+  </div>
+  <mat-paginator [pageSize]="pageSize" [length]="data.length" (page)="pageEvent($event)"></mat-paginator>
+</div>

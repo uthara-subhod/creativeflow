@@ -1,6 +1,6 @@
 
 <div class="row " *ngIf="isPaginator">
-  <mat-card class="p-2 col-lg-3 mx-lg-2 artwork" *ngFor="let a of obs | async">
+  <mat-card class="p-2 col-lg-3 mx-lg-2 artwork mb-3" *ngFor="let a of obs | async">
     <!-- <button class="btn btn-dark rounded-pill info"><i class="fa fa-info"></i>  <span class="title">Artwork Title</span></button> -->
     <button class="heart-button btn btn-light">
       <i class="fa fa-heart px-1" style="font-size:15px"></i>{{a.votes.length}}
@@ -27,7 +27,7 @@
   <mat-paginator [pageSizeOptions]="[9]" *ngIf="isPaginator"></mat-paginator>
   <div class="d-flex justify-content-start mx-lg-2 px-lg-auto px-lg-2 ms-lg-auto" *ngIf="!isPaginator" >
 
-    <mat-card class="p-2 col-lg-3 col-3 mx-lg-2 artwork" *ngFor="let a of artworks">
+    <mat-card class="p-2 col-lg-3 col-3 mx-lg-2 artwork mb-3" *ngFor="let a of artworks">
 
       <button class="heart-button btn btn-light">
         <i class="fa fa-heart px-1" style="font-size:15px"></i>{{a.votes.length}}

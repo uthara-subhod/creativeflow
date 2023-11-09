@@ -14,6 +14,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class BChapterComponent implements OnInit {
   comments:any
   count=0
+  isChapter = false
   constructor(private users:UserService, private profile:ProfileService, private router:Router, private route:ActivatedRoute, private comment:CommentService, private browse:BrowseService, private sanitizer:DomSanitizer){}
   chapter:any
   book:any
@@ -30,33 +31,48 @@ export class BChapterComponent implements OnInit {
     this.route.paramMap.subscribe((params: any) => {
     id = params.get('id');
     if(id){
-      this.browse.getChapter(id).subscribe({
-        next:(res)=>{
-          this.chapter=res.chapter
-          const content = res.chapter.content
-          this.chapter.content = this.sanitizer.bypassSecurityTrustHtml(content);
-          this.book=res.chapter.book
-          this.chapter_id=res.chapter.chapter_id
-          this.browse.getBook(this.book.book_id).subscribe({
-            next:(res)=>{
-              this.book=res.book
-              const current = res.book.chapters.filter((ch)=>{return ch.chapter_id==this.chapter.chapter_id})
-              const index = res.book.chapters.indexOf(current[0])
-              if(index<this.book.chapters.length-1&&index>=0){
-                const nindex = index+1
-                console.log(this.book.chapters[nindex])
-                this.next = this.book.chapters[nindex]
-              }else{
-                this.next=null
+      let book_id=params.get('book_id')
+      if(book_id){
+        this.users.getChapter(id,book_id).subscribe({
+          next:(res)=>{
+            this.isChapter=true
+            this.chapter=res.chapter
+            const content = res.chapter.content
+            this.chapter.content = this.sanitizer.bypassSecurityTrustHtml(content);
+            this.book=res.chapter.book
+            this.chapter_id=res.chapter.chapter_id
+          }
+        })
+      }else{
+        this.browse.getChapter(id).subscribe({
+          next:(res)=>{
+            this.isChapter=true
+            this.chapter=res.chapter
+            const content = res.chapter.content
+            this.chapter.content = this.sanitizer.bypassSecurityTrustHtml(content);
+            this.book=res.chapter.book
+            this.chapter_id=res.chapter.chapter_id
+            this.browse.getBook(this.book.book_id).subscribe({
+              next:(res)=>{
+                this.book=res.book
+                const current = res.book.chapters.filter((ch)=>{return ch.chapter_id==this.chapter.chapter_id})
+                const index = res.book.chapters.indexOf(current[0])
+                if(index<this.book.chapters.length-1&&index>=0){
+                  const nindex = index+1
+                  console.log(this.book.chapters[nindex])
+                  this.next = this.book.chapters[nindex]
+                }else{
+                  this.next=null
+                }
               }
-            }
-          })
+            })
 
-        },
-        error:()=>{
-          this.router.navigate(['/browse/books'])
-        }
-      })
+          },
+          error:()=>{
+            this.router.navigate(['/browse/books'])
+          }
+        })
+      }
       this.comment.getComments(id).subscribe({
         next:(res)=>{
           this.comments = res.comments

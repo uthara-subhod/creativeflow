@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { BrowseService } from 'src/app/services/browse.service';
 
 @Component({
@@ -20,16 +21,23 @@ export class BooksComponent implements OnInit{
   mature =false
   complete = false
   ongoing = false
-
+  firstIndex = 0
+  lastIndex = 3
+  pageSize = 6
   constructor(private browse:BrowseService){}
-
+  pageEvent(event) {
+    this.firstIndex = this.paginator.pageIndex * this.paginator.pageSize
+    this.lastIndex = (this.paginator.pageIndex + 1) * this.paginator.pageSize
+  }
+  @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
 
   searchQuery: string = '';
   ngOnInit(): void {
       this.browse.getBooks().subscribe({
         next:(res)=>{
-          this.books=res.books
+          this.books=res.books.reverse()
+          this.lastIndex=this.pageSize
         }
       })
   }

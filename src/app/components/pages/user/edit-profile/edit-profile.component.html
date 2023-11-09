@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 <div class="d-flex justify-content-center mx-0 mt-5 px-lg-3">
 
-  <div class="col-lg-3 mx-3">
+  <div class="col-lg-3 mx-3 ">
     <nav class="list-group list-group-flush">
-      <a class="list-group-item" *ngFor="let tab of tabs" [class.active]="tab.active" (click)="selectTab(tab)">
+      <a class="list-group-item " *ngFor="let tab of tabs" [class.active]="tab.active" (click)="selectTab(tab)">
         {{ tab.title }}
       </a>
     </nav>
@@ -15,17 +15,13 @@
       <div class="container">
         <h4>Edit Profile</h4>
         <hr>
-      <div class="row">
+        <div class="row">
           <div class="col-md-3">
             <div class="text-center">
               <div class="pro-img">
                 <img [src]="user.profile==''? uploadedFileUrl: user.profile" alt="user">
               </div>
-              <button class="btn redirect my-3"
-                uploadButton
-                [uploadOptions]="options"
-                [uploadComplete]="onComplete"
-              >
+              <button class="btn redirect my-3" uploadButton [uploadOptions]="options" [uploadComplete]="onComplete">
                 Upload a file...
               </button>
             </div>
@@ -45,13 +41,10 @@
                 <div class="d-flex mb-2 ">
                   <label class="col-2 control-label">Banner:</label>
                   <div class="col-8">
-                    <button class="btn redirect my-0 py-0 btn-small"
-                  uploadButton
-                  [uploadOptions]="option2"
-                  [uploadComplete]="bannerComplete"
-                >
-                  Upload banner
-                </button>
+                    <button class="btn redirect my-0 py-0 btn-small" uploadButton [uploadOptions]="option2"
+                      [uploadComplete]="bannerComplete">
+                      Upload banner
+                    </button>
                   </div>
                 </div>
                 <div class="card p-4 mb-4">
@@ -74,7 +67,8 @@
                 <label class="col-lg-3 control-label">Country:</label>
                 <div class="col-lg-8">
                   <div class="ui-select">
-                    <select id="user_time_zone" class="form-control" (change)="onCountryChange(countrySelect.value)" #countrySelect [(ngModel)]="user.country" name="country">
+                    <select id="user_time_zone" class="form-control" (change)="onCountryChange(countrySelect.value)"
+                      #countrySelect [(ngModel)]="user.country" name="country">
                       <option value="" disabled selected>Select a country</option>
                       <option *ngFor="let country of countries" [value]="country.name.common">
                         {{ country.name.common }}
@@ -93,13 +87,13 @@
               </div>
             </form>
           </div>
+        </div>
       </div>
+      <hr>
     </div>
-    <hr>
-    </div>
-    <div *ngIf="tabs[1].active" class="bg-white p-2 py-4">
-      <div class="container">
-        <div class="card p-4">
+    <div *ngIf="tabs[1].active" class="p-2 py-4 pt-0">
+      <div class="container col-12 mx-0 px-0">
+        <div class="card p-4 border-0">
           <div class=" d-flex justify-content-between">
 
             Your plan : {{plan}}
@@ -107,7 +101,83 @@
           </div>
         </div>
       </div>
+      <div class="container bg-white mt-3 p-2">
+        <div *ngIf="tableData.length==0" class="d-flex flex-column justify-content-center align-items-center">
+          <img src="https://organickle.com/images/no-order.svg" width="40%">
+          <h5 class="mt-5">You have to yet to make any transactions</h5>
+
+        </div>
+        <div class="card mb-3" *ngFor="let tr of tableData|slice:firstIndex:lastIndex">
+
+          <div class="card-body">
+            <h6 class="">Transaction Summary</h6>
+            <p>
+              {{tr.transaction_id}}
+            </p>
+            Order Placed on: {{tr.createdAt|date :'short'}}
+            <br>
+            Item: {{tr.detail}}
+            <br>
+            PaymentID : {{tr.paymentID}}
+            <br>
+            Order Total:<span>&#x20B9;</span>
+            {{tr.amount}}
+          </div>
+          <div class="card-footer bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+              <a class="btn btn-primary" (click)="generatePDF(tr,'view')">View Invoice</a>
+              <a class="btn btn-success" (click)="generatePDF(tr,'download')">Download Invoice</a>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <mat-paginator [pageSize]="pageSize" [length]="tableData.length" (page)="pageEvent($event)"></mat-paginator>
+
+    </div>
+    <div *ngIf="tabs[2].active" class="p-2 py-4 pt-0">
+      <div class="container col-12 mx-0 px-0">
+        <div class="card p-4 border-0">
+          <h5>Take a look at all the services you have requested!</h5>
+        </div>
+      </div>
+      <div class="container bg-white mt-3 p-2">
+        <div *ngIf="requests.length==0" class="d-flex flex-column justify-content-center align-items-center">
+          <img src="https://organickle.com/images/no-order.svg" width="40%">
+          <h5 class="mt-5">You have to yet to make any requests</h5>
+
+        </div>
+        <div class="card mb-3" *ngFor="let c of requests|slice:firstIndex:lastIndex">
+
+          <div class="card-body">
+            <h6 class="fw-bold">Request Summary</h6>
+            Service: {{c.provider.title}}
+            <br>
+            Requested on: {{c.date|date :'short'}}
+            <br>
+            Requested from: <a [routerLink]="'/user/'+c.vendor.user_id">{{c.vendor.fullname}}</a>
+            <br>
+            Title : {{c.title}}
+            <br>
+            Description : {{c.description}}
+            <br>
+            Status : {{c.status}}
+            <br>
+            <span *ngIf="c.agree1&&!c.paid">Agreement form is available please check</span>
+
+          </div>
+          <div class="card-footer bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+              <a class="btn btn-primary" *ngIf="c.agree1" [routerLink]="'/profile/request/'+c.commission_id">Proceed to agreement form</a>
+              <button class="btn btn-success" *ngIf="c.paid&&c.status!='completed'" (click)="status(c.commission_id)">Mark this request Complete</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <mat-paginator [pageSize]="pageSize" [length]="tableData.length" (page)="pageEvent($event)"></mat-paginator>
+
     </div>
 
-</div>
-
+  </div>

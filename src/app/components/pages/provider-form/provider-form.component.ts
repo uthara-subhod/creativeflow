@@ -20,7 +20,7 @@ export class ProviderFormComponent implements OnInit {
   maxPrice: number = 1;
   deliveryTime='';
 
-  constructor(private user: UserService, private profile: ProfileService, private route: Router) { }
+  constructor(private user: UserService, private profile: ProfileService, private router:Router) { }
 
   ngOnInit(): void {
     this.user.categories('services').subscribe({
@@ -84,7 +84,14 @@ export class ProviderFormComponent implements OnInit {
           icon: "success",
           title: "Application registered successfully",
       })
-      }
+      this.router.navigateByUrl('/')
+      },
+     error:(err:any)=>{
+      Toast.fire({
+        icon: "error",
+        title: err.error.msg,
+    })
+     }
     })
   }
 }

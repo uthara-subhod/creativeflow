@@ -17,8 +17,6 @@
     </div> -->
     <a class="d-lg-block d-none rectangle-5 mx-3 btn rounded-pill py-0" [routerLink]="'/create'"><i class="fa-solid fa-pen-to-square"></i> Creator's Studio
     </a>
-    <a class="d-lg-none d-block rectangle-5 mx-3 btn btn rounded-pill py-0" [routerLink]="'/create'"><i class="fa-solid fa-pen-to-square"></i>
-    </a>
     </div>
 
   </div>
@@ -38,31 +36,55 @@
       <input type="text" placeholder="Search for people, artworks, and more..." class="search">
       <i class="fa fa-search search-icon"></i>
     </div> -->
-    <div class="d-md-none justify-content-start align-items-center mx-3 d-flex">
-      <a  class="link navlink btn border rounded-pill " style="margin-right: 10px;" *ngIf="logIn"> <i class="fa-regular fa-message"></i></a>
-      <button class="link navlink btn border dropdown-toggle rounded-pill hide-dropdown-arrow" type="button"  *ngIf="logIn" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-bell" ></i>
-      </button>
-      <div class="dropdown-menu ">
-        <app-notifications [userId]="userId" (count)="findCount($event)"  ></app-notifications>
-        <a href="/notification" class="col-12 text-decoration-none dropdown-item text-center fw-semi-bold"  >View all notifications</a>
-      </div>
-      <!-- <div class="notif-wrapper"  *ngIf="logIn">
-        <a class="link navlink btn border rounded-pill" *ngIf="logIn" (click)="toggleDropdown()"> <i class="fa-solid fa-bell" ></i></a>
-        <div class="dropdown-container" [ngClass]="{'active': showDropdown}" style="width:50vw" >
+    <div class="d-md-none align-items-center d-flex justify-content-between container-fluid">
 
+      <div class="d-flex ">
+        <a  class="link navlink  btn border " style="margin-right: 10px;" *ngIf="logIn"> <i class="fa-regular fa-message"></i></a>
+        <button class="link navlink dropdown-toggle btn border hide-dropdown-arrow" type="button"  *ngIf="logIn" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-bell" ></i>
+        </button>
+        <div class="dropdown-menu ">
+          <app-notifications [userId]="userId" (count)="findCount($event)"  ></app-notifications>
+          <a href="/notification" class="col-12 text-decoration-none dropdown-item text-center fw-semi-bold"  >View all notifications</a>
         </div>
-      </div> -->
-      <a routerLink="/register" class="link navlink" *ngIf="!logIn"> Register</a>
-      <a class="mx-2" *ngIf="!logIn" >|</a>
-      <a routerLink="/login" class="link navlink" *ngIf="!logIn">Login</a>
+        <!-- <div class="notif-wrapper"  *ngIf="logIn">
+          <a class="link navlink btn border rounded-pill" *ngIf="logIn" (click)="toggleDropdown()"> <i class="fa-solid fa-bell" ></i></a>
+          <div class="dropdown-container" [ngClass]="{'active': showDropdown}" style="width:50vw" >
 
+          </div>
+        </div> -->
+        <a routerLink="/register" class="link navlink" *ngIf="!logIn"> Register</a>
+        <a class="mx-2" *ngIf="!logIn" >|</a>
+        <a routerLink="/login" class="link navlink" *ngIf="!logIn">Login</a>
+
+      </div>
+      <div class="d-flex">
+        <a  class="link navlink btn border " style="margin-right: 10px;" *ngIf="logIn" routerLink="/profile"><i class="fa-solid fa-user"></i></a>
+        <a class="link navlink btn border" type="button"  *ngIf="logIn" [routerLink]="'/create'">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </a>
+
+        <!-- <div class="notif-wrapper"  *ngIf="logIn">
+          <a class="link navlink btn border rounded-pill" *ngIf="logIn" (click)="toggleDropdown()"> <i class="fa-solid fa-bell" ></i></a>
+          <div class="dropdown-container" [ngClass]="{'active': showDropdown}" style="width:50vw" >
+
+          </div>
+        </div> -->
+        <a routerLink="/register" class="link navlink" *ngIf="!logIn"> Register</a>
+        <a class="mx-2" *ngIf="!logIn" >|</a>
+        <a routerLink="/login" class="link navlink" *ngIf="!logIn">Login</a>
+
+      </div>
     </div>
     <div class="d-md-flex justify-content-start align-items-center mx-3 d-none">
       <a class="link navlink" *ngIf="logIn" [routerLink]="'/message'" ><i class="fa-regular fa-message"></i></a>
       <a class="mx-2" *ngIf="logIn" >|</a>
       <a class="link navlink dropdown-toggle hide-dropdown-arrow"   *ngIf="logIn" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa-solid fa-bell" ></i>
+      </a>
+      <a class="mx-2" *ngIf="logIn" >|</a>
+      <a class="link navlink"   *ngIf="logIn" [routerLink]="'/library'" >
+        <i class="fa-solid fa-book-bookmark"></i> Library
       </a>
       <div class="dropdown-menu ">
         <app-notifications [userId]="userId" (count)="findCount($event)"  ></app-notifications>
@@ -95,17 +117,16 @@
   </div>
   <div class="offcanvas-body">
     <div class="d-flex flex-column align-items-center text-light">
-      <a routerLink="/" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Home</a>
+      <a routerLink="/" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;" data-bs-dismiss="offcanvas">Home</a>
 
-      <a routerLink="/browse/books" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Books</a>
+      <a routerLink="/browse/books" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;" data-bs-dismiss="offcanvas">Books</a>
 
-      <a routerLink="/browse/artworks" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Artworks</a>
+      <a routerLink="/browse/artworks" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;" data-bs-dismiss="offcanvas">Artworks</a>
 
-      <a routerLink="/browse/people" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">People</a>
+      <a routerLink="/browse/people" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;" data-bs-dismiss="offcanvas">People</a>
 
-      <a routerLink="/browse/services" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Services</a>
+      <a routerLink="/browse/services" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;" data-bs-dismiss="offcanvas">Services</a>
 
-      <a routerLink="/profile" class="w-100 text-center py-2 text-light" style="border-bottom: solid 1px !important;">Account</a>
       <button type="button" class="btn btn-secondary w-100 mt-3">Logout</button>
     </div>
   </div>

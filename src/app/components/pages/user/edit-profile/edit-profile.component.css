@@ -113,8 +113,8 @@
 }
 
 .list-group-flush .list-group-item {
-    border-right: 0 !important;
-    border-left: 0 !important;
+    border-right: 1 !important;
+    border-left: 1 !important;
 }
 
 .list-group-flush .list-group-item {
@@ -217,4 +217,8 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0; /* Optional */
+}
+
+.table-container::-webkit-scrollbar {
+  width: 0; /* Hide the scrollbar on Webkit-based browsers (Chrome, Safari) */
 }

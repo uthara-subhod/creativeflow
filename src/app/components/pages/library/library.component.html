@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+<div class="d-flex align-items-center justify-content-center mt-5 p-4" *ngIf="isEmpty">
+  <div class="col-8 mx-4 d-flex flex-column justify-content-center align-items-center  ">
+    <img src="https://cdn.dribbble.com/users/634336/screenshots/2246883/media/7beefb96feac302ee313cf510fca4577.png?resize=800x600&vertical=center" alt="" width="70%">
+  </div>
+</div>
+
+<div class="d-flex flex-column justify-content-start mt-5 p-4" *ngIf="!isEmpty">
+  <div class="ms-lg-5 mb-5">
+
+    <h3>Your library</h3>
+    <h6>This is where books you have bought are kept</h6>
+  </div>
+  <div class="col-12 row mx-4">
+    <mat-card *ngFor="let book of list" class="book-card container col-lg-3 mx-0 align-items-start">
+      <mat-card-content class="flex-lg-row flex-column align-items-lg-start align-items-center">
+
+        <div class="cover-image">
+          <img [src]="book.cover" alt="Book Cover" width="100%">
+        </div>
+        <div class="col-lg-8 align-items-start">
+          <mat-card-title class="text-lg-start text-center">{{ book.title }}</mat-card-title>
+          <p class="description "> {{ book.description | truncate:20 }}</p>
+
+
+        </div>
+
+
+      </mat-card-content>
+      <div class="overlay d-flex flex-column justify-content-center  align-items-center">
+        <a class="btn btn-outline-light mb-2 col-8" [routerLink]="'/browse/books/'+book.book_id">View Info</a>
+        <a class="btn btn-outline-light col-8" [routerLink]="'/library/'+book.book_id+'/'+book.chapters[0].chapter_id">Start Reading</a>
+      </div>
+
+    </mat-card>
+
+    <div class="col-xl-6"></div>
+  </div>
+  <mat-paginator [pageSizeOptions]="[9]" ></mat-paginator>
+  </div>
+
+

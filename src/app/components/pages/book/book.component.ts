@@ -32,23 +32,24 @@ export class BookComponent implements OnInit{
     let id=''
       this.route.paramMap.subscribe((params: any) => {
       id = params.get('id');
+      if(id){
+        this.browse.getBook(id).subscribe({
+          next:(res)=>{
+            this.book=res.book
+            this.book.chapters.forEach((ch)=>{
+              this.words+=ch.words
+              this.votes+=ch.votes.length
+            })
+          },
+          error:()=>{
+            this.router.navigate(['/browse/books'])
+          }
+        })
+      }else{
+        this.router.navigate(['/browse/books'])
+      }
     });
-    if(id!=''){
-      this.browse.getBook(id).subscribe({
-        next:(res)=>{
-          this.book=res.book
-          this.book.chapters.forEach((ch)=>{
-            this.words+=ch.words
-            this.votes+=ch.votes.length
-          })
-        },
-        error:()=>{
-          this.router.navigate(['/browse/books'])
-        }
-      })
-    }else{
-      this.router.navigate(['/browse/books'])
-    }
+
   }
 
   pay(){
@@ -102,7 +103,7 @@ export class BookComponent implements OnInit{
       seller:this.book.author.user_id,
       paymentID: paymentId,
       amount: this.book.pricing,
-      detail: "Book,"+this.book.book_id
+      detail: this.book.title+','+this.book.book_id
     };
     this.pays.transaction(payload).subscribe({
       next: (res) => {

@@ -1,0 +1,61 @@
+<app-create-navbar></app-create-navbar>
+<div class="container bg-white mt-5 border d-flex justify-content-end align-items-center p-4">
+  <button class="btn btn-primary" (click)="save()"> Save </button>
+</div>
+<div class="container bg-white mt-3 border shadow font-monospace">
+  <h1 class="mt-5 text-uppercase font-monospace text-center">Agreement</h1>
+  <p>
+    This Service Agreement ("Agreement") is entered into by and between
+   {{commission.vendor.fullname}} (referred to as the "Provider") and
+   {{commission.customer.fullname}} (referred to as the "Customer").
+  </p>
+  <p>
+    <strong>1. Scope of Agreement</strong><br>
+    This Agreement covers the terms and conditions under which the Provider agrees to provide the following services to the Customer:
+  </p>
+  <textarea type="text" placeholder="details of the agreement" rows="3" style="width:100%" [(ngModel)]="details"></textarea>.
+  <p>
+    <strong>2. Responsibilities</strong><br>
+    Each Party agrees to fulfill the responsibilities outlined in this Agreement.
+  </p>
+  <p>
+    <strong>3. Term</strong><br>
+    The term of this Agreement shall be
+    <input type="text" placeholder="start date" disabled> to
+    indefinite.
+  </p>
+  <p>
+    <strong>4. Payment Terms</strong><br>
+    The total payment for the services shall be
+    <input type="number" placeholder="total amount" class="number" [(ngModel)]="amount">, payment done through the CreativeFlow platform
+  </p>
+  <p>
+    <strong>5. Confidentiality</strong><br>
+    Both Parties agree to keep any confidential information obtained during the term of this Agreement confidential.
+  </p>
+  <p>
+    <strong>6. Governing Law</strong><br>
+    This Agreement shall be governed by and construed in accordance with the laws of the jurisdiction, {{commission.vendor.country}} in which the service provider is located.
+  </p>
+  <p>
+    <strong>7. Termination</strong><br>
+    Either Party may terminate this Agreement with written notice to the other Party.
+  </p>
+  <p>
+    <strong>8. Miscellaneous</strong><br>
+    Any additional terms or conditions are attached hereto as Exhibit A.
+  </p>
+  <p>
+    IN WITNESS WHEREOF, the Parties hereto have executed this Agreement as of the Effective Date.
+  </p>
+  <p>
+    {{commission.vendor.fullname}}<br>
+    <input type="checkbox" (change)="agree()" [(ngModel)]="agrees"> Service Provider's Agreement
+    <br>
+  </p>
+  <p>
+    {{commission.customer.fullname}}<br>
+    <input type="checkbox" disabled> Customer's Agreement
+    <br>
+  </p>
+</div>

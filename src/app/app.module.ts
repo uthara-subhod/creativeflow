@@ -75,6 +75,11 @@ import { DashboardComponent } from './components/pages/create/dashboard/dashboar
 import { NgChartsModule } from 'ng2-charts';
 import { TransactionsComponent } from './components/pages/create/transactions/transactions.component';
 import { ChatroomComponent } from './components/pages/chatroom/chatroom.component';
+import { LibraryComponent } from './components/pages/library/library.component';
+import { BookCardsComponent } from './components/book-cards/book-cards.component';
+import { CommissionListComponent } from './components/pages/create/commission-list/commission-list.component';
+import { AgreementComponent } from './components/pages/create/agreement/agreement.component';
+import { RequestAgreeComponent } from './components/pages/user/request-agree/request-agree.component';
 
 
 
@@ -128,6 +133,11 @@ import { ChatroomComponent } from './components/pages/chatroom/chatroom.componen
     DashboardComponent,
     TransactionsComponent,
     ChatroomComponent,
+    LibraryComponent,
+    BookCardsComponent,
+    CommissionListComponent,
+    AgreementComponent,
+    RequestAgreeComponent,
   ],
   imports: [
     PickerComponent,

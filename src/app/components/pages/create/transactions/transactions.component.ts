@@ -41,7 +41,6 @@ ngOnInit(): void {
 this.create.transactions().subscribe({
   next:(res)=>{
     this.tableData=res.data
-    console.log(res.data)
     this.dataSource.data = this.tableData;
   }
 })

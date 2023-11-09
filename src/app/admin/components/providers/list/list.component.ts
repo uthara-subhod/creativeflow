@@ -12,10 +12,10 @@ import Swal from 'sweetalert2';
 })
 export class PListComponent implements OnInit, OnChanges, AfterViewInit {
   tableData: any
-  pr:any
+  pr: any
   type = ''
   id = ''
-  approved:boolean |null = null
+  approved: boolean | null = null
   dataSource = new MatTableDataSource<any>([]); // Replace 'any' with your data type
 
 
@@ -43,36 +43,45 @@ export class PListComponent implements OnInit, OnChanges, AfterViewInit {
         this.tableData = res.data
         this.dataSource.data = this.tableData;
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err)
       }
     })
   }
 
   openModal(id: string) {
-    this.pr= this.tableData.filter((p)=>{return p.provider_id=id})[0]
+    this.pr = this.tableData.filter((p) => { return p.provider_id = id })[0]
     console.log(this.pr)
-    if(this.pr.approved==true||this.pr==false){
-      this.approved=this.pr.approved
+    if (this.pr.approved == true || this.pr == false) {
+      this.approved = this.pr.approved
     }
     this.id = id
   }
 
-  submit(){
-    if(this.approved==null){
+  submit() {
+    if (this.approved == null) {
 
 
-        Swal.fire({
-          icon: 'error',
-          title: 'Fields cannot be empty',
-          background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
-        });
-        return;
-    
+      Swal.fire({
+        icon: 'error',
+        title: 'Fields cannot be empty',
+        background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+      });
+      return;
+
     }
-    this.admin.editProvider(this.id,this.approved).subscribe({
-      next:(res)=>{
+    this.admin.editProvider(this.id, this.approved).subscribe({
+      next: (res) => {
         this.ngOnInit()
+        Swal.fire({
+          toast: true,
+          position: "top-end",
+          icon: "success",
+          title: "Provider edited successfully",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        })
       }
     })
   }
