@@ -13,6 +13,8 @@ import { GFormComponent } from './components/genre/form/form.component';
 import { FormComponent } from './components/artist/form/form.component';
 import { SFormComponent } from './components/service/form/form.component';
 import { PListComponent } from './components/providers/list/list.component';
+import { TListComponent } from './components/transactions/list/list.component';
+import { SalesComponent } from './components/sales/sales.component';
 
 
 
@@ -35,6 +37,8 @@ const adminRoutes: Routes = [
       { path: 'artfields/add', component: FormComponent },
       { path: 'artfields/:id/edit', component: FormComponent },
       { path: 'artfields', component: ListComponent },
+      { path: 'transactions', component: TListComponent },
+      { path: 'sales', component: SalesComponent },
     ],
   },
 ];

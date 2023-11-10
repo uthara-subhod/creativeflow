@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from 'src/app/services/payment.service';
 import { ProviderService } from 'src/app/services/provider.service';
 import Swal from 'sweetalert2';
@@ -26,7 +26,7 @@ export class RequestAgreeComponent {
     },
     });
 
-  constructor(private provider:ProviderService, private route:ActivatedRoute, private pays:PaymentService){}
+  constructor(private provider:ProviderService, private route:ActivatedRoute, private pays:PaymentService, private router:Router){}
   ngOnInit(): void {
     this.pays
     .lazyLoadLibrary('https://checkout.razorpay.com/v1/checkout.js')
@@ -55,6 +55,8 @@ export class RequestAgreeComponent {
             let razorpay = new Razorpay(options)
             razorpay.open();
           }
+        },error:()=>{
+          this.router.navigateByUrl('/profile/edit')
         }
       })
     }

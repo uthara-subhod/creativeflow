@@ -19,10 +19,16 @@ export class ArtsComponent implements OnInit {
   artwork: any
   isLoggedIn = false
   user: any
-
+  firstIndex = 0
+  lastIndex = 9
+  pageSize = 9
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
   obs: Observable<any> | any;
   dataSource: MatTableDataSource<any> | any
+  pageEvent(event) {
+    this.firstIndex = this.paginator.pageIndex * this.paginator.pageSize
+    this.lastIndex = (this.paginator.pageIndex + 1) * this.paginator.pageSize
+  }
   constructor(private changeDetectorRef: ChangeDetectorRef, private auth: AuthService, private router: Router, private profile: ProfileService, private users: UserService) { }
   getArtwork(a) {
     if (this.isLoggedIn) {

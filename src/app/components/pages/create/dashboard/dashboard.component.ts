@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
     this.profile.getDashboard().subscribe({
       next:(res)=>{
         this.user=res.user
-        console.log(res.datas)
         this.barChartLabels = res.labels
         this.barChartData = [{
             label: 'Number of votes',

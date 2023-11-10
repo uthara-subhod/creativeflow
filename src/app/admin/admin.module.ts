@@ -29,8 +29,9 @@ import { PListComponent } from './components/providers/list/list.component';
 import { FormsModule } from '@angular/forms';
 import { UploadWidgetModule } from '@bytescale/upload-widget-angular';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
-
-
+import { NgChartsModule } from 'ng2-charts';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { SalesComponent } from './components/sales/sales.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -55,7 +56,8 @@ import { CategoryFormComponent } from './components/category-form/category-form.
     LoginComponent,
     CategoryFormComponent,
     GFormComponent,
-    GListComponent
+    GListComponent,
+    SalesComponent,
   ],
   imports: [
     CommonModule,
@@ -63,8 +65,10 @@ import { CategoryFormComponent } from './components/category-form/category-form.
     MatTableModule,
     ClarityModule,
     MaterialModule,
+    NgChartsModule,
     FormsModule,
     UploadWidgetModule,
+    CanvasJSAngularChartsModule
   ],
 })
 export class AdminModule { }

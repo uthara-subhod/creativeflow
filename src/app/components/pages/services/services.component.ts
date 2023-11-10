@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BrowseService } from 'src/app/services/browse.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-services',
@@ -22,9 +23,10 @@ export class ServicesComponent {
   mature =false
   complete = false
   ongoing = false
+  user:any
 
 
-  constructor(private browse:BrowseService){}
+  constructor(private browse:BrowseService, private profile:ProfileService){}
 
 
 
@@ -33,6 +35,11 @@ export class ServicesComponent {
       this.browse.getProviders().subscribe({
         next:(res)=>{
           this.providers=res.providers
+        }
+      })
+      this.profile.getUser().subscribe({
+        next:(res)=>{
+          this.user=res.user
         }
       })
   }

@@ -11,8 +11,8 @@
   </div>
 
 </div>
-<div class="d-lg-flex overflow-y-hidden mx-0 mt-5">
-  <div class="component-wrapper col-lg-3 mb-3 ms-lg-5 mx-0" >
+<div class="d-lg-flex overflow-y-hidden mx-0 mt-5 ms-lg-5">
+  <div class="component-wrapper col-lg-3 mb-3  mx-0" >
     <a class="btn ftr-btn " data-bs-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="collapseExample">
       Filters
     </a>
@@ -109,11 +109,11 @@
       </div>
     </div>
   </div>
-  <div class=" ms-lg-5 col-lg-9 ">
+  <div class=" col-lg-9 ">
 
     <div class="row mx-0">
 
-      <app-arts [artworks]="filteredArtworks.reverse()" [isPaginator]="true"></app-arts>
+      <app-arts [artworks]="filteredArtworks" [isPaginator]="true"></app-arts>
     </div>
 
   </div>

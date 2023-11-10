@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProviderService } from 'src/app/services/provider.service';
 import Swal from 'sweetalert2';
 
@@ -24,7 +24,7 @@ export class AgreementComponent implements OnInit {
     });
   details:string =''
   amount:string | number= ''
-  constructor(private provider:ProviderService, private route:ActivatedRoute){}
+  constructor(private provider:ProviderService, private route:ActivatedRoute, private router:Router){}
   ngOnInit(): void {
     let id=''
     this.route.paramMap.subscribe((params: any) => {
@@ -41,6 +41,8 @@ export class AgreementComponent implements OnInit {
           }else{
             this.agrees=false
           }
+        },error:()=>{
+          this.router.navigateByUrl('/create')
         }
       })
     }
