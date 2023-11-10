@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<main id="main" class="main">
+
+
+  <div class="pagetitle ">
+    <h1>Report Management </h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a >Admin</a></li>
+        <li class="breadcrumb-item active">Reports</li>>
+      </ol>
+    </nav>
+  </div>
+  <div class="container my-5 bg-white p-5 border">
+    <h2>Report Details</h2>
+    <h6>Report id :{{report.report_id}}</h6>
+    <h6>Reported by: {{report.reporter.fullname}}</h6>
+    <h6>Reported item: {{report.item}}</h6>
+    <h6>Reporter item id: {{item._id}}</h6>
+    <h6>Description : {{report.description}}</h6>
+    <h6>Links:
+     <a *ngFor="let l of report.links" [href]="l">{{l}}<br></a>
+    </h6>
+    <h6 *ngIf="resolved">Status: Resolved</h6>
+    <div class="form-group my-3" *ngIf="!resolved">
+     <label for="violation">Choose action to be taken</label>
+     <div>
+       <select class="form-select" id="violation" name="violation" required="required" [(ngModel)]="action">
+         <option value="warn">Warn</option>
+         <option value="unpublish">Unpublish</option>
+         <option value="reject">Reject</option>
+       </select>
+     </div>
+     <button class="btn btn-secondary my-3" (click)="submit()">Resolve Report</button>
+   </div>
+   </div>
+
+  </main>

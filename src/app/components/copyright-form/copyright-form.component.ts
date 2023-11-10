@@ -115,6 +115,7 @@ export class CopyrightFormComponent implements OnInit {
     this.violation=this.violation.trim()
     this.description=this.description.trim()
     if(this.violation==''||this.description==''||this.links.length==0){
+      console.log(this.violation,this.description,this.links.length)
       Swal.fire({
         icon: 'error',
         title: 'Miising Fields',
@@ -142,7 +143,7 @@ export class CopyrightFormComponent implements OnInit {
     this.users.report(data).subscribe({
       next:(res)=>{
         Swal.fire('Report Submitted succesfully!', '', 'success')
-        this.ngOnInit()
+        this.router.navigateByUrl('/')
       },
       error:(err:any)=>{
         Swal.fire(err.error.msg, '', 'error')

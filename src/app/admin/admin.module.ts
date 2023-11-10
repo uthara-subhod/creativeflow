@@ -32,6 +32,8 @@ import { CategoryFormComponent } from './components/category-form/category-form.
 import { NgChartsModule } from 'ng2-charts';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { SalesComponent } from './components/sales/sales.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ReportComponent } from './components/report/report.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -58,6 +60,8 @@ import { SalesComponent } from './components/sales/sales.component';
     GFormComponent,
     GListComponent,
     SalesComponent,
+    ReportsComponent,
+    ReportComponent,
   ],
   imports: [
     CommonModule,

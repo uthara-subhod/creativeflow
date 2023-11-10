@@ -15,6 +15,8 @@ import { SFormComponent } from './components/service/form/form.component';
 import { PListComponent } from './components/providers/list/list.component';
 import { TListComponent } from './components/transactions/list/list.component';
 import { SalesComponent } from './components/sales/sales.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ReportComponent } from './components/report/report.component';
 
 
 
@@ -39,6 +41,8 @@ const adminRoutes: Routes = [
       { path: 'artfields', component: ListComponent },
       { path: 'transactions', component: TListComponent },
       { path: 'sales', component: SalesComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'reports/:report_id', component: ReportComponent },
     ],
   },
 ];
