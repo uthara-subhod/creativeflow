@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BrowseService } from 'src/app/services/browse.service';
 import Quill from 'quill'
 import DOMPurify from 'dompurify';
+import { CreateService } from 'src/app/services/create.service';
 
 @Component({
   selector: 'app-chapter',
@@ -19,28 +20,28 @@ export class ChapterComponent implements OnInit, AfterViewInit {
 
   private quill!: Quill
 
-  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private router: Router, private browse: BrowseService) { }
+  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private router: Router, private create: CreateService) { }
   ngOnInit(): void {
     let id = ''
     this.route.params.subscribe(params => {
       id = params['id'];
     });
-    this.browse.getChapter(id).subscribe({
+    this.create.chapter(id).subscribe({
       next: (res) => {
         this.chapter = res.chapter
-        this.browse.getBook(res.chapter.book.book_id).subscribe({
+        this.create.book(res.chapter.book.book_id).subscribe({
           next: (res) => {
             this.book = res.book
             if (this.book.cover == '') {
               this.book.cover = '../../../../../assets/images/cover-dummy.jpg'
             }
           },
-          error: () => {
+          error: (err:any) => {
             this.router.navigate(['/error'])
           }
         })
       },
-      error: () => {
+      error: (err:any) => {
         this.router.navigate(['/error'])
       }
     })

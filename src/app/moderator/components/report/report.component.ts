@@ -47,6 +47,7 @@ export class ReportComponent {
     }
     this.mod.resolveReport(this.report.report_id,data).subscribe({
       next:(res)=>{
+        console.log(res)
         Swal.fire('Report resolved succesfully!', '', 'success')
         this.ngOnInit()
       },

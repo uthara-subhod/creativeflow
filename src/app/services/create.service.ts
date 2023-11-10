@@ -21,6 +21,10 @@ export class CreateService {
     return this.http.get<any>(`${this.apiUrl}/books`)
   }
 
+  chapter(id:string){
+    return this.http.get<any>(`${this.apiUrl}/chapter/${id}`)
+  }
+
   book(id:string){
     return this.http.get<any>(`${this.apiUrl}/book/${id}`)
   }

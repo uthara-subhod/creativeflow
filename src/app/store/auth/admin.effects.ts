@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import * as AuthActions from './admin.actions';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminService } from 'src/app/services/admin.service';
-
+import Swal from 'sweetalert2';
 
 
 @Injectable()
@@ -47,22 +47,30 @@ export class AdminEffects {
             const username=loginSuccessResponse.admin as string
             this.router.navigateByUrl('/behindflow');
 
-            alert(
-              'Login Successful! ' +
-              'Welcome, ' +
-              username
-            );
+            Swal.fire({
+              toast: true,
+              icon:'success',
+              title:`Welcome back, ${username}`,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true,
+            })
           }else{
             this.cookie.set('mod',loginSuccessResponse.token)
             localStorage.setItem('mod', loginSuccessResponse.token);
             const username=loginSuccessResponse.admin as string
             this.router.navigateByUrl('/moderator');
 
-            alert(
-              'Login Successful! ' +
-              'Welcome, ' +
-              username
-            );
+            Swal.fire({
+              toast: true,
+              icon:'success',
+              title:`Welcome back, ${username}`,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true,
+            })
           }
         })
       ),
@@ -74,7 +82,15 @@ export class AdminEffects {
       this.actions$.pipe(
         ofType(AuthActions.adminLoginFailure),
         tap(({ error }) => {
-          alert(error)
+          Swal.fire({
+            toast: true,
+            icon:'error',
+            title:`${error}`,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          })
         })
       ),
     { dispatch: false }
@@ -88,9 +104,15 @@ export class AdminEffects {
       this.cookie.delete('admin')
       localStorage.removeItem('admin');
       this.router.navigateByUrl('/behindflow/login');
-      alert(
-        'You have logged out! '
-      );
+      Swal.fire({
+        toast: true,
+        icon:'success',
+        title:`You have logged out`,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      })
     })
   ),
     { dispatch: false }
