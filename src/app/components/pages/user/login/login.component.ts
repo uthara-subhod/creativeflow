@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private formBuilder: FormBuilder, private socialAuthService: SocialAuthService, private router: Router, private store: Store<appReducer.AppState>, private cookie: CookieService) { }
   socialUser!: SocialUser;
   loginForm!: FormGroup;
+  loading=false
   isLoggedin?: boolean;
   private accessToken = '';
   user = {
@@ -33,6 +34,19 @@ export class LoginComponent implements OnInit {
   ngOnInit(){
     this.socialAuthService.authState.subscribe((user:any) => {
       if(user!=null){
+        this.loading=true
+        Swal.fire({
+          title: "Please wait while we log you in",
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          didOpen: () => {
+            if(this.loading){
+              Swal.showLoading();
+            }else{
+              Swal.close()
+            }
+          }
+        });
         const no =Math.floor(Math.random() * 1084)+'';
         axios.get(`https://picsum.photos/id/${no}/info`)
       .then(response => {
@@ -45,7 +59,7 @@ export class LoginComponent implements OnInit {
           const email=res.user.email as string
           const username = res.user.fullname
           this.router.navigateByUrl('/');
-
+          this.loading=false
           Swal.fire({
             toast: true,
             icon:'success',
