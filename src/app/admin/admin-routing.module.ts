@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { UsersComponent } from './components/users/users.component';
-import { MListComponent } from './components/moderator/m-list/m-list.component';
 import { ListComponent } from './components/artist/list/list.component';
-import { WListComponent } from './components/author/list/list.component';
 import { SListComponent } from './components/service/list/list.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard, loggedIn } from './services/admin.guard';
@@ -27,9 +25,8 @@ const adminRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: HomeComponent },
+      { path: 'users', component: UsersComponent },
       { path: 'providers', component: PListComponent },
-      { path: 'moderators', component: MListComponent },
-      { path: 'authors', component: WListComponent },
       { path: 'services', component: SListComponent },
       { path: 'services/add', component: SFormComponent },
       { path: 'services/:id/edit', component: SFormComponent },

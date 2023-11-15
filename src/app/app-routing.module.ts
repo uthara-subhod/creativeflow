@@ -7,7 +7,7 @@ import { ErrorComponent } from './components/pages/error/error.component';
 import { PeopleComponent } from './components/pages/people/people.component';
 import { LoginComponent } from './components/pages/user/login/login.component';
 import { EditProfileComponent } from './components/pages/user/edit-profile/edit-profile.component';
-import { AuthGuard, CanDeactivateGuard, isCreator, loggedIn } from './services/route-guard.service';
+import { AuthGuard, isCreator, loggedIn } from './services/route-guard.service';
 import { PricingComponent } from './components/pages/create/pricing/pricing.component';
 import { CreateBookMainComponent } from './components/pages/create/create-book-main/create-book-main.component';
 import { CworksComponent } from './components/pages/create/cworks/cworks.component';
@@ -17,8 +17,6 @@ import { BooksComponent } from './components/pages/books/books.component';
 import { ChapterComponent } from './components/pages/create/chapter/chapter.component';
 import { BookComponent } from './components/pages/book/book.component';
 import { BChapterComponent } from './components/pages/chapter/chapter.component';
-import { MessagesComponent } from './components/messages/messages.component';
-import { AuthGuard as Guard } from './moderator/services/guard.service';
 import { ChatComponent } from './components/pages/chat/chat.component';
 import { ArtworksComponent } from './components/pages/artworks/artworks.component';
 import { ArtworkComponent } from './components/pages/create/artwork/artwork.component';
@@ -77,12 +75,6 @@ const routes: Routes = [
     path: 'behindflow',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
-  },
-  {
-    path: 'moderator',
-    canActivate:[Guard],
-    loadChildren: () =>
-      import('./moderator/moderator.module').then((m) => m.ModeratorModule),
   },
   { path: 'error', component: ErrorComponent },
   { path: '**', redirectTo: '/error' },

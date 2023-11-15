@@ -92,26 +92,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" [routerLink]="'/behindflow/users'">
+          <i class="bi bi-journal-text"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="/behindflow/moderators">
-              <i class="bi bi-circle"></i><span>Moderator List</span>
-            </a>
-          </li>
-          <li>
-            <a>
-              <i class="bi bi-circle"></i><span>Add Moderator</span>
-            </a>
-          </li>
-          <!-- <li>
-            <a>
-              <i class="bi bi-circle"></i><span>Moderator Logs</span>
-            </a>
-          </li> -->
-        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link collapsed" [routerLink]="'/behindflow/transactions'">

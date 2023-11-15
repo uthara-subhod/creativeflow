@@ -7,7 +7,6 @@ import {
 } from '@bytescale/upload-widget';
 import { AdminService } from 'src/app/services/admin.service';
 import Swal from 'sweetalert2';
-import { navItems } from '../sidebar/sidebar-data';
 
 @Component({
   selector: 'app-category-form',
