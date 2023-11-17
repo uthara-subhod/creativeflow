@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   artworks: any[] = []
   following: boolean = false
   artwork: any
-
+  @ViewChild('dismiss') dismiss!: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
   obs: Observable<any> | any;
   obs2:Observable<any> | any;
@@ -119,4 +119,8 @@ export class ProfileComponent implements OnInit {
   getArtwork(a) {
     this.artwork = a
   }
+
+  ngOnDestroy(): void {
+    this.dismiss.nativeElement.click()
+}
 }

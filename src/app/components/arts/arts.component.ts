@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef,  Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   templateUrl: './arts.component.html',
   styleUrls: ['./arts.component.css']
 })
-export class ArtsComponent implements OnInit {
+export class ArtsComponent implements OnInit, OnDestroy {
   @Input() artworks: any[] = []
   @Input() isPaginator = false
   @ViewChild('dismiss') dismiss!: ElementRef;
@@ -32,14 +32,8 @@ export class ArtsComponent implements OnInit {
   }
   constructor(private changeDetectorRef: ChangeDetectorRef, private auth: AuthService, private router: Router, private profile: ProfileService, private users: UserService) { }
 
-  @HostListener('window:beforeunload', ['$event'])
-  unloadNotification($event: any): void {
-    // Ensure that the modal is dismissed before navigating away
-    this.dismissModal();
-  }
 
   dismissModal() {
-    console.log('jdhjdhd')
     this.dismiss.nativeElement.click()
   }
 
@@ -87,4 +81,9 @@ export class ArtsComponent implements OnInit {
       }
     })
   }
+
+  ngOnDestroy(): void {
+      this.dismissModal()
+  }
+
 }

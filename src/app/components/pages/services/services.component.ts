@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { BrowseService } from 'src/app/services/browse.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -9,7 +9,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class ServicesComponent {
   providers: any[] = [];
-
+  @ViewChild('dismiss') dismiss!: ElementRef;
   lc = 1
   hc = 99999
   service = ''
@@ -130,5 +130,9 @@ export class ServicesComponent {
     );
   }
 
+
+  ngOnDestroy(): void {
+    this.dismiss.nativeElement.click()
+}
 
 }
