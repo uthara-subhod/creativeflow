@@ -39,9 +39,10 @@ export class ArtsComponent implements OnInit {
   }
 
   dismissModal() {
+    console.log('jdhjdhd')
     this.dismiss.nativeElement.click()
   }
-  
+
   getArtwork(a) {
     if (this.isLoggedIn) {
       this.artwork = a
