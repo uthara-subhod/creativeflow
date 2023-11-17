@@ -111,11 +111,11 @@
                       <div class="component-wrapper"
                         id="component-copyright-copyright-%2fmyworks%2f309326541-scribbles-%25c2%25bb-g-port-v-3">
                         <div class="form-field">
-                          <div class="form-field-label mb-2"><label>Copyright<button  mat-flat-button matTooltip="You do not allow your work to be used or adapted in any way without
+                          <div class="form-field-label mb-2"><label>Copyright<button mat-flat-button matTooltip="You do not allow your work to be used or adapted in any way without
                             your permission." [matTooltipPosition]="'after'"
-                              aria-label="Button that displays a tooltip in various positions" class="tool">
-                              <mat-icon >info</mat-icon>
-                            </button></label>
+                                aria-label="Button that displays a tooltip in various positions" class="tool">
+                                <mat-icon>info</mat-icon>
+                              </button></label>
 
                           </div><select class="form-select" id="select-form-component" aria-label="Copyright options"
                             name="copyright" [(ngModel)]="book.copyright">
@@ -177,7 +177,7 @@
                     <div class="col-sm-4">
                       <input type="number" class="form-control" name="price" [(ngModel)]="book.pricing">
                     </div>
-                    </div>
+                  </div>
 
 
                 </div>
@@ -194,18 +194,22 @@
                     <div class="book-details col-5">
                       <mat-card-title>{{ ch.title}}</mat-card-title>
                       <!-- Published Chapters -->
-                      <mat-card-subtitle *ngIf="ch.published ">Published - {{ch.publishedAt | date:'short' }}</mat-card-subtitle>
-                      <mat-card-subtitle *ngIf="!ch.published ">Draft - {{ch.publishedAt | date:'short' }}</mat-card-subtitle>
+                      <mat-card-subtitle *ngIf="ch.published ">Published - {{ch.publishedAt | date:'short'
+                        }}</mat-card-subtitle>
+                      <mat-card-subtitle *ngIf="!ch.published ">Draft - {{ch.publishedAt | date:'short'
+                        }}</mat-card-subtitle>
                     </div>
                     <mat-card-actions class="d-lg-flex d-none">
-                      <a class="px-5 text-decoration-none text-white" mat-flat-button color="primary" [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter </a>
+                      <a class="px-5 text-decoration-none text-white" mat-flat-button color="primary"
+                        [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter </a>
                       <div class="d-flex" style="gap:7px">
 
                       </div>
                     </mat-card-actions>
                   </mat-card-content>
-                  <mat-card-actions class="d-lg-none d-flex"  width="50vw !important">
-                    <a class="px-5 text-decoration-none text-white" mat-flat-button color="primary" [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter </a>
+                  <mat-card-actions class="d-lg-none d-flex" width="50vw !important">
+                    <a class="px-5 text-decoration-none text-white" mat-flat-button color="primary"
+                      [href]="'/create/chapter/'+ch.chapter_id">Edit Chapter </a>
                     <div class="d-flex" style="gap:7px">
 
                     </div>
@@ -213,7 +217,8 @@
 
                 </mat-card>
               </div>
-              <div *ngIf="book.chapters.length==0"  class="container fs-5 py-4 text-center">You do not have any chapters</div>
+              <div *ngIf="book.chapters.length==0" class="container fs-5 py-4 text-center">You do not have any chapters
+              </div>
 
             </div>
           </div>

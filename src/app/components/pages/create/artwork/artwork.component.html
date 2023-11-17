@@ -5,14 +5,15 @@
       <mat-card-content>
 
         <h6>Title</h6>
-        <input type="text" class="form-control" style="background-color: transparent; " [(ngModel)]="artwork.title" >
+        <input type="text" class="form-control" style="background-color: transparent; " [(ngModel)]="artwork.title">
       </mat-card-content>
     </mat-card>
     <mat-card>
       <mat-card-content>
 
         <h6>Description</h6>
-        <textarea rows="6" class="form-control" style="background-color: transparent; " [(ngModel)]="artwork.description" ></textarea>
+        <textarea rows="6" class="form-control" style="background-color: transparent; "
+          [(ngModel)]="artwork.description"></textarea>
       </mat-card-content>
       <mat-card>
         <mat-card-content>
@@ -24,14 +25,13 @@
                 <ul class="tag-list" style="text-decoration: none; list-style: none ;">
                   <li *ngFor="let tag of artwork.tags"><a
                       class="btn btn-sm rounded-pill btn-secondary mx-1 px-2 py-0">{{tag}}</a></li>
-
                 </ul>
               </div>
             </div>
           </div>
-
           <h6>Add new tag</h6>
-          <input type="text" class="form-control" style="background-color: transparent; "  [(ngModel)]="tag" (keydown)="onInputKeydown($event)" autocomplete="off">
+          <input type="text" class="form-control" style="background-color: transparent; " [(ngModel)]="tag"
+            (keydown)="onInputKeydown($event)" autocomplete="off">
         </mat-card-content>
       </mat-card>
     </mat-card>
@@ -41,7 +41,8 @@
     <mat-card>
       <mat-card-content>
         <img [src]="artwork.artwork" alt="" width="100%">
-        <button class="redirect my-3 col-12" uploadButton [uploadOptions]="options" [uploadComplete]="onComplete">Upload Artwork</button>
+        <button class="redirect my-3 col-12" uploadButton [uploadOptions]="options" [uploadComplete]="onComplete">Upload
+          Artwork</button>
       </mat-card-content>
     </mat-card>
     <mat-card>
@@ -57,20 +58,18 @@
       <mat-card-content>
 
         <h6>Copyrights</h6>
-        <select class="form-select" id="select-form-component" aria-label="Copyright options"
-        name="copyright" [(ngModel)]="artwork.copyright">
-        <option value="All Rights Reserved">All Rights Reserved</option>
-        <option value="Public Domain">Public Domain</option>
-        <option value="Creative Commons (CC) Attribution">Creative Commons (CC) Attribution</option>
-        <option value="(CC) Attrib. NonCommercial">(CC) Attrib. NonCommercial</option>
-        <option value="(CC) Attrib. NonComm. NoDeriv">(CC) Attrib. NonComm. NoDerivs</option>
-        <option value="(CC) Attrib. NonComm. ShareAlike">(CC) Attrib. NonComm. ShareAlike</option>
-        <option value="(CC) Attribution-ShareAlike">(CC) Attribution-ShareAlike</option>
-        <option value="(CC) Attribution-NoDerivs">(CC) Attribution-NoDerivs</option>
-      </select>
+        <select class="form-select" id="select-form-component" aria-label="Copyright options" name="copyright"
+          [(ngModel)]="artwork.copyright">
+          <option value="All Rights Reserved">All Rights Reserved</option>
+          <option value="Public Domain">Public Domain</option>
+          <option value="Creative Commons (CC) Attribution">Creative Commons (CC) Attribution</option>
+          <option value="(CC) Attrib. NonCommercial">(CC) Attrib. NonCommercial</option>
+          <option value="(CC) Attrib. NonComm. NoDeriv">(CC) Attrib. NonComm. NoDerivs</option>
+          <option value="(CC) Attrib. NonComm. ShareAlike">(CC) Attrib. NonComm. ShareAlike</option>
+          <option value="(CC) Attribution-ShareAlike">(CC) Attribution-ShareAlike</option>
+          <option value="(CC) Attribution-NoDerivs">(CC) Attribution-NoDerivs</option>
+        </select>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
-
-
