@@ -97,7 +97,7 @@
           <div class=" d-flex justify-content-between">
 
             Your plan : {{plan}}
-            <button class="btn btn-primary " (click)="cancel()" *ngIf="plan!='paid'">Cancel Subscription</button>
+            <button class="btn btn-primary " (click)="cancel()" *ngIf="plan=='paid'">Cancel Subscription</button>
           </div>
         </div>
       </div>
