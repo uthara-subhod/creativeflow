@@ -232,11 +232,26 @@ export class EditProfileComponent {
   }
 
   cancel(){
-    this.pay.cancel(this.id).subscribe({
-      next:(res)=>{
-        this.ngOnInit()
+    Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure?',
+      text: 'This artwork will be published!',
+      confirmButtonText: 'I am sure',
+      showCancelButton: true
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.pay.cancel(this.id).subscribe({
+          next:(res)=>{
+            Swal.fire('Cancelled successfully', '', 'success')
+            this.ngOnInit()
+          }
+        })
+      } else if (result.isDenied) {
+       return
       }
     })
+
   }
 
   generatePDF(tr:any,action:any) {
