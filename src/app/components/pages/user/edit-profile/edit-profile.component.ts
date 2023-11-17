@@ -25,7 +25,7 @@ export class EditProfileComponent {
   lastIndex = 3
   pageSize = 5
   requests:any[]=[]
-
+  id=''
   user = {
     fullname:'',
     profile:'',
@@ -72,6 +72,7 @@ export class EditProfileComponent {
     });
     this.profile.getUser().subscribe({
       next:(res)=>{
+        this.id=res.user.user_id
         this.user.fullname=res.user.fullname
         this.user.profile=res.user.profile
         this.user.country = res.user.country
@@ -231,7 +232,7 @@ export class EditProfileComponent {
   }
 
   cancel(){
-    this.pay.cancel().subscribe({
+    this.pay.cancel(this.id).subscribe({
       next:(res)=>{
         this.ngOnInit()
       }

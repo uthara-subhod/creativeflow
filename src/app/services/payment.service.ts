@@ -48,7 +48,7 @@ export class PaymentService {
       return this.http.post<any>(`${this.apiUrl}/buy`, data)
     }
 
-    cancel(){
-      return this.http.get<any>(`${this.apiUrl}/user/subscription`)
+    cancel(id:string){
+      return this.http.get<any>(`${this.apiUrl}/user/${id}/subscription`)
     }
 }
