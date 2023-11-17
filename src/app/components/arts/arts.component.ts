@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 export class ArtsComponent implements OnInit {
   @Input() artworks: any[] = []
   @Input() isPaginator = false
+  @ViewChild('dismiss') dismiss!: ElementRef;
   artwork: any
   isLoggedIn = false
   user: any
@@ -30,6 +31,17 @@ export class ArtsComponent implements OnInit {
     this.lastIndex = (this.paginator.pageIndex + 1) * this.paginator.pageSize
   }
   constructor(private changeDetectorRef: ChangeDetectorRef, private auth: AuthService, private router: Router, private profile: ProfileService, private users: UserService) { }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any): void {
+    // Ensure that the modal is dismissed before navigating away
+    this.dismissModal();
+  }
+
+  dismissModal() {
+    this.dismiss.nativeElement.click()
+  }
+  
   getArtwork(a) {
     if (this.isLoggedIn) {
       this.artwork = a
