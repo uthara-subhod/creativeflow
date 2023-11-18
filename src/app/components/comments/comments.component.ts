@@ -176,6 +176,7 @@ export class CommentsComponent implements OnInit{
           next:(res)=>{
             Swal.fire('Deleted successfully', '', 'success')
             this.comments=res.comments
+            this.ngOnInit()
           }
         })
       } else if (result.isDenied) {

@@ -73,7 +73,7 @@
           </div>
         </div>
       </div>
-        <div class="comment comment-level-2" *ngFor="let r of c.replies.reverse()">
+        <div class="comment comment-level-2" *ngFor="let r of c.replies">
           <img [src]="r.user.profile==''? '../../../assets/images/dummy-image.jpeg':r.user.profile" alt="" />
           <div>
             <div class="comment-label">

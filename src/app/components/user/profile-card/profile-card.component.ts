@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,8 @@ users:any = []
 followings:any =[]
 loggedIn =false
 @ViewChild(MatPaginator) paginator: MatPaginator | any;
+@ViewChild('btn1') btn1!: ElementRef;
+@ViewChild('btn2') btn2!: ElementRef;
 obs: Observable<any>|any;
 dataSource: MatTableDataSource<any> |any
 
@@ -95,5 +97,7 @@ ngOnDestroy() {
   if (this.dataSource) {
     this.dataSource.disconnect();
   }
+  this.btn1.nativeElement.click()
+  this.btn2.nativeElement.click()
 }
 }
