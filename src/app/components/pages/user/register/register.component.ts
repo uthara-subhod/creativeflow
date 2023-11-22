@@ -66,10 +66,10 @@ export class RegisterComponent {
       })
       return
     }
-    if(this.user.password==""){
+    if(this.user.password==""||!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/.test(this.user.password)){
       Swal.fire({
         icon: 'error',
-        title: 'password cannot be empty',
+        title: 'Password is invalid',
         background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
       })
       return
